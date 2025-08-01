@@ -6,9 +6,9 @@ import 'lenis/dist/lenis.css'; // optional CSS helper (tiny)
 export default function SmoothScroll({ children }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      lerp: 0.1,
-      smoothTouch: true
+      duration: 1.5,
+      lerp: 0.4,
+      smoothTouch: true,
     });
 
     function raf(time) {
