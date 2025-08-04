@@ -5,7 +5,7 @@ import Poster from './pages/Home/poster';
 function App() {
   return (
     < >
-    <Navbar />
+    {/* <Navbar /> */}
     <Poster />
     
     <div>thfdbfgngfngfmhg</div>
