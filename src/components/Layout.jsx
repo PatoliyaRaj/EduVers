@@ -1,8 +1,15 @@
 import React from 'react'
+import Navbar from './navbar'
 
-function Layout() {
+function Layout({ children }) {
   return (
-    <div>Layout</div>
+    <div>
+      <Navbar />
+      <main>{children}</main>
+      <footer>
+        <p>© 2023 My Website</p>
+      </footer>
+    </div>
   )
 }
 

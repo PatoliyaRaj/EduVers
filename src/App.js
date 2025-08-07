@@ -1,15 +1,22 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/navbar';
-import Poster from './pages/Home/poster';
+import Home from './pages/Home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import About from './pages/About';
+
 function App() {
   return (
-    < >
-    {/* <Navbar /> */}
-    <Poster />
-    
-    <div>thfdbfgngfngfmhg</div>
-    </>
+    <React.Fragment>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Home />} />
+          <Route path="/instructors" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </React.Fragment>
   );
 }
 

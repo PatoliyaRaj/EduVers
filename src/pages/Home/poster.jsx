@@ -5,12 +5,12 @@ import { React } from "react";
 function Poster() {
   return (
     <>
-      <div className="w-full h-60 sm:h-72 md:h-80 lg:h-96 xl:h-[400px] bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden rounded-xl shadow-lg z-index-10">
+      <div className="w-full h-60 sm:h-72 md:h-80 lg:h-96 xl:h-[500px] bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden rounded-xl shadow-lg z-index-10">
         <div className="absolute top-1/2 left-4 sm:left-6 md:left-8 lg:left-12 transform -translate-y-1/2 w-1/2 sm:w-2/5 md:w-1/2 lg:w-2/5 z-0">
           <BlurText
             text="Give Wings to Your Dreams"
-            delay={150}
-            animateBy="words"
+            delay={75}
+            animateBy="character"
             direction="top"
             className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 leading-tight z-index-0"
             easing="easeInOut"
@@ -48,28 +48,27 @@ function Poster() {
         <img
           src={boy}
           alt="I/'am a boy"
-        //   style={{ filter: "drop-shadow(6px 4px 8px rgba(210, 51, 51, 0.47))" }}
+          style={{ filter: "drop-shadow(6px 4px 8px rgba(210, 51, 51, 0.47))" }}
           className="
             absolute 
             bottom-0 
-            hidden right-2 sm:hidden md:block md:show md:right-36 lg:right-52 xl:right-64
+             md:block md:show md:right-36 lg:right-52 xl:right-64
             h-full
             w-auto
             object-contain
             object-bottom
-            max-w-[40%] sm:max-w-[30%] md:max-w-[28%] lg:max-w-[28%] xl:max-w-[19.5%]
+            max-w-[0%] sm:max-w-[0%] md:max-w-[28%] lg:max-w-[28%] xl:max-w-[19.5%]
             animate-fade-in2
             animate-duration-2000
             animate-ease-in-out
             drop-shadow-lg
             z-0
           "
-
         />
         <img
           src={girls}
           alt="Student with books and thumbs up gesture"
-        //   style={{ filter: "drop-shadow(6px 4px 8px rgba(210, 51, 51, 0.47))" }}
+          style={{ filter: "drop-shadow(6px 4px 8px rgba(210, 51, 51, 0.47))" }}
           className="
             absolute 
             bottom-0 
