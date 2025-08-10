@@ -1,5 +1,4 @@
 
-// Simple and Clean Card Components with Variants
 
 export function Card({ children, className = "", variant = "default" }) {
   const variants = {

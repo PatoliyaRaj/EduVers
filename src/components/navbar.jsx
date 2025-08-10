@@ -127,7 +127,6 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Desktop Navigation Links - Hidden on lg, visible on xl+ */}
           <nav className="hidden xl:flex lg:align-center items-center space-x-1 xl:space-x-1">
             {navLinks.map((link) => {
               const IconComponent = link.icon;
@@ -145,7 +144,6 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* LG Navigation Toggle Button - Only visible on lg screens */}
           <div className="hidden lg:flex xl:hidden items-center">
             <button
               onClick={() => setLgNavOpen(!lgNavOpen)}
@@ -155,7 +153,6 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Desktop Auth Buttons */}
           <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 ml-2 xl:ml-4">
             <button className="flex items-center space-x-2 px-4 lg:px-5 xl:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-inter">
               <UserPlus className="w-4 h-4" />
@@ -163,7 +160,6 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center">
             <button
               onClick={(e) => {
@@ -178,7 +174,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* LG Screen Vertical Navigation - Only visible on lg screens */}
       <div
         className={`hidden lg:block xl:hidden transition-all duration-300 ease-in-out ${
           lgNavOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
@@ -204,7 +199,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`mobile-menu lg:hidden transition-all duration-300 ease-in-out ${
           open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
@@ -231,7 +225,6 @@ export default function Navbar() {
             </select>
           </div>
 
-          {/* Mobile Navigation Links */}
           <nav className="space-y-2 pt-6 border-t border-slate-200/60">
             {navLinks.map((link) => {
               const IconComponent = link.icon;
@@ -249,7 +242,6 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Mobile Auth Buttons */}
           <div className="space-y-3 pt-6 border-t border-slate-200/60">
             <button className="flex items-center justify-center space-x-2 w-full px-4 py-4 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg transform hover:scale-[1.02] font-inter">
               <UserPlus className="w-4 h-4" />
