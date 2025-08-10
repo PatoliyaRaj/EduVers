@@ -134,7 +134,7 @@ export default function Navbar() {
               return (
                 <Link
                   key={link.name}
-                  href={link.path || "/"}
+                  to={link.path || "/"}
                   className="flex items-center space-x-2 px-3 lg:px-2 xl:px-5 py-2.5 lg:py-3 text-slate-700 hover:text-blue-600 font-medium text-sm lg:text-base transition-all duration-300 relative group rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 font-inter"
                 >
                   <IconComponent className="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 group-hover:text-blue-500 transition-colors duration-300" />
@@ -189,15 +189,15 @@ export default function Navbar() {
             {navLinks.map((link) => {
               const IconComponent = link.icon;
               return (
-                <a
+                <Link
                   key={link.name}
-                  href="/"
+                  to={link.path || "/"}
                   className="flex items-center space-x-3 px-4 py-3 text-slate-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl font-medium transition-all duration-300 group font-inter"
                   onClick={() => setLgNavOpen(false)}
                 >
                   <IconComponent className="w-5 h-5 text-slate-500 group-hover:text-blue-500 transition-colors duration-300" />
                   <span>{link.name}</span>
-                </a>
+                </Link>
               );
             })}
           </nav>
@@ -236,15 +236,15 @@ export default function Navbar() {
             {navLinks.map((link) => {
               const IconComponent = link.icon;
               return (
-                <a
+                <Link
                   key={link.name}
-                  href="/"
+                  to={link.path || "/"}
                   className="flex items-center space-x-3 px-4 py-4 text-slate-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl font-medium transition-all duration-300 group font-inter"
                   onClick={() => setOpen(false)}
                 >
                   <IconComponent className="w-5 h-5 text-slate-500 group-hover:text-blue-500 transition-colors duration-300" />
                   <span>{link.name}</span>
-                </a>
+                </Link>
               );
             })}
           </nav>

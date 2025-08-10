@@ -5,7 +5,7 @@ import { React } from "react";
 function Poster() {
   return (
     <>
-      <div className="w-full h-60 sm:h-72 md:h-80 lg:h-96 xl:h-[500px] bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden rounded-xl shadow-lg z-index-10">
+      <div className="w-full h-60 sm:h-72 md:h-80 lg:h-96 xl:h-[450px] bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden rounded-xl shadow-lg z-index-10">
         <div className="absolute top-1/2 left-4 sm:left-6 md:left-8 lg:left-12 transform -translate-y-1/2 w-1/2 sm:w-2/5 md:w-1/2 lg:w-2/5 z-0">
           <BlurText
             text="Give Wings to Your Dreams"

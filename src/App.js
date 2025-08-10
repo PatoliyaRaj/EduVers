@@ -2,8 +2,7 @@ import React from 'react';
 import './App.css';
 import Home from './pages/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import About from './pages/About';
-
+import About from './pages/About/About.jsx';
 function App() {
   return (
     <React.Fragment>
