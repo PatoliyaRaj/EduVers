@@ -2,8 +2,8 @@ import React from "react";
 import Poster from "./poster";
 import Layout from "../../components/Layout";
 import CarouselCard from "./carousel/carouselCard";
-import Cards from "./cards";
-// import CardScroll from "./Scrolltrig";
+import Coursecards from "./services/coursecards";
+
 
 
 function Home() {
@@ -12,7 +12,7 @@ function Home() {
       <Layout>
         <Poster />
         <CarouselCard />
-        <Cards />
+       <Coursecards />
       </Layout>
     </React.Fragment>
   );
