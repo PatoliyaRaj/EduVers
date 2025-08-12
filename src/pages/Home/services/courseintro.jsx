@@ -36,7 +36,7 @@ function CourseIntro() {
           scrollEnd="bottom 25%"
           stagger={0.15}
           containerClassName="mt-4 sm:mt-5 md:mt-6 text-gray-600 text-center max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-4xl mx-auto px-4 sm:px-6"
-          textClassName="inline-block text-[clamp(0.9rem,2vw,2rem)] leading-[1.5] font-serif text-[26.1px]"
+          textClassName="inline-block text-[clamp(0.9rem,2vw,2rem)] leading-[1.5] font-serif text-[26.2px]"
         >
           Explore our diverse range of courses designed to empower learners with
           knowledge and skills for a brighter future.
