@@ -2,9 +2,9 @@ import React from "react";
 import Poster from "./poster";
 import Layout from "../../components/Layout";
 import CarouselCard from "./carousel/carouselCard";
-import Coursecards from "./services/coursecards";
-
-
+import TeachersSec from "./Teachers/teachersSec";
+import CourseIntro from "./services/courseintro";
+import Review from "./Review/index";
 
 function Home() {
   return (
@@ -12,7 +12,9 @@ function Home() {
       <Layout>
         <Poster />
         <CarouselCard />
-       <Coursecards />
+        <CourseIntro/>
+        <TeachersSec />
+        <Review />
       </Layout>
     </React.Fragment>
   );

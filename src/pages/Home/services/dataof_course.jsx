@@ -14,7 +14,6 @@ const courses = [
   {
     image: `${busness}`,
     title: "Entrepreneurship Masterclass",
-    description: "Turn your ideas into successful ventures",
     content:
       "Learn business planning, fundraising, marketing, and scaling strategies.",
     rating: 4.8,
@@ -30,7 +29,6 @@ const courses = [
   {
     image: `${comp}`,
     title: "Full Stack Web Development",
-    description: "Become a job-ready developer",
     content:
       "Master HTML, CSS, JavaScript, React, Node.js, and databases with projects.",
     rating: 4.9,
@@ -46,7 +44,6 @@ const courses = [
   {
     image: `${fin}`,
     title: "Personal Finance & Investment",
-    description: "Manage money like a pro",
     content:
       "Learn budgeting, saving, investing, and wealth-building strategies.",
     rating: 4.7,
@@ -62,7 +59,6 @@ const courses = [
   {
     image: `${eco}`,
     title: "Macroeconomics Explained",
-    description: "Understand how economies work",
     content:
       "Learn GDP, inflation, unemployment, and fiscal & monetary policy.",
     rating: 4.6,
@@ -77,7 +73,6 @@ const courses = [
   {
     image: `${Ui}`,
     title: "UI/UX Design for Beginners",
-    description: "Design beautiful and user-friendly products",
     content:
       "Learn wireframing, prototyping, usability testing, and Figma skills.",
     rating: 4.8,
@@ -93,7 +88,6 @@ const courses = [
   {
     image: `${digm}`,
     title: "Digital Marketing & SEO",
-    description: "Grow your online presence",
     content: "Learn SEO, Google Ads, social media marketing, and analytics.",
     rating: 4.7,
     reviewCount: 123,
@@ -107,7 +101,6 @@ const courses = [
   {
     image: `${bus2}`,
     title: "Leadership & Management Skills",
-    description: "Lead teams effectively",
     content:
       "Learn team building, conflict resolution, communication, and decision-making.",
     rating: 4.9,
@@ -123,7 +116,6 @@ const courses = [
   {
     image: `${cyber}`,
     title: "Cybersecurity Fundamentals",
-    description: "Protect systems and data",
     content:
       "Understand ethical hacking, vulnerabilities, and network security.",
     rating: 4.8,
@@ -139,7 +131,6 @@ const courses = [
   {
     image: `${fin2}`,
     title: "Stock Market Trading",
-    description: "Master the art of trading",
     content:
       "Learn technical analysis, risk management, and market psychology.",
     rating: 4.7,
@@ -153,7 +144,6 @@ const courses = [
   {
     image: `${eco2}`,
     title: "Global Economic Trends",
-    description: "Analyze world market patterns",
     content:
       "Understand trade, globalisation, economic indicators, and policies.",
     rating: 4.6,

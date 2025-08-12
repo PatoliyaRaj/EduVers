@@ -18,7 +18,6 @@ function Coursecards() {
       let ctx = gsap.context(() => {
         // Get container and calculate scroll distance
         const container = cardsContainerRef.current;
-        const cards = container.children;
         const containerWidth = container.scrollWidth;
         const viewportWidth = window.innerWidth;
         const scrollDistance = -(containerWidth - viewportWidth + 139); // Add some padding
@@ -143,16 +142,6 @@ function Coursecards() {
           </div>
         </div>
       </section>
-
-      {/* <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style> */}
     </>
   );
 }

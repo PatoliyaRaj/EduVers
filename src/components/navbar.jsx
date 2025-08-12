@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
-  Star,
   Search,
   ChevronDown,
   Menu,
@@ -13,6 +12,7 @@ import {
   Info,
   Mail,
 } from "lucide-react";
+import logo from "../assets/imgs/logo.png";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -23,27 +23,27 @@ export default function Navbar() {
     {
       name: "Home",
       icon: Home,
-      path:"/"
+      path: "/",
     },
     {
       name: "Courses",
       icon: BookOpen,
-      path:"/courses"
+      path: "/courses",
     },
     {
       name: "Instructors",
       icon: Users,
-      path:"/instructors"
+      path: "/instructors",
     },
     {
       name: "About",
       icon: Info,
-      path:"/about"
+      path: "/about",
     },
     {
       name: "Contact",
       icon: Mail,
-      path:"/contact"
+      path: "/contact",
     },
   ];
 
@@ -83,13 +83,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 lg:h-20 xl:h-22 ">
           <div className="flex-shrink-0 flex items-center group cursor-pointer transition-transform duration-300 hover:scale-105">
             <div className="relative">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 ring-2 ring-blue-100 group-hover:ring-blue-200">
-                <Star
-                  className="w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white"
-                  fill="currentColor"
-                />
-              </div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-green-400 to-blue-500 rounded-full animate-pulse"></div>
+              <img
+                src={logo}
+                alt="EduVers Logo"
+                className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-14 lg:h-14 object-contain transition-all duration-300 group-hover:scale-110"
+              />
             </div>
             <div className="ml-2 sm:ml-3 flex flex-col">
               <span className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-purple-800 bg-clip-text text-transparent tracking-tight font-inter">

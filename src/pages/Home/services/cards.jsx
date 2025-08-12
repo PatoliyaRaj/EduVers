@@ -2,7 +2,6 @@ import React from "react";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "../../../components/Card";
@@ -10,7 +9,6 @@ import { ArrowRight } from "lucide-react";
 
 const defaultProps = {
   title: "Card Title",
-  description: "Card description goes here",
   content: "Discover amazing features and benefits.",
   rating: 4.9,
   reviewCount: 127,
@@ -27,7 +25,6 @@ const defaultProps = {
 function ReusableCard({
   image,
   title = defaultProps.title,
-  description = defaultProps.description,
   content = defaultProps.content,
   rating = defaultProps.rating,
   reviewCount = defaultProps.reviewCount,
@@ -103,11 +100,6 @@ function ReusableCard({
               <CardTitle className="absolute bottom-3 sm:bottom-4 md:bottom-6 right-3 sm:right-4 md:right-6 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold drop-shadow-2xl text-white transform group-hover:scale-105 transition-transform duration-300">
                 {title}
               </CardTitle>
-
-              {/* Card Description - Center */}
-              {/* <CardDescription className="text-start hidden text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed drop-shadow-lg max-w-[80%] mb-4 sm:mb-6 md:mb-8 opacity-90 group-hover:opacity-100 transition-opacity duration-300 ">
-               {description} 
-              </CardDescription> */}
             </div>
           </CardHeader>
 
