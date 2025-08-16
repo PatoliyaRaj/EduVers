@@ -66,19 +66,6 @@ function InfosectionS() {
           credibility, every course is backed with transparent reviews, ratings,
           and certifications that add real value to career growth.
         </ScrollReveal>
-        {/* <ScrollReveal
-          textClassName="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0"
-          baseOpacity={0}
-          enableBlur={true}
-          baseRotation={2}
-          blurStrength={10}
-          rotationEnd="bottom center"
-          wordAnimationEnd="center center"
-        >
-          EduVers also ensures a secure and smooth learning environment, with
-          reliable payment gateways, mobile-friendly access, and 24/7 customer
-          support.
-        </ScrollReveal> */}
         <ScrollReveal
           textClassName="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0"
           baseOpacity={0}
@@ -88,7 +75,7 @@ function InfosectionS() {
           rotationEnd="bottom center"
           wordAnimationEnd="center center"
         >
-          ‟our mission is to create a global learning community that inspires,
+          ‟Our Mission is to create a global learning community that inspires,
           empowers, and equips learners with the knowledge and skills needed to
           thrive in today’s fast-changing world.”
         </ScrollReveal>

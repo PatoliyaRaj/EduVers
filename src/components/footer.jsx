@@ -1,5 +1,5 @@
 import React from "react";
-import { Twitter, Linkedin, Github, Facebook, Globe } from "lucide-react";
+import { Twitter, Linkedin, Github, Facebook, Globe, Mail } from "lucide-react";
 import logo from "../assets/imgs/logo.png"; // Adjust the path as necessary
 
 const Footer = () => {
@@ -9,7 +9,7 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand Section */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div className="sm:col-span-2 lg:col-span-1 ">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-3">
                 <a href="/home">
@@ -21,6 +21,17 @@ const Footer = () => {
             <p className="text-gray-400 text-sm leading-6 pr-4">
               Top learning experiences that create more talent in the world.
             </p>
+            <div className="flex flex-col gap-4 mt-3">
+              <div className="flex items-center gap-2">
+                <Mail className="text-gray-400 hover:text-white transition-colors text-sm block" />
+                <span className="text-gray-400 text-sm ">Stay updated </span>
+              </div>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="bg-transparent border-b border-gray-600 w-full text-white focus:outline-none focus:border-white md:w-1/2 lg:w-full"
+              />
+            </div>
           </div>
 
           {/* Product Links */}

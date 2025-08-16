@@ -59,12 +59,12 @@ function InfoSection() {
             <img
               src={busness}
               alt="business education"
-              className="absolute top-0 right-0 w-2/3 sm:w-3/5 md:w-2/3 lg:w-3/5 xl:w-2/3 h-2/3 sm:h-3/5 md:h-2/3 lg:h-3/5 xl:h-2/3 object-cover rounded-lg shadow-lg z-10 transition-transform duration-300 hover:scale-105 filter grayscale hover:grayscale-0 animate-fade-in2"
+              className="absolute top-0 right-0 w-2/3 sm:w-3/5 md:w-2/3 lg:w-3/5 xl:w-2/3 h-2/3 sm:h-3/5 md:h-2/3 lg:h-3/5 xl:h-2/3 object-cover rounded-lg shadow-lg z-10 transition-transform duration-300 hover:scale-105 filter grayscale hover:grayscale-0 animate-fade-in2 invisible  md:visible "
             />
             <img
               src={busness2}
               alt="business learning"
-              className="absolute bottom-[-20%]  left-0 w-2/3 sm:w-3/5 md:w-2/3 lg:w-3/5 xl:w-2/3 h-2/3 sm:h-3/5 md:h-2/3 lg:h-3/5 xl:h-2/3 object-cover rounded-lg shadow-lg z-20 transition-transform duration-300 hover:scale-105 filter grayscale hover:grayscale-0 animate-fade-in"
+              className="absolute bottom-[-20%]  left-0 w-2/3 sm:w-3/5 md:w-2/3 lg:w-3/5 xl:w-2/3 h-2/3 sm:h-3/5 md:h-2/3 lg:h-3/5 xl:h-2/3 object-cover rounded-lg shadow-lg z-20 transition-transform duration-300 hover:scale-105 filter grayscale hover:grayscale-0 animate-fade-in "
             />
           </div>
         </div>
