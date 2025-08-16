@@ -1,11 +1,13 @@
 import React from "react";
 import ScrollFloat from "../../../components/ScrollFloat";
+// import ReviewSlider from "./reviewslider";
+import ReusableCarousel from "./sliderforriv";
 
 function index() {
   return (
     <React.Fragment>
       <div
-        className="w-full flex flex-col bg-white
+        className="w-full flex flex-col bg-blue-200
                      pt-6 sm:pt-8 md:pt-10 lg:pt-12
                      px-4 sm:px-6 md:px-8
                      min-h-[600px] sm:min-h-[700px] md:min-h-[800px] lg:h-auto
@@ -20,9 +22,12 @@ function index() {
           containerClassName="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-start font-bold text-gray-800"
           textClassName="underline font-serif"
         >
-          Our Teachers
+          Our Revies
         </ScrollFloat>
+        {/* <ReviewSlider/> */}
+        <ReusableCarousel/>
       </div>
+      
     </React.Fragment>
   );
 }
