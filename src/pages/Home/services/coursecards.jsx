@@ -20,7 +20,7 @@ function Coursecards() {
         const container = cardsContainerRef.current;
         const containerWidth = container.scrollWidth;
         const viewportWidth = window.innerWidth;
-        const scrollDistance = -(containerWidth - viewportWidth + 139); // Add some padding
+        const scrollDistance = -(containerWidth - viewportWidth + 50); // Add some padding
 
         gsap.to(container, {
           x: scrollDistance,

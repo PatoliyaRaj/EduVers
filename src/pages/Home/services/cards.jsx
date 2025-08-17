@@ -39,22 +39,19 @@ function ReusableCard({
   onButtonClick,
   onCardClick,
 }) {
-  // Handle button click
   const handleButtonClick = (e) => {
-    e.stopPropagation(); // Prevent card click if both handlers exist
+    e.stopPropagation(); 
     if (onButtonClick) {
       onButtonClick();
     }
   };
 
-  // Handle card click
   const handleCardClick = () => {
     if (onCardClick) {
       onCardClick();
     }
   };
 
-  // Generate tag colors dynamically
   const tagColors = [
     "bg-blue-100 text-blue-700 hover:bg-blue-200",
     "bg-green-100 text-green-700 hover:bg-green-200",
@@ -130,7 +127,6 @@ function ReusableCard({
               </div>
             )}
 
-            {/* Action Button */}
             {showButton && (
               <div className="button-section mb-4 sm:mb-5 md:mb-6 relative my-2 py-5">
                 <span
@@ -143,11 +139,9 @@ function ReusableCard({
               </div>
             )}
 
-            {/* Stats Section */}
             {(showRating || showPrice) && (
               <div className="stats-section">
                 <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-gray-200 group-hover:border-gray-300 transition-colors duration-300">
-                  {/* Rating */}
                   {showRating && (
                     <div className="rating flex items-center gap-1 sm:gap-2">
                       <div className="stars text-yellow-400 group-hover:text-yellow-500 transition-colors duration-300 text-sm sm:text-base">
@@ -160,7 +154,6 @@ function ReusableCard({
                     </div>
                   )}
 
-                  {/* Price */}
                   {showPrice && (
                     <div className="price">
                       <span className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">

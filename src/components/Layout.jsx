@@ -7,7 +7,7 @@ function Layout({ children }) {
     <div>
       <Navbar />
       <main>{children}</main>
-      <Footer className="mt-10"/>
+      <Footer />
     </div>
   )
 }

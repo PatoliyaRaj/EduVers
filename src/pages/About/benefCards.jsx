@@ -51,7 +51,7 @@ const BenefitCard = ({ number, title, description, className = "" }) => {
               {" "}
               <button
                 onClick={() => setIsExpanded(false)}
-                className="text-blue-600 hover:text-blue-800 font-medium underline transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 rounded"
+                className="text-blue-600 hover:text-blue-800 font-medium underline transition-colors duration-2000  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 rounded"
               >
                 read less
               </button>

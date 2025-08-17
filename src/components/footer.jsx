@@ -2,9 +2,9 @@ import React from "react";
 import { Twitter, Linkedin, Github, Facebook, Globe, Mail } from "lucide-react";
 import logo from "../assets/imgs/logo.png"; // Adjust the path as necessary
 
-const Footer = () => {
+const Footer = ({ className }) => {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className={`bg-gray-900 text-white ${className}`}>
       <div className="max-w-6xl mx-auto px-6 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
