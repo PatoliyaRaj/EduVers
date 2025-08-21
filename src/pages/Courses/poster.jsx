@@ -8,7 +8,7 @@ function Poster() {
         <div className="w-full h-60 sm:h-72 md:h-80 lg:h-96 xl:h-[450px] bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 relative overflow-hidden rounded-xl shadow-lg z-index-10">
           <div className="absolute top-1/2 left-4 sm:left-6 md:left-8 lg:left-12 transform -translate-y-1/2 w-1/2 sm:w-2/5 md:w-1/2 lg:w-2/5 z-0">
             <BlurText
-              text="Master New Skills Today"
+              text="Transform Learning into Success with EduVers"
               delay={75}
               animateBy="character"
               direction="top"

@@ -133,7 +133,7 @@ export default function ReusableCarousel({ items, cardsPerPage = 4 }) {
             key={index}
             onClick={() => goToPage(index)}
             className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full cursor-pointer transition-all duration-200 hover:scale-110 ${
-              page === index ? "bg-teal-500 shadow-md" : "bg-gray-300 hover:bg-gray-400"
+              page === index ? "bg-blue-400 shadow-md" : "bg-gray-300 hover:bg-gray-400"
             }`}
           />
         ))}

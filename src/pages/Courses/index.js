@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import Poster from "./poster";
-import CourseIntro from "./introsection";
+import InfoSection from "./introsection";
 
 function Index() {
   return (
@@ -10,7 +10,7 @@ function Index() {
         <main className=" h-auto pb-8">
           <React.Fragment>
             <Poster />
-            <CourseIntro/>
+            <InfoSection />
           </React.Fragment>
         </main>
       </Layout>
