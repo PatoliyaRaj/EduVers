@@ -1,12 +1,15 @@
 
-import busness   from "../../../assets/imgs/busness.jpg";
-import comp   from "../../../assets/imgs/comp.png";
-import fin from "../../../assets/imgs/finance.jpg";
-import eco from "../../../assets/imgs/eco.jpg";
-import Ui from "../../../assets/imgs/UIUx.jpg";
-import digm from "../../../assets/imgs/Digm.jpg";
+import busness   from "../../assets/imgs/busness.jpg";
+import comp   from "../../assets/imgs/comp.png";
+import fin from "../../assets/imgs/finance.jpg";
+import eco from "../../assets/imgs/eco.jpg";
+import Ui from "../../assets/imgs/UIUx.jpg";
+import digm from "../../assets/imgs/Digm.jpg";
+import cyber from "../../assets/imgs/cyber.jpg";
+import fin2 from "../../assets/imgs/fin2.jpg";
+import eco2 from "../../assets/imgs/eco2.jpg";
 
-const courses = [
+const DataOfCourse = [
   {
     image: `${busness}`,
     title: "Entrepreneurship Masterclass",
@@ -88,48 +91,48 @@ const courses = [
       console.log("Digital Marketing & SEO - Button clicked!"),
     onCardClick: () => console.log("Digital Marketing & SEO - Card clicked!"),
   },
-  // {
-  //   image: `${cyber}`,
-  //   title: "Cybersecurity Fundamentals",
-  //   content:
-  //     "Understand ethical hacking, vulnerabilities, and network security.",
-  //   rating: 4.8,
-  //   reviewCount: 101,
-  //   price: "₹209",
-  //   buttonText: "Enroll Now",
-  //   tags: ["IT", "Security", "Networking"],
-  //   onButtonClick: () =>
-  //     console.log("Cybersecurity Fundamentals - Button clicked!"),
-  //   onCardClick: () =>
-  //     console.log("Cybersecurity Fundamentals - Card clicked!"),
-  // },
-  // {
-  //   image: `${fin2}`,
-  //   title: "Stock Market Trading",
-  //   content:
-  //     "Learn technical analysis, risk management, and market psychology.",
-  //   rating: 4.7,
-  //   reviewCount: 76,
-  //   price: "₹249",
-  //   buttonText: "Enroll Now",
-  //   tags: ["Finance", "Stock Market", "Trading"],
-  //   onButtonClick: () => console.log("Stock Market Trading - Button clicked!"),
-  //   onCardClick: () => console.log("Stock Market Trading - Card clicked!"),
-  // },
-  // {
-  //   image: `${eco2}`,
-  //   title: "Global Economic Trends",
-  //   content:
-  //     "Understand trade, globalisation, economic indicators, and policies.",
-  //   rating: 4.6,
-  //   reviewCount: 59,
-  //   price: "₹199",
-  //   buttonText: "Enroll Now",
-  //   tags: ["Economics", "Finance", "Business"],
-  //   onButtonClick: () =>
-  //     console.log("Global Economic Trends - Button clicked!"),
-  //   onCardClick: () => console.log("Global Economic Trends - Card clicked!"),
-  // },
+  {
+    image: `${cyber}`,
+    title: "Cybersecurity Fundamentals",
+    content:
+      "Understand ethical hacking, vulnerabilities, and network security.",
+    rating: 4.8,
+    reviewCount: 101,
+    price: "₹209",
+    buttonText: "Enroll Now",
+    tags: ["IT", "Security", "Networking"],
+    onButtonClick: () =>
+      console.log("Cybersecurity Fundamentals - Button clicked!"),
+    onCardClick: () =>
+      console.log("Cybersecurity Fundamentals - Card clicked!"),
+  },
+  {
+    image: `${fin2}`,
+    title: "Stock Market Trading",
+    content:
+      "Learn technical analysis, risk management, and market psychology.",
+    rating: 4.7,
+    reviewCount: 76,
+    price: "₹249",
+    buttonText: "Enroll Now",
+    tags: ["Finance", "Stock Market", "Trading"],
+    onButtonClick: () => console.log("Stock Market Trading - Button clicked!"),
+    onCardClick: () => console.log("Stock Market Trading - Card clicked!"),
+  },
+  {
+    image: `${eco2}`,
+    title: "Global Economic Trends",
+    content:
+      "Understand trade, globalisation, economic indicators, and policies.",
+    rating: 4.6,
+    reviewCount: 59,
+    price: "₹199",
+    buttonText: "Enroll Now",
+    tags: ["Economics", "Finance", "Business"],
+    onButtonClick: () =>
+      console.log("Global Economic Trends - Button clicked!"),
+    onCardClick: () => console.log("Global Economic Trends - Card clicked!"),
+  },
 ];
 
-export default courses;
+export default DataOfCourse;

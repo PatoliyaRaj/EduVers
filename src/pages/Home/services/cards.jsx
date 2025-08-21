@@ -12,6 +12,7 @@ const defaultProps = {
   content: "Discover amazing features and benefits.",
   rating: 4.9,
   reviewCount: 127,
+  price: "₹299",
   buttonText: "Learn More",
   tags: ["Feature 1", "Feature 2", "Feature 3"],
   showButton: true,
@@ -27,6 +28,7 @@ function ReusableCard({
   content = defaultProps.content,
   rating = defaultProps.rating,
   reviewCount = defaultProps.reviewCount,
+  price = defaultProps.price,
   buttonText = defaultProps.buttonText,
   tags = defaultProps.tags,
   showButton = defaultProps.showButton,
@@ -148,6 +150,14 @@ function ReusableCard({
                       </div>
                       <span className="text-gray-600 text-xs sm:text-sm group-hover:text-gray-700 transition-colors duration-300">
                         {rating} ({reviewCount} reviews)
+                      </span>
+                    </div>
+                  )}
+
+                  {showPrice && (
+                    <div className="price">
+                      <span className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                        {price}
                       </span>
                     </div>
                   )}

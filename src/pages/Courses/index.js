@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../../components/Layout";
 import Poster from "./poster";
 import InfoSection from "./introsection";
+import CoursesGrids from "./CoursesGrids";
 
 function Index() {
   return (
@@ -11,6 +12,7 @@ function Index() {
           <React.Fragment>
             <Poster />
             <InfoSection />
+            <CoursesGrids />
           </React.Fragment>
         </main>
       </Layout>

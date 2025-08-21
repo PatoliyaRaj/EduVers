@@ -107,7 +107,7 @@ function Coursecards() {
                   content={course.content}
                   rating={course.rating}
                   reviewCount={course.reviewCount}
-                  price={course.price}
+                  price={false}
                   buttonText={course.buttonText}
                   tags={course.tags}
                   onButtonClick={course.onButtonClick}
