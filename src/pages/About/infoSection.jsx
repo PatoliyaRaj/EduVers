@@ -1,4 +1,3 @@
-
 import React from "react";
 import BlurText from "../../components/blureText";
 import ScrollFloat from "../../components/ScrollFloat";
@@ -11,7 +10,6 @@ function InfoSection() {
     <React.Fragment>
       <section className="flex flex-col lg:flex-row justify-between items-center mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12 2xl:mx-16 py-8 md:py-12 lg:py-16">
         <div className="flex flex-col w-full lg:w-1/2 p-4 sm:p-6 md:p-8 space-y-6 md:space-y-8">
-          {/* Main Title with ScrollFloat */}
           <div className="mb-4">
             <ScrollFloat
               containerClassName="text-center lg:text-left"
@@ -28,8 +26,8 @@ function InfoSection() {
           {/* Subtitle with BlurText */}
           <div className="mt-4" style={{ textAlign: "right" }}>
             <BlurText
-              text="At EduVers, we are redefining the future of learning. As a trusted e-learning marketplace, we provide a diverse range of high-quality educational resources."
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-700 leading-relaxed text-center lg:text-left text-right"
+              text={`At EduVers, we are redefining the future of learning. As a trusted e-learning marketplace, we provide a diverse range of high-quality educational resources.`}
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-700 leading-relaxed text-center lg:text-left text-right capitalize"
               delay={150}
               animateBy="words"
               direction="top"
@@ -41,7 +39,7 @@ function InfoSection() {
           <div className="mt-4">
             <BlurText
               text="Our mission is to deliver high-quality products that improve the lives of our customers. EduVers is a global hub of learning excellence, connecting knowledge seekers with industry experts. Our commitment lies in creating a seamless, engaging, and future-ready learning experience that inspires growth and unlocks opportunities."
-              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed text-center lg:text-left"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed text-center lg:text-left "
               delay={100}
               animateBy="words"
               direction="top"
@@ -68,7 +66,6 @@ function InfoSection() {
             />
           </div>
         </div>
-
 
       </section>
     </React.Fragment>

@@ -158,7 +158,7 @@ function From() {
                         rows={6}
                         className="w-full pl-10 pr-4 py-3 bg-white/50 backdrop-blur-sm border border-white/40 rounded-lg 
                                  focus:ring-2 focus:ring-blue-500 focus:border-transparent 
-                                 placeholder-gray-400 text-gray-900 transition-all duration-200
+                                 placeholder-gray-400 text-gray-900 transition-all duration-150
                                  hover:bg-white/60 resize-vertical min-h-[120px]"
                         placeholder="Enter your message here..."
                       />
