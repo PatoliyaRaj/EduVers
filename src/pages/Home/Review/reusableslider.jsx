@@ -4,6 +4,7 @@ import gsap from "gsap";
 export default function SimpleCarousel({
   elements = [],
   className = "",
+  style = {},
   autoPlay = true,
   autoPlayInterval = 3000,
   pauseOnHover = true,
@@ -61,16 +62,17 @@ export default function SimpleCarousel({
 
   return (
     <div
-      className={`w-full h-full min-h-[400px] flex flex-col ${className}`}
+      className={`w-full h-full min-h-[400px] flex flex-col bg-transparent ${className}`}
+      style={style}
       onMouseEnter={() => pauseOnHover && setIsHovered(true)}
       onMouseLeave={() => pauseOnHover && setIsHovered(false)}
     >
       {/* Carousel Container */}
-      <div className="relative w-full h-full flex-1 overflow-hidden">
+      <div className="relative w-full h-full flex-1 overflow-hidden bg-transparent">
         {/* Current Element Display */}
         <div
           ref={containerRef}
-          className="w-full h-full flex justify-center items-center "
+          className="w-full h-full flex justify-center items-center bg-transparent"
         >
           {elements[currentIndex]}
         </div>
@@ -78,11 +80,11 @@ export default function SimpleCarousel({
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-0 sm:left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-xl rounded-full p-3 sm:p-4 transition-all duration-300 hover:scale-110 border border-gray-200"
+          className="absolute left-0 sm:left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-xl rounded-full p-3 sm:p-4 transition-all duration-300 hover:scale-110 border border-white/30"
           aria-label="Previous slide"
         >
           <svg
-            className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700"
+            className="w-5 h-5 sm:w-6 sm:h-6 text-white"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -98,11 +100,11 @@ export default function SimpleCarousel({
 
         <button
           onClick={nextSlide}
-          className="absolute right-0 sm:right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-xl rounded-full p-3 sm:p-4 transition-all duration-300 hover:scale-110 border border-gray-200"
+          className="absolute right-0 sm:right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-xl rounded-full p-3 sm:p-4 transition-all duration-300 hover:scale-110 border border-white/30"
           aria-label="Next slide"
         >
           <svg
-            className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700"
+            className="w-5 h-5 sm:w-6 sm:h-6 text-white"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -117,15 +119,15 @@ export default function SimpleCarousel({
         </button>
 
         {/* Pagination Dots */}
-        <div className="flex justify-center absolute bottom-4 left-1/2 transform -translate-x-1/2 space-x-3 ">
+        <div className="flex justify-center absolute bottom-4 left-1/2 transform -translate-x-1/2 space-x-3 bg-transparent">
           {elements.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 hover:scale-125 ${
+              className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 hover:scale-125 border border-white/50 ${
                 currentIndex === index
-                  ? "bg-teal-500 shadow-lg scale-110"
-                  : "bg-gray-300 hover:bg-teal-300"
+                  ? "bg-white shadow-lg scale-110"
+                  : "bg-white/30 hover:bg-white/50"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
