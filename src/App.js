@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import About from './pages/About/About.jsx';
 import ContactUs from './pages/ContectUs/index.js';
 import Index from './pages/Courses/index.js';
+import CardDetail from './pages/Courses/Videocard.jsx';
 function App() {
   return (
     <React.Fragment>
@@ -15,6 +16,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/instructors" element={<Home />} />
+          <Route path="/card/:id" element={<CardDetail />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>

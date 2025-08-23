@@ -20,7 +20,7 @@ function Coursecards() {
         const container = cardsContainerRef.current;
         const containerWidth = container.scrollWidth;
         const viewportWidth = window.innerWidth;
-        const scrollDistance = -(containerWidth - viewportWidth + 50); // Add some padding
+        const scrollDistance = -(containerWidth - viewportWidth + 50); 
 
         gsap.to(container, {
           x: scrollDistance,
@@ -75,7 +75,7 @@ function Coursecards() {
                   content={course.content}
                   rating={course.rating}
                   reviewCount={course.reviewCount}
-                  price={course.price}
+                  price={false}
                   buttonText={course.buttonText}
                   tags={course.tags}
                   onButtonClick={course.onButtonClick}
@@ -131,7 +131,7 @@ function Coursecards() {
                   content={course.content}
                   rating={course.rating}
                   reviewCount={course.reviewCount}
-                  price={course.price}
+                  price={false}
                   buttonText={course.buttonText}
                   tags={course.tags}
                   onButtonClick={course.onButtonClick}

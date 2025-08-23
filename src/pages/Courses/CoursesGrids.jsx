@@ -4,23 +4,23 @@ import { Button } from "./../../components/Button";
 import ShinyText from "../../components/shyniText";
 import DataOfCourse from "./DataOfCourses";
 import ReusableCard from "../Home/services/cards";
+import { useNavigate } from "react-router-dom";
 
 function CoursesGrids() {
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <section className="flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen p-4 sm:p-6 lg:p-8">
-        {/* Header Section with Title and Controls */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full max-w-7xl bg-white rounded-xl shadow-lg p-4 sm:p-6 mb-8 border border-gray-200">
-          {/* Title */}
           <div className="flex-shrink-0">
             <h1 className="text-2xl sm:text-3xl  lg:text-4xl font-bold text-gray-800 bg-gradient-to-r from-red-600 to-purple-600 bg-clip-text text-transparent">
-              Courses
+             Explore Courses
             </h1>
             <ShinyText
               text="Discover amazing learning opportunities"
               disabled={false}
               speed={6}
-              className="text-sm text-blue-600 mt-1 font-bold"
+              className="text-sm text-gray-400 mt-1 font-bold"
             />
           </div>
 
@@ -43,7 +43,6 @@ function CoursesGrids() {
           </div>
         </div>
 
-        {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 w-full max-w-7xl"> */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 w-full max-w-7xl">
     
           {DataOfCourse.map((course, index) => (
@@ -55,11 +54,26 @@ function CoursesGrids() {
                 content={course.content}
                 rating={course.rating}
                 reviewCount={course.reviewCount}
-                price={course.price}
-                buttonText={<span>Enroll Now</span>}
+                price={false}
+                buttonText={course.buttonText}
                 tags={course.tags}
-                onButtonClick={course.onButtonClick}
-                onCardClick={course.onCardClick}
+                onButtonClick={() => {
+                  // Create a clean course object without functions
+                  const cleanCourse = {
+                    id: course.id,
+                    image: course.image,
+                    title: course.title,
+                    content: course.content,
+                    rating: course.rating,
+                    reviewCount: course.reviewCount,
+                    buttonText: course.buttonText,
+                    tags: course.tags,
+                    videoUrl: course.videoUrl,
+                    price: course.price
+                  };
+                  navigate(`/card/${course.id}`, { state: cleanCourse });
+                }}
+                onCardClick={() => console.log(`${course.title} - Card clicked!`)}
               />
             </div>
           ))}
