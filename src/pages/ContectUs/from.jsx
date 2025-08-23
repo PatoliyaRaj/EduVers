@@ -1,28 +1,28 @@
-
-
 import { MapPin, Mail, Phone, Send, User, MessageSquare } from "lucide-react";
 import React, { useState } from "react";
+import "./glass-effect.css";
+import { Button } from "../../components/Button";
 
 function From() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
     // Handle form submission logic here
   };
 
@@ -36,19 +36,20 @@ function From() {
               Get In Touch
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-              We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+              We'd love to hear from you. Send us a message and we'll respond as
+              soon as possible.
             </p>
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
             {/* Contact Form - Glass Effect */}
             <div className="flex-1 lg:flex-[2]">
-              <div className="bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl">
+              <div className="glass-effect bg-white/0 backdrop-blur-[13.3px] border border-white/67 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
                 <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8">
                   Send us a message
                 </h2>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
+
+                <form onSubmit={handleSubmit} className="space-y-6 ">
                   {/* Name and Email Row */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     {/* Name Field */}
@@ -167,17 +168,19 @@ function From() {
 
                   {/* Submit Button */}
                   <div className="pt-4">
-                    <button
+                    <Button
                       type="submit"
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 
-                               bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 
-                               text-white font-medium rounded-lg shadow-lg hover:shadow-xl 
+                      text-black
+                              bg-gradient-to-br from-blue-300 to-pink-200 hover:bg-gradient-to-br from-blue-100 to-purple-100 hover:text-white 
+                               font-medium rounded-lg shadow-lg hover:shadow-xl 
                                transform hover:scale-105 transition-all duration-200 
-                               focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                               focus:ring-2 focus:ring-blue-500 focus:ring-offset-2   
+                               "
                     >
                       <Send className="h-5 w-5" />
                       Send Message
-                    </button>
+                    </Button>
                   </div>
                 </form>
               </div>
@@ -185,7 +188,7 @@ function From() {
 
             {/* Contact Information - Glass Effect */}
             <div className="flex-1 lg:flex-[1]">
-              <div className="bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl p-6 sm:p-8 shadow-xl h-fit sticky top-8">
+              <div className="glass-effect bg-white/0 backdrop-blur-[13.3px] border border-white/67 rounded-2xl p-6 sm:p-8 shadow-[0_4px_30px_rgba(0,0,0,0.1)] h-fit sticky top-8">
                 <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8">
                   Contact Information
                 </h2>
@@ -197,10 +200,14 @@ function From() {
                       <MapPin className="h-6 w-6 text-blue-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Our Location</h3>
+                      <h3 className="font-semibold text-gray-900 mb-1">
+                        Our Location
+                      </h3>
                       <p className="text-gray-600 leading-relaxed">
-                        123 Education Street<br />
-                        Learning District<br />
+                        123 Education Street
+                        <br />
+                        Learning District
+                        <br />
                         Knowledge City, KC 12345
                       </p>
                     </div>
@@ -212,7 +219,9 @@ function From() {
                       <Mail className="h-6 w-6 text-green-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Email Us</h3>
+                      <h3 className="font-semibold text-gray-900 mb-1">
+                        Email Us
+                      </h3>
                       <p className="text-gray-600">info@eduvers.com</p>
                       <p className="text-gray-600">support@eduvers.com</p>
                     </div>
@@ -224,7 +233,9 @@ function From() {
                       <Phone className="h-6 w-6 text-purple-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Call Us</h3>
+                      <h3 className="font-semibold text-gray-900 mb-1">
+                        Call Us
+                      </h3>
                       <p className="text-gray-600">+1 (555) 123-4567</p>
                       <p className="text-gray-600">+1 (555) 987-6543</p>
                     </div>
@@ -232,7 +243,9 @@ function From() {
 
                   {/* Office Hours */}
                   <div className="mt-8 p-4 bg-white/30 backdrop-blur-sm rounded-lg border border-white/40">
-                    <h3 className="font-semibold text-gray-900 mb-3">Office Hours</h3>
+                    <h3 className="font-semibold text-gray-900 mb-3">
+                      Office Hours
+                    </h3>
                     <div className="space-y-2 text-sm text-gray-600">
                       <div className="flex justify-between">
                         <span>Monday - Friday:</span>

@@ -8,7 +8,6 @@ import {
   UserPlus,
   Home,
   BookOpen,
-  Users,
   Info,
   Mail,
 } from "lucide-react";
@@ -29,11 +28,6 @@ export default function Navbar() {
       name: "Courses",
       icon: BookOpen,
       path: "/courses",
-    },
-    {
-      name: "Instructors",
-      icon: Users,
-      path: "/instructors",
     },
     {
       name: "About",
@@ -57,7 +51,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -75,7 +68,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`bg-white/90 backdrop-blur-lg sticky top-0 z-50 transition-all duration-300 border-b border-slate-200/60 font-inter ${
+      className={`bg-white/90 backdrop-blur-lg bg-transparent sticky top-0 z-50 transition-all duration-300 border-b border-slate-200/60 font-inter ${
         scrolled ? "shadow-xl shadow-slate-900/5 bg-white/95" : "shadow-sm"
       }`}
     >

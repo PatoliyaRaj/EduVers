@@ -1,6 +1,6 @@
 import React from "react";
 import ScrollFloat from "../../../components/ScrollFloat";
-// import ReviewSlider from "./reviewslider";
+import ReviewSlider from "./reviewslider";
 import ReusableCarousel from "./sliderforriv";
 
 function index() {
@@ -24,8 +24,8 @@ function index() {
         >
           Our Revies
         </ScrollFloat>
-        {/* <ReviewSlider/> */}
-        <ReusableCarousel/>
+        <ReviewSlider/>
+        {/* <ReusableCarousel/> */}
       </div>
       
     </React.Fragment>

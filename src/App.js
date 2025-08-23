@@ -15,7 +15,6 @@ function App() {
           <Route path="/courses" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/instructors" element={<Home />} />
           <Route path="/card/:id" element={<CardDetail />} />
         </Routes>
       </BrowserRouter>

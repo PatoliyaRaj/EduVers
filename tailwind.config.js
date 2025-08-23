@@ -1,15 +1,15 @@
-// /** @type {import('tailwindcss').Config} */
-// module.exports = {
-//   content: [],
-//   theme: {
-//     extend: {},
-//   },
-//   plugins: [],
-// }
 
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"], // Add this line
-  theme: { extend: {} },
+  theme: { 
+    extend: {
+      backdropBlur: {
+        '13.3': '13.3px',
+      },
+    } 
+  },
   plugins: [],
 };
+
+export default config;
