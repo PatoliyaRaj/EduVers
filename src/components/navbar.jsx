@@ -145,10 +145,12 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 ml-2 xl:ml-4">
-            <button className="flex items-center space-x-2 px-4 lg:px-5 xl:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-inter">
-              <UserPlus className="w-4 h-4" />
-              <span className="whitespace-nowrap">Join EduVers</span>
-            </button>
+            <Link to={"/Sign-Up"}>
+              <button className="flex items-center space-x-2 px-4 lg:px-5 xl:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-inter">
+                <UserPlus className="w-4 h-4" />
+                <span className="whitespace-nowrap">Join EduVers</span>
+              </button>
+            </Link>
           </div>
 
           <div className="lg:hidden flex items-center">
