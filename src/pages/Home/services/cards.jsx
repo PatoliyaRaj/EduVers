@@ -18,7 +18,7 @@ const defaultProps = {
   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
   showButton: true,
   showRating: true,
-  showPrice: true,
+  showPrice: false,
   showTags: true,
   showVideo: true,
   className: "",

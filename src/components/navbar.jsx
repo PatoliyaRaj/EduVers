@@ -236,10 +236,12 @@ export default function Navbar() {
           </nav>
 
           <div className="space-y-3 pt-6 border-t border-slate-200/60">
-            <button className="flex items-center justify-center space-x-2 w-full px-4 py-4 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg transform hover:scale-[1.02] font-inter">
-              <UserPlus className="w-4 h-4" />
-              <span>Join EduVers</span>
-            </button>
+            <Link to={"/Sign-Up"}>
+              <button className="flex items-center justify-center space-x-2 w-full px-4 py-4 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg transform hover:scale-[1.02] font-inter">
+                <UserPlus className="w-4 h-4" />
+                <span>Join EduVers</span>
+              </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
-
-import busness   from "../../../assets/imgs/busness.jpg";
-import comp   from "../../../assets/imgs/comp.png";
+import busness from "../../../assets/imgs/busness.jpg";
+import comp from "../../../assets/imgs/comp.png";
 import fin from "../../../assets/imgs/finance.jpg";
 import eco from "../../../assets/imgs/eco.jpg";
 import Ui from "../../../assets/imgs/UIUx.jpg";
@@ -16,8 +15,7 @@ const courses = [
     reviewCount: 145,
     buttonText: "Know More",
     tags: ["Business", "Startup", "Management"],
-    onButtonClick: () =>
-      console.log("Entrepreneurship Masterclass - Button clicked!"),
+    onButtonClick: () => (window.location.href = "/courses/"),
     onCardClick: () =>
       console.log("Entrepreneurship Masterclass - Card clicked!"),
   },
@@ -30,8 +28,7 @@ const courses = [
     reviewCount: 212,
     buttonText: "Know More",
     tags: ["IT", "Web Development", "Programming"],
-    onButtonClick: () =>
-      console.log("Full Stack Web Development - Button clicked!"),
+    onButtonClick: () => (window.location.href = "/courses/"),
     onCardClick: () =>
       console.log("Full Stack Web Development - Card clicked!"),
   },
@@ -44,8 +41,7 @@ const courses = [
     reviewCount: 88,
     buttonText: "Know More",
     tags: ["Finance", "Investment", "Wealth"],
-    onButtonClick: () =>
-      console.log("Personal Finance & Investment - Button clicked!"),
+    onButtonClick: () => (window.location.href = "/courses/"),
     onCardClick: () =>
       console.log("Personal Finance & Investment - Card clicked!"),
   },
@@ -58,8 +54,7 @@ const courses = [
     reviewCount: 67,
     buttonText: "Know More",
     tags: ["Economics", "Business", "Finance"],
-    onButtonClick: () =>
-      console.log("Macroeconomics Explained - Button clicked!"),
+    onButtonClick: () => (window.location.href = "/courses/"),
     onCardClick: () => console.log("Macroeconomics Explained - Card clicked!"),
   },
   {
@@ -71,8 +66,7 @@ const courses = [
     reviewCount: 94,
     buttonText: "Know More",
     tags: ["UI/UX", "Design", "Figma"],
-    onButtonClick: () =>
-      console.log("UI/UX Design for Beginners - Button clicked!"),
+    onButtonClick: () => (window.location.href = "/courses/"),
     onCardClick: () =>
       console.log("UI/UX Design for Beginners - Card clicked!"),
   },
@@ -84,52 +78,9 @@ const courses = [
     reviewCount: 123,
     buttonText: "Know More",
     tags: ["Marketing", "SEO", "Social Media"],
-    onButtonClick: () =>
-      console.log("Digital Marketing & SEO - Button clicked!"),
+    onButtonClick: () => (window.location.href = "/courses/"),
     onCardClick: () => console.log("Digital Marketing & SEO - Card clicked!"),
   },
-  // {
-  //   image: `${cyber}`,
-  //   title: "Cybersecurity Fundamentals",
-  //   content:
-  //     "Understand ethical hacking, vulnerabilities, and network security.",
-  //   rating: 4.8,
-  //   reviewCount: 101,
-  //   price: "₹209",
-  //   buttonText: "Enroll Now",
-  //   tags: ["IT", "Security", "Networking"],
-  //   onButtonClick: () =>
-  //     console.log("Cybersecurity Fundamentals - Button clicked!"),
-  //   onCardClick: () =>
-  //     console.log("Cybersecurity Fundamentals - Card clicked!"),
-  // },
-  // {
-  //   image: `${fin2}`,
-  //   title: "Stock Market Trading",
-  //   content:
-  //     "Learn technical analysis, risk management, and market psychology.",
-  //   rating: 4.7,
-  //   reviewCount: 76,
-  //   price: "₹249",
-  //   buttonText: "Enroll Now",
-  //   tags: ["Finance", "Stock Market", "Trading"],
-  //   onButtonClick: () => console.log("Stock Market Trading - Button clicked!"),
-  //   onCardClick: () => console.log("Stock Market Trading - Card clicked!"),
-  // },
-  // {
-  //   image: `${eco2}`,
-  //   title: "Global Economic Trends",
-  //   content:
-  //     "Understand trade, globalisation, economic indicators, and policies.",
-  //   rating: 4.6,
-  //   reviewCount: 59,
-  //   price: "₹199",
-  //   buttonText: "Enroll Now",
-  //   tags: ["Economics", "Finance", "Business"],
-  //   onButtonClick: () =>
-  //     console.log("Global Economic Trends - Button clicked!"),
-  //   onCardClick: () => console.log("Global Economic Trends - Card clicked!"),
-  // },
 ];
 
 export default courses;
