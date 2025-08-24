@@ -85,35 +85,27 @@ function ReusableCard({
                 }}
               />
 
-              {/* Base overlay for image darkness */}
               <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-all duration-300" />
 
-              {/* Bottom shadow gradient for title visibility */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-              {/* Additional shadow specifically for bottom area */}
               <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-24 md:h-28 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
             </div>
 
-            {/* Content Overlay */}
             <div className="content-overlay relative z-20 flex flex-col items-center justify-center w-full h-full px-4 sm:px-6 md:px-8">
-              {/* Card Title - Bottom Right */}
               <CardTitle className="absolute bottom-3 sm:bottom-4 md:bottom-6 right-3 sm:right-4 md:right-6 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold drop-shadow-2xl text-white transform group-hover:scale-105 transition-transform duration-300">
                 {title}
               </CardTitle>
             </div>
           </CardHeader>
 
-          {/* Card Content */}
           <CardContent className="content-section p-4 sm:p-5 md:p-6 lg:p-8 bg-gradient-to-b from-white to-gray-50/50 group-hover:from-blue-50/30 group-hover:to-purple-50/30 transition-all duration-300">
-            {/* Content Description */}
             <div className="content-text mb-4 sm:mb-5 md:mb-6">
               <p className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg group-hover:text-gray-800 transition-colors duration-300">
                 {content}
               </p>
             </div>
 
-            {/* Features Tags */}
             {showTags && tags && tags.length > 0 && (
               <div className="features-section mb-4 sm:mb-5 md:mb-6">
                 <div className="flex flex-wrap gap-2 sm:gap-3">

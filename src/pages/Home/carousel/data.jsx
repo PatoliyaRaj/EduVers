@@ -26,7 +26,7 @@ const courses = [
     level: "Intermediate",
     description:
       "Master React hooks, state management, and component lifecycle. Build modern, scalable web applications with the most popular JavaScript library.",
-    link: "/course/react",
+    link: "",
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ const courses = [
     level: "Advanced",
     description:
       "Learn data analysis, visualization, and machine learning techniques to solve real-world problems using AI-driven solutions.",
-    link: "/course/data-science",
+    link: "",
   },
   {
     id: 3,
@@ -57,7 +57,7 @@ const courses = [
     level: "Beginner",
     description:
       "Understand core management, leadership, and organizational strategies to lead teams and achieve business goals.",
-    link: "/course/business-management",
+    link: "",
   },
   {
     id: 4,
@@ -71,7 +71,7 @@ const courses = [
     level: "Intermediate",
     description:
       "Boost your brand presence through SEO, social media marketing, and targeted content creation strategies.",
-    link: "/course/digital-marketing",
+    link: "",
   },
   {
     id: 5,
@@ -87,7 +87,7 @@ const courses = [
     level: "Beginner",
     description:
       "Grasp economic concepts, market forces, and policy effects to make better financial and business decisions.",
-    link: "/course/economics",
+    link: "",
   },
   {
     id: 6,
@@ -105,7 +105,7 @@ const courses = [
     level: "Advanced",
     description:
       "Learn how to evaluate investments, analyze company performance, and create strategies for long-term wealth.",
-    link: "/course/finance",
+    link: "",
   },
   {
     id: 7,
@@ -122,7 +122,7 @@ const courses = [
     level: "Beginner",
     description:
       "Create intuitive and visually appealing designs by mastering the principles of user interface and experience.",
-    link: "/course/ui-ux",
+    link: "",
   },
   {
     id: 8,
@@ -139,7 +139,7 @@ const courses = [
     level: "Intermediate",
     description:
       "Learn how to validate ideas, build products, attract customers, and scale a successful startup.",
-    link: "/course/entrepreneurship",
+    link: "",
   },
   {
     id: 9,
@@ -157,7 +157,7 @@ const courses = [
     level: "Beginner",
     description:
       "Understand the basics of online security, threat prevention, and protecting systems from cyber attacks.",
-    link: "/course/cybersecurity",
+    link: "",
   },
 ];
 

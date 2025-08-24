@@ -11,7 +11,7 @@ function ReviewCard({
   quoteColor = "text-gray-700",
   textColor = "text-white",
   nameColor = "text-yellow-400",
-  roleColor = "text-gray-300",
+  roleColor = "text-[#BCA88D]",
 }) {
   return (
     <div
@@ -25,7 +25,7 @@ function ReviewCard({
         {/* Review Text */}
         <div className="mb-8 sm:mb-12">
           <p
-            className={`text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto ${textColor}`}
+            className={`text-base sm:text-lg lg:text-xl leading-relaxed select-none max-w-3xl mx-auto ${textColor}`}
           >
             {quote}
           </p>
@@ -38,16 +38,16 @@ function ReviewCard({
             <img
               src={studentImage}
               alt={studentName}
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-white/20 shadow-lg"
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-white/20 shadow-lg select-none"
             />
           </div>
 
           {/* Student Info */}
           <div>
-            <h4 className={`text-lg sm:text-xl font-bold mb-1 ${nameColor}`}>
+            <h4 className={`text-lg sm:text-xl font-bold mb-1 select-none ${nameColor}`}>
               {studentName.toUpperCase()}
             </h4>
-            <p className={`text-sm sm:text-base ${roleColor}`}>{studentRole}</p>
+            <p className={`text-sm sm:text-base select-none ${roleColor}`}>{studentRole}</p>
           </div>
         </div>
       </div>
