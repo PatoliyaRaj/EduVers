@@ -8,7 +8,7 @@ function ReviewCard({
   studentRole = "Graduate Student",
   studentImage = "https://via.placeholder.com/80",
   className = "",
-  quoteColor = "text-blue-800",
+  quoteColor = "text-gray-700",
   textColor = "text-white",
   nameColor = "text-yellow-400",
   roleColor = "text-gray-300",
@@ -18,9 +18,8 @@ function ReviewCard({
       className={`relative w-full max-w-4xl mx-auto px-8 py-12 ${className}`}
     >
       <div className="bg-transparent backdrop-blur-sm border border-white/10 rounded-3xl p-8 sm:p-12 text-center">
-        {/* Quote Icon */}
         <div className={`flex justify-center mb-6 ${quoteColor}`}>
-          <QuoteIcon className="w-8 h-8 sm:w-12 sm:h-12" />
+          <QuoteIcon className="w-8 h-8 sm:w-12 sm:h-12 "  />
         </div>
 
         {/* Review Text */}
@@ -58,23 +57,3 @@ function ReviewCard({
 
 export default ReviewCard;
 
-//   {
-//       quote: "In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum. In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum.",
-//       studentName: "James Cooper",
-//       studentRole: "Graduate Student",
-//       studentImage: "/api/placeholder/80/80"
-//     },
-
-//   <div className="space-y-8 p-8">
-//     {sampleReviews.map((review, index) => (
-//       <ReviewCard
-//         key={index}
-//         quote={review.quote}
-//         studentName={review.studentName}
-//         studentRole={review.studentRole}
-//         studentImage={review.studentImage}
-//       />
-//     ))}
-//   </div>
-
-// Main Component with Sample Data
