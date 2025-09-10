@@ -74,24 +74,25 @@ export default function Navbar() {
     >
       <div className="w-full mx-auto px-2 ">
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 lg:h-20 xl:h-22 ">
-          <div className="flex-shrink-0 flex items-center group cursor-pointer transition-transform duration-300 hover:scale-105">
-            <div className="relative">
-              <img
-                src={logo}
-                alt="EduVers Logo"
-                className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-14 lg:h-14 object-contain transition-all duration-300 group-hover:scale-110"
-              />
+          <Link to="/">
+            <div className="flex-shrink-0 flex items-center group cursor-pointer transition-transform duration-300 hover:scale-105">
+              <div className="relative">
+                <img
+                  src={logo}
+                  alt="EduVers Logo"
+                  className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-14 lg:h-14 object-contain transition-all duration-300 group-hover:scale-110"
+                />
+              </div>
+              <div className="ml-2 sm:ml-3 flex flex-col">
+                <span className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-purple-800 bg-clip-text text-transparent tracking-tight font-inter">
+                  EduVers
+                </span>
+                <span className="text-xs text-blue-600 font-medium hidden sm:block font-inter">
+                  Learn & Grow
+                </span>
+              </div>
             </div>
-            <div className="ml-2 sm:ml-3 flex flex-col">
-              <span className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-purple-800 bg-clip-text text-transparent tracking-tight font-inter">
-                EduVers
-              </span>
-              <span className="text-xs text-blue-600 font-medium hidden sm:block font-inter">
-                Learn & Grow
-              </span>
-            </div>
-          </div>
-
+          </Link>
           {/* Desktop: Search and Navigation */}
           <div className="hidden lg:flex items-center space-x-4  xl:space-x-6 flex-1 justify-center max-w-3xl xl:max-w-4xl mx-auto px-2 xl:px-4">
             {/* Enhanced Search Container */}

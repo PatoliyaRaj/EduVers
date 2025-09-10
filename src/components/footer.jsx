@@ -40,7 +40,7 @@ const Footer = ({ className }) => {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Overview
@@ -203,7 +203,7 @@ const Footer = ({ className }) => {
         <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-6">
           {/* Copyright */}
           <p className="text-gray-400 text-sm order-2 sm:order-1">
-            © 2022 Ed-Circle. All rights reserved.
+            {` © ${new Date().getFullYear()} Ed-Circle. All rights reserved.`}
           </p>
 
           {/* Social Icons */}

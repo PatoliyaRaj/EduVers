@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../../components/Button";
 import ilus from "../../assets/imgs/ilustrater.png";
 import { Link } from "react-router-dom";
 
-function index() {
+function Login() {
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [Chaked, setChaked] = useState(false);
+
+  const handelsubmit = (e) => {
+    e.preventDefault();
+    if (!Email || !Password) {
+      alert("Please fill in all fields.");
+      return;
+    }
+    console.log(Email);
+    console.log(Password);
+    console.log(Chaked);
+    window.alert("Login Successfully");
+    window.location.href = "/";
+  };
   return (
     <React.Fragment>
       <section
@@ -26,7 +42,7 @@ function index() {
             {/* Form Section */}
             <div className="w-full max-w-md lg:max-w-lg xl:max-w-xl order-2 lg:order-1">
               <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sm:p-8 lg:p-10">
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handelsubmit}>
                   <div>
                     <label
                       htmlFor="email"
@@ -37,6 +53,8 @@ function index() {
                     <input
                       type="email"
                       id="email"
+                      value={Email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm 
                                                      focus:ring-2 focus:ring-blue-500 focus:border-transparent 
                                                      transition-all duration-200 font-sans text-gray-900
@@ -56,6 +74,8 @@ function index() {
                     <input
                       type="password"
                       id="password"
+                      value={Password}
+                      onChange={(e) => setPassword(e.target.value)}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm 
                                                      focus:ring-2 focus:ring-blue-500 focus:border-transparent 
                                                      transition-all duration-200 font-sans text-gray-900
@@ -68,6 +88,8 @@ function index() {
                     <label className="flex items-center font-sans">
                       <input
                         type="checkbox"
+                        checked={Chaked}
+                        onChange={(e) => setChaked(e.target.checked)}
                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
                       <span className="ml-2 text-gray-600">Remember me</span>
@@ -124,4 +146,4 @@ function index() {
   );
 }
 
-export default index;
+export default Login;
