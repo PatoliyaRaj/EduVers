@@ -4,11 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import SmoothScroll from "./components/SmoothScroll";
+import { Toaster } from "react-hot-toast";
+import { ToastContainer } from 'react-toastify';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <SmoothScroll>
+      <ToastContainer />
+      <Toaster />
       <App />
     </SmoothScroll>
   </React.StrictMode>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../../components/Button";
 import ilus from "../../assets/imgs/ilustrater.png";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 function Login() {
@@ -14,11 +15,26 @@ function Login() {
       alert("Please fill in all fields.");
       return;
     }
+    const notif = () => {
+      toast("✔️Logged in Successfully", {
+        duration: 4000,
+        position: "bottom-right",
+
+        className:
+          "bg-green-500 text-white font-bold px-6 py-4 rounded shadow-md",
+        style: {
+          border: "2px solid #4ADE80",
+        },
+      });
+    };
     console.log(Email);
     console.log(Password);
     console.log(Chaked);
-    window.alert("Login Successfully");
-    window.location.href = "/";
+    notif();
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
+    clearTimeout();
   };
   return (
     <React.Fragment>
@@ -27,7 +43,6 @@ function Login() {
                               flex items-center justify-center px-4 sm:px-6 lg:px-8"
       >
         <div className="w-full max-w-6xl mx-auto">
-          {/* Header */}
           <div className="text-center mb-8 lg:mb-12">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 font-serif tracking-tight">
               Welcome Back
@@ -37,9 +52,7 @@ function Login() {
             </p>
           </div>
 
-          {/* Main Content */}
           <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 xl:gap-20">
-            {/* Form Section */}
             <div className="w-full max-w-md lg:max-w-lg xl:max-w-xl order-2 lg:order-1">
               <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sm:p-8 lg:p-10">
                 <form className="space-y-6" onSubmit={handelsubmit}>
@@ -63,7 +76,6 @@ function Login() {
                     />
                   </div>
 
-                  {/* Password Field */}
                   <div>
                     <label
                       htmlFor="password"

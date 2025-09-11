@@ -1,9 +1,9 @@
-
 import React, { useState } from "react";
 import { Button } from "../../components/Button";
 import ilus2 from "../../assets/imgs/ilustrator2.png";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
+import { toast } from "react-toastify";
 function SignUp() {
   const [Data, setData] = useState({
     userType: "",
@@ -15,7 +15,7 @@ function SignUp() {
     email: "",
     password: "",
     confirmPassword: "",
-    agreeTerms: false, // ✅ added checkbox state
+    agreeTerms: false,
   });
 
   const handleChange = (e) => {
@@ -28,7 +28,41 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(Data);
+    await axios
+      .create({
+        baseURL: "http://localhost:3000",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .post("/User/signup", {
+        userType: Data.userType,
+        firstName: Data.firstName,
+        lastName: Data.lastName,
+        age: parseInt(Data.age),
+        gender: Data.gender,
+        phoneNo: Data.phoneNo,
+        email: Data.email,
+        password: Data.password,
+        confirmPassword: Data.confirmPassword,
+        agreeTerms: Data.agreeTerms,
+      })
+      .then((response) => {
+        console.log("User registered successfully:", response.data);
+        toast.success("Registration successful! Redirecting to login...", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error(
+          "Error registering user:",
+          error.response?.data || error.message
+        );
+      });
   };
 
   return (
@@ -56,7 +90,6 @@ function SignUp() {
                   className="space-y-3 sm:space-y-4"
                   onSubmit={handleSubmit}
                 >
-                  {/* User Role */}
                   <div>
                     <label
                       htmlFor="userType"
@@ -80,7 +113,6 @@ function SignUp() {
                     </select>
                   </div>
 
-                  {/* First & Last Name */}
                   <div className="flex flex-row gap-3 justify-between items-center">
                     <div className="flex flex-col flex-1">
                       <label
@@ -124,7 +156,6 @@ function SignUp() {
                     </div>
                   </div>
 
-                  {/* Age & Gender */}
                   <div className="flex flex-row gap-3 justify-between items-center">
                     <div className="flex flex-col flex-1">
                       <label
@@ -172,7 +203,6 @@ function SignUp() {
                     </div>
                   </div>
 
-                  {/* Phone */}
                   <div>
                     <label
                       htmlFor="phoneNo"
@@ -194,7 +224,6 @@ function SignUp() {
                     />
                   </div>
 
-                  {/* Email */}
                   <div>
                     <label
                       htmlFor="email"
@@ -216,7 +245,6 @@ function SignUp() {
                     />
                   </div>
 
-                  {/* Password */}
                   <div>
                     <label
                       htmlFor="password"
@@ -238,7 +266,6 @@ function SignUp() {
                     />
                   </div>
 
-                  {/* Confirm Password */}
                   <div>
                     <label
                       htmlFor="confirmPassword"
@@ -260,7 +287,6 @@ function SignUp() {
                     />
                   </div>
 
-                  {/* Terms and Conditions */}
                   <div className="flex items-start text-sm">
                     <label className="flex items-start font-sans">
                       <input
@@ -289,7 +315,6 @@ function SignUp() {
                     </label>
                   </div>
 
-                  {/* Submit */}
                   <Button
                     type="submit"
                     className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 
@@ -299,7 +324,6 @@ function SignUp() {
                     Sign Up
                   </Button>
 
-                  {/* Login Redirect */}
                   <div className="text-center pt-4 border-t border-gray-100">
                     <p className="text-sm text-gray-600 font-sans">
                       Already have an account?{" "}
@@ -315,7 +339,6 @@ function SignUp() {
               </div>
             </div>
 
-            {/* Illustration Section */}
             <div className="w-full max-w-md lg:max-w-lg xl:max-w-2xl order-1">
               <div className="relative">
                 <img
