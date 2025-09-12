@@ -28,41 +28,45 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .create({
-        baseURL: "http://localhost:3000",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .post("/User/signup", {
-        userType: Data.userType,
-        firstName: Data.firstName,
-        lastName: Data.lastName,
-        age: parseInt(Data.age),
-        gender: Data.gender,
-        phoneNo: Data.phoneNo,
-        email: Data.email,
-        password: Data.password,
-        confirmPassword: Data.confirmPassword,
-        agreeTerms: Data.agreeTerms,
-      })
-      .then((response) => {
-        console.log("User registered successfully:", response.data);
-        toast.success("Registration successful! Redirecting to login...", {
-          position: "top-right",
-          autoClose: 3000,
+
+    try {
+      const response = await axios
+        .create({
+          baseURL: "http://localhost:3000",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .post("/User/signup", {
+          userType: Data.userType,
+          firstName: Data.firstName,
+          lastName: Data.lastName,
+          age: parseInt(Data.age),
+          gender: Data.gender,
+          phoneNo: Data.phoneNo,
+          email: Data.email,
+          password: Data.password,
+          confirmPassword: Data.confirmPassword,
+          agreeTerms: Data.agreeTerms,
         });
+      if (response.data.success) {
+        toast.success("Account Created Successfully", {
+          position: "top-center",
+          duration: 4000,
+        });
+
         setTimeout(() => {
-          window.location.href = "/login";
-        }, 2000);
-      })
-      .catch((error) => {
-        console.error(
-          "Error registering user:",
-          error.response?.data || error.message
-        );
+          window.location.href ="/Login"
+        }, 3000);
+      }
+     
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Sign Up Failed. Please try again", {
+        position: "top-center",
+        duration: 4000,
       });
+      console.error("Sign Up error:", error.response?.Data || error.message);
+    }
   };
 
   return (

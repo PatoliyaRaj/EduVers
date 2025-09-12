@@ -3,39 +3,76 @@ import { Button } from "../../components/Button";
 import ilus from "../../assets/imgs/ilustrater.png";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [Chaked, setChaked] = useState(false);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+    Rememberme: false,
+  });
 
-  const handelsubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handelsubmit = async (e) => {
     e.preventDefault();
-    if (!Email || !Password) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    const notif = () => {
-      toast("✔️Logged in Successfully", {
+    if (!data.email || !data.password) {
+      toast.error("All Fields Are Necessary", {
         duration: 4000,
-        position: "bottom-right",
-
+        position: "top-center",
         className:
-          "bg-green-500 text-white font-bold px-6 py-4 rounded shadow-md",
+          "bg-red-500 text-white font-bold px-6 py-4 rounded shadow-md",
         style: {
-          border: "2px solid #4ADE80",
+          border: "2px solid red",
         },
       });
-    };
-    console.log(Email);
-    console.log(Password);
-    console.log(Chaked);
-    notif();
-    setTimeout(() => {
-      window.location.href = "/";
-    }, 2000);
-    clearTimeout();
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/Login/userlogin",
+        {
+          email: data.email,
+          password: data.password,
+          Rememberme: data.Rememberme,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(response.data);
+
+      if (response.data.success) {
+        toast.success("Logged in Successfully", {
+          position: "top-center",
+          duration: 4000,
+        });
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      }
+    } catch (error) {
+      console.error("Login error:", error.response?.data || error.message);
+      toast.error(
+        error.response?.data?.message || "Login Failed. Please try again",{
+          position:"top-center",
+          duration:4000,
+        }
+      );
+    }
   };
+
   return (
     <React.Fragment>
       <section
@@ -66,8 +103,9 @@ function Login() {
                     <input
                       type="email"
                       id="email"
-                      value={Email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      name="email"
+                      value={data.email}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm 
                                                      focus:ring-2 focus:ring-blue-500 focus:border-transparent 
                                                      transition-all duration-200 font-sans text-gray-900
@@ -86,8 +124,9 @@ function Login() {
                     <input
                       type="password"
                       id="password"
-                      value={Password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      name="password"
+                      value={data.password}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm 
                                                      focus:ring-2 focus:ring-blue-500 focus:border-transparent 
                                                      transition-all duration-200 font-sans text-gray-900
@@ -100,8 +139,9 @@ function Login() {
                     <label className="flex items-center font-sans">
                       <input
                         type="checkbox"
-                        checked={Chaked}
-                        onChange={(e) => setChaked(e.target.checked)}
+                        name="Rememberme"
+                        checked={data.Rememberme}
+                        onChange={handleChange}
                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
                       <span className="ml-2 text-gray-600">Remember me</span>
