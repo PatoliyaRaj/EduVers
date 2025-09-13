@@ -49,22 +49,37 @@ function SignUp() {
           confirmPassword: Data.confirmPassword,
           agreeTerms: Data.agreeTerms,
         });
+
       if (response.data.success) {
         toast.success("Account Created Successfully", {
           position: "top-center",
           duration: 4000,
         });
+        setData({
+          userType: "",
+          firstName: "",
+          lastName: "",
+          age: "",
+          gender: "",
+          phoneNo: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          agreeTerms: false,
+        });
 
         setTimeout(() => {
-          window.location.href ="/Login"
-        }, 3000);
+          window.location.href = "/Login";
+        }, 2000);
       }
-     
     } catch (error) {
-      toast.error(error.response?.data?.message || "Sign Up Failed. Please try again", {
-        position: "top-center",
-        duration: 4000,
-      });
+      toast.error(
+        error.response?.data?.message || "Sign Up Failed. Please try again",
+        {
+          position: "top-center",
+          duration: 4000,
+        }
+      );
       console.error("Sign Up error:", error.response?.Data || error.message);
     }
   };

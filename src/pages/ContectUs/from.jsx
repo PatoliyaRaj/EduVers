@@ -2,10 +2,12 @@ import { MapPin, Mail, Phone, Send, User, MessageSquare } from "lucide-react";
 import React, { useState } from "react";
 import "./glass-effect.css";
 import { Button } from "../../components/Button";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function From() {
   const [formData, setFormData] = useState({
-    name: "",
+    fullname: "",
     email: "",
     phone: "",
     subject: "",
@@ -20,10 +22,40 @@ function From() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission logic here
+
+    try {
+      const response = await axios
+        .create({
+          method: "post",
+          baseURL: "http://localhost:3000",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .post("/Contact/submit", formData);
+      if (response.data.success) {
+        toast.success("Message sent successfully!", {
+          position: "top-center",
+          duration: 2000,
+        });
+        setFormData({
+          fullname: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error(error.response?.data?.message || "Failed to send message. Please try again later.", {
+        position: "top-center",
+        duration: 2000,
+        className: "bg-red-200",
+      });
+    }
   };
 
   return (
@@ -61,8 +93,8 @@ function From() {
                         <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                         <input
                           type="text"
-                          name="name"
-                          value={formData.name}
+                          name="fullname"
+                          value={formData.fullname}
                           onChange={handleInputChange}
                           required
                           className="w-full pl-10 pr-4 py-3 bg-white/50 backdrop-blur-sm border border-white/40 rounded-lg 

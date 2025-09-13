@@ -58,6 +58,12 @@ function Login() {
           duration: 4000,
         });
 
+        setData({
+          email: "",
+          password: "",
+          Rememberme: false,
+        });
+
         setTimeout(() => {
           window.location.href = "/";
         }, 2000);
@@ -65,9 +71,10 @@ function Login() {
     } catch (error) {
       console.error("Login error:", error.response?.data || error.message);
       toast.error(
-        error.response?.data?.message || "Login Failed. Please try again",{
-          position:"top-center",
-          duration:4000,
+        error.response?.data?.message || "Login Failed. Please try again",
+        {
+          position: "top-center",
+          duration: 4000,
         }
       );
     }
