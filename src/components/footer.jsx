@@ -1,9 +1,10 @@
 import React from "react";
 import { Twitter, Linkedin, Github, Facebook, Globe, Mail } from "lucide-react";
-import logo from "../assets/imgs/logo.png"; // Adjust the path as necessary
+import logo from "../assets/imgs/logo.png"; 
 
 const Footer = ({ className }) => {
   return (
+    <React.Fragment>  
     <footer className={`bg-gray-900 text-white ${className}`}>
       <div className="max-w-6xl mx-auto px-6 py-16">
         {/* Main Footer Content */}
@@ -48,7 +49,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Features
@@ -56,7 +57,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Solutions
@@ -64,7 +65,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Tutorials
@@ -72,7 +73,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Pricing
@@ -87,7 +88,7 @@ const Footer = ({ className }) => {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   About us
@@ -95,7 +96,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Careers
@@ -103,7 +104,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   <div className="flex items-center">Press</div>
@@ -111,7 +112,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   News
@@ -126,7 +127,7 @@ const Footer = ({ className }) => {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Twitter
@@ -134,7 +135,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   LinkedIn
@@ -142,7 +143,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   GitHub
@@ -150,7 +151,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Dribbble
@@ -165,7 +166,7 @@ const Footer = ({ className }) => {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Terms
@@ -173,7 +174,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Privacy
@@ -181,7 +182,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Cookies
@@ -189,7 +190,7 @@ const Footer = ({ className }) => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-400 hover:text-white transition-colors text-sm block"
                 >
                   Contact
@@ -209,35 +210,35 @@ const Footer = ({ className }) => {
           {/* Social Icons */}
           <div className="flex items-center space-x-5 order-1 sm:order-2">
             <a
-              href="#"
+              href="/"
               className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
               aria-label="Twitter"
             >
               <Twitter size={18} />
             </a>
             <a
-              href="#"
+              href="/"
               className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
               aria-label="LinkedIn"
             >
               <Linkedin size={18} />
             </a>
             <a
-              href="#"
+              href="/"
               className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
               aria-label="Facebook"
             >
               <Facebook size={18} />
             </a>
             <a
-              href="#"
+              href="/"
               className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
               aria-label="GitHub"
             >
               <Github size={18} />
             </a>
             <a
-              href="#"
+              href="/"
               className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
               aria-label="Dribbble"
             >
@@ -247,6 +248,7 @@ const Footer = ({ className }) => {
         </div>
       </div>
     </footer>
+    </React.Fragment>
   );
 };
 

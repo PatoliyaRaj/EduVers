@@ -58,6 +58,9 @@ function Login() {
           duration: 4000,
         });
 
+        localStorage.setItem("isLogin", "true");
+        localStorage.setItem("userEmail", data.email);
+
         setData({
           email: "",
           password: "",

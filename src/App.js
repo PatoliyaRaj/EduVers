@@ -8,6 +8,7 @@ import Index from './pages/Courses/index.js';
 import Login from './pages/Login/index.jsx';
 import SignUp from './pages/Sign-Up/index.jsx';
 import CardDetail from './pages/Courses/Videocard.jsx';
+import Profile from './pages/Profile/Profile.jsx';
 function App() {
   return (
     <React.Fragment>
@@ -20,6 +21,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/card/:id" element={<CardDetail />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
