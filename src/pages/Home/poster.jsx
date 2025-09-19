@@ -23,17 +23,20 @@ function Poster() {
 
           <button
             className="
-            bg-gradient-to-r from-purple-500 to-pink-500 
-            hover:from-purple-600 hover:to-pink-600 
-            text-white font-semibold 
+            bg-transparent 
+            hover:bg-gradient-to-r       
+            hover:from-[#343131] hover:to-[#D8A25E]          
+                    
+            text-black font-semibold 
             px-4 sm:px-6 md:px-8 
             py-2 sm:py-3 
+            hover:text-white
             rounded-full 
+            border-2 border-[#A9B5DF] hover:border-none
             text-xs sm:text-sm md:text-base
             transition-all duration-300 
-            transform hover:scale-105 hover:shadow-lg
-            focus:outline-none focus:ring-4 focus:ring-purple-300
-            active:scale-95
+            transform  hover:shadow-lg
+            focus:outline-none focus:ring-2 focus:ring-[#D8A25E]
           "
           >
             Start Your Journey

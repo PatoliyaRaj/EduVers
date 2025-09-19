@@ -20,8 +20,6 @@ export default function Navbar() {
   const [lgNavOpen, setLgNavOpen] = useState(false);
   const isLogin = JSON.parse(localStorage.getItem("isLogin"));
   const email = localStorage.getItem("userEmail") || "User";
-  console.log("isLogin:", isLogin, typeof isLogin);
-  console.log(email);
 
   const navLinks = [
     {
@@ -90,10 +88,10 @@ export default function Navbar() {
                   />
                 </div>
                 <div className="ml-2 sm:ml-3 flex flex-col">
-                  <span className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-purple-800 bg-clip-text text-transparent tracking-tight font-inter">
+                  <span className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-[#343131] to-[#D8A25E] bg-clip-text text-transparent tracking-tight font-inter">
                     EduVers
                   </span>
-                  <span className="text-xs text-blue-600 font-medium hidden sm:block font-inter">
+                  <span className="text-xs text-black font-medium hidden sm:block font-inter">
                     Learn & Grow
                   </span>
                 </div>
@@ -104,7 +102,7 @@ export default function Navbar() {
               {/* Enhanced Search Container */}
               <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200 hover:border-blue-300 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-500/10 transition-all duration-300 shadow-sm hover:shadow-lg w-full max-w-xl xl:max-w-2xl ">
                 <div className="pl-4 lg:pl-3 pr-3">
-                  <Search className="w-5 h-5 text-blue-500" />
+                  <Search className="w-5 h-5 text-[#D8A25E]" />
                 </div>
                 <input
                   type="text"
@@ -112,15 +110,17 @@ export default function Navbar() {
                   className="flex-1 bg-transparent px-3 py-3 lg:py-1.5 text-sm lg:text-base text-slate-700 placeholder-slate-500 focus:outline-none min-w-0 font-medium font-inter"
                 />
                 <div className="relative mr-2">
-                  <select className="appearance-none bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 px-3 lg:px-4 py-2.5 lg:py-2 pr-8 lg:pr-9 rounded-xl text-sm lg:text-base font-semibold cursor-pointer hover:from-blue-100 hover:to-purple-100 focus:outline-none focus:ring-3 focus:ring-blue-500/20 transition-all duration-300 border border-blue-200 font-inter">
+                  <select className="appearance-none bg-gradient-to-r from-[#343131] to-[#D8A25E] font-medium text-white px-3 lg:px-4 py-2.5 lg:py-2 pr-8 lg:pr-9 rounded-xl text-sm lg:text-base font-semibold cursor-pointer  focus:outline-none focus:ring-3 focus:ring-blue-500/20 transition-all duration-300 border border-blue-200 font-inter transition-all duration-500">
+                    <optgroup label="Categories" className="font-bold text-black">
                     <option>All Categories</option>
                     <option>Programming</option>
                     <option>Design</option>
                     <option>Business</option>
                     <option>Marketing</option>
-                    <option>Data Science</option>
+                    <option>Data Science</option> 
+                    </optgroup>
                   </select>
-                  <ChevronDown className="absolute right-2 lg:right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-blue-600 pointer-events-none" />
+                  <ChevronDown className="absolute right-2 lg:right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white pointer-events-none transition-all duration-300" />
                 </div>
               </div>
             </div>
@@ -132,11 +132,11 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     to={link.path || "/"}
-                    className="flex items-center space-x-2 px-3 lg:px-2 xl:px-5 py-2.5 lg:py-3 text-slate-700 hover:text-blue-600 font-medium text-sm lg:text-base transition-all duration-300 relative group rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 font-inter"
+                    className="flex items-center space-x-2 px-3 lg:px-2 xl:px-5 py-2.5 lg:py-3 text-slate-700  font-medium text-sm lg:text-base transition-all duration-300 relative group rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 font-inter"
                   >
-                    <IconComponent className="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 group-hover:text-blue-500 transition-colors duration-300" />
-                    <span className="whitespace-nowrap">{link.name}</span>
-                    <span className="absolute -bottom-1 left-1/2  transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-all duration-300 group-hover:w-[90%]   rounded-full"></span>
+                    <IconComponent className="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 group-hover:text-[#343131] transition-colors duration-300" />
+                    <span className="whitespace-nowrap group-hover:text-[#D8A25E]">{link.name}</span>
+                    <span className="absolute -bottom-1 left-0 right-0 mx-auto w-0 h-0.5 bg-gradient-to-r from-[#343131] to-[#D8A25E] transition-all duration-300 group-hover:w-[90%] rounded-full"></span>
                   </Link>
                 );
               })}
@@ -156,7 +156,7 @@ export default function Navbar() {
                 <AvatarDropdown placeholder={`${email.charAt(0)}`} />
               ) : (
                 <Link to={"/Sign-Up"}>
-                  <button className="flex items-center space-x-2 px-4 lg:px-5 xl:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-inter">
+                  <button className="flex items-center space-x-2 px-4 lg:px-5 xl:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold text-white  bg-gradient-to-r from-[#343131] to-[#D8A25E]  rounded-xl  transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-inter">
                     <UserPlus className="w-4 h-4" />
                     <span className="whitespace-nowrap">Join EduVers</span>
                   </button>
@@ -178,7 +178,10 @@ export default function Navbar() {
                   <Menu className="w-6 h-6" />
                 )}
               </button>
-              <AvatarDropdown placeholder={`${email.charAt(0)}`} size="sm" />
+
+              {isLogin && (
+                <AvatarDropdown placeholder={`${email.charAt(0)}`} size="sm" />
+              )}
             </div>
           </div>
         </div>
@@ -217,20 +220,21 @@ export default function Navbar() {
             {/* Mobile Search */}
             <div className="space-y-4" onClick={(e) => e.stopPropagation()}>
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-500" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#D8A25E]" />
                 <input
                   type="text"
                   placeholder="Search courses, topics..."
                   className="w-full pl-12 pr-4 py-4 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-3 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/90 backdrop-blur-sm font-inter"
                 />
               </div>
-              <select className="w-full px-4 py-4 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-3 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-gradient-to-r from-blue-50 to-purple-50 font-medium text-blue-700 font-inter">
-                <option>All Categories</option>
-                <option>Programming</option>
-                <option>Design</option>
-                <option>Business</option>
-                <option>Marketing</option>
-                <option>Data Science</option>
+              <select className="w-full px-4 py-4 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-3 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-gradient-to-r from-[#343131] to-[#D8A25E] font-medium text-white   font-inter">
+                <optgroup label="Categories" className="font-bold text-black">
+                  <option>Programming</option>
+                  <option>Design</option>
+                  <option>Business</option>
+                  <option>Marketing</option>
+                  <option>Data Science</option>
+                </optgroup>
               </select>
             </div>
 
@@ -254,7 +258,7 @@ export default function Navbar() {
             <div className="space-y-3 pt-6 border-t border-slate-200/60">
               {!isLogin && (
                 <Link to={"/Sign-Up"}>
-                  <button className="flex items-center justify-center space-x-2 w-full px-4 py-4 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg transform hover:scale-[1.02] font-inter">
+                  <button className="flex items-center justify-center space-x-2 w-full px-4 py-4 text-sm font-semibold text-white bg-gradient-to-r from-[#343131] to-[#D8A25E]  rounded-xl transition-all duration-300 shadow-lg transform hover:scale-[1.02] font-inter">
                     <UserPlus className="w-4 h-4" />
                     <span>Join EduVers</span>
                   </button>
