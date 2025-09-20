@@ -1,22 +1,23 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { User, Settings, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
+import { SuccessToster, ErrorToster } from "./toster";
 export default function AvatarDropdown({
   placeholder = "U",
   className = "  ",
   size = "md", // sm, md, lg, xl
   bgColor = "bg-transparent hover:bg-gray-800",
-  textColor = "text-blue-400 hover:text-yellow-500",
-  borderColor = "ring-2 ring-blue-600 hover:ring-yellow-400",
-  customSize = null, 
+  textColor = "text-[#343131] hover:text-yellow-500",
+  borderColor = "ring-2 ring-[#D8A25E] hover:ring-yellow-400",
+  customSize = null,
   showdropdown = true,
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState(null);
   const trigger = useRef(null);
   const dropdown = useRef(null);
+  const email = localStorage.getItem("userEmail") || "User";
 
   const sizeConfig = {
     sm: {
@@ -94,11 +95,31 @@ export default function AvatarDropdown({
     return () => document.removeEventListener("click", clickHandler);
   }, [dropdownOpen]);
 
-  const handleSignOut = () => {
-    localStorage.removeItem("isLogin");
-    localStorage.removeItem("userEmail");
-    setDropdownOpen(false);
-    window.location.href = "/";
+  const handleSignOut = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/Logout/Userlogout",
+        {
+          email: email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      SuccessToster(response.data.message || "Logged Out Successfully");
+      if (response.data.success) {
+        localStorage.removeItem("isLogin");
+        localStorage.removeItem("userEmail");
+        window.location.href = "/";
+      }
+    } catch (error) {
+      console.error("error",error)
+      ErrorToster(error.response?.data?.message || "Some thing went wrong");
+    }
   };
 
   return (
@@ -143,7 +164,9 @@ export default function AvatarDropdown({
           transform transition-all duration-300 ease-out z-50
           ${
             dropdownOpen
-              ? showdropdown ? "opacity-100 scale-100 translate-y-0 pointer-events-auto" : "opacity-0 hidden scale-95 -translate-y-2 pointer-events-none"
+              ? showdropdown
+                ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 hidden scale-95 -translate-y-2 pointer-events-none"
               : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
           }
         `}
@@ -153,7 +176,7 @@ export default function AvatarDropdown({
             to="/profile"
             className="flex items-center px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-gray-900 transition-all duration-200 group"
           >
-            <User className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-gray-500 group-hover:text-blue-600 transition-colors duration-200" />
+            <User className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-gray-500 group-hover:text-[#D8A25E] transition-colors duration-200" />
             <span className="truncate font-medium">Profile</span>
           </Link>
 
@@ -161,7 +184,7 @@ export default function AvatarDropdown({
             href="/settings"
             className="flex items-center px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-gray-900 transition-all duration-200 group"
           >
-            <Settings className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-gray-500 group-hover:text-blue-600 transition-colors duration-200" />
+            <Settings className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-gray-500 group-hover:text-[#D8A25E] transition-colors duration-200" />
             <span className="truncate font-medium">Settings</span>
           </a>
 

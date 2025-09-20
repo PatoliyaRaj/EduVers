@@ -20,6 +20,7 @@ export default function Navbar() {
   const [lgNavOpen, setLgNavOpen] = useState(false);
   const isLogin = JSON.parse(localStorage.getItem("isLogin"));
   const email = localStorage.getItem("userEmail") || "User";
+  
 
   const navLinks = [
     {
