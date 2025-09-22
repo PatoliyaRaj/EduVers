@@ -114,6 +114,7 @@ export default function AvatarDropdown({
       if (response.data.success) {
         localStorage.removeItem("isLogin");
         localStorage.removeItem("userEmail");
+        localStorage.removeItem("UserType");
         window.location.href = "/";
       }
     } catch (error) {

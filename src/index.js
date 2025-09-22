@@ -5,7 +5,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import SmoothScroll from "./components/SmoothScroll";
 import { Toaster } from "react-hot-toast";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,7 +16,9 @@ root.render(
     <SmoothScroll>
       <ToastContainer />
       <Toaster />
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </SmoothScroll>
   </React.StrictMode>
 );

@@ -8,7 +8,7 @@ import Index from './pages/Courses/index.js';
 import Login from './pages/Login/index.jsx';
 import SignUp from './pages/Sign-Up/index.jsx';
 import CardDetail from './pages/Courses/Videocard.jsx';
-import Profile from './pages/Profile/Profile.jsx';
+import Profile from './pages/Profile/Profile';
 function App() {
   return (
     <React.Fragment>

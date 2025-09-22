@@ -51,7 +51,7 @@ function Poster() {
         <img
           src={boy}
           alt="I/'am a boy"
-          style={{ filter: "drop-shadow(6px 4px 8px rgba(210, 51, 51, 0.47))" }}
+          style={{ filter: "drop-shadow(6px 4px 8px rgba(104, 103, 103, 0.35))" }}
           className="
             absolute 
             bottom-0 
@@ -71,7 +71,7 @@ function Poster() {
         <img
           src={girls}
           alt="Student with books and thumbs up gesture"
-          style={{ filter: "drop-shadow(6px 4px 8px rgba(210, 51, 51, 0.47))" }}
+          style={{ filter: "drop-shadow(6px 4px 8px rgba(104, 103, 103, 0.52))" }}
           className="
             absolute 
             bottom-0 

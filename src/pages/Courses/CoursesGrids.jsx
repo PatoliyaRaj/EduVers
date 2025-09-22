@@ -27,7 +27,7 @@ function CoursesGrids() {
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
-    setopen(false); // Close dropdown after selection
+    setopen(false); 
   };
 
   const filteredCourses =

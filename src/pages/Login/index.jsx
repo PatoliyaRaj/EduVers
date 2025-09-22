@@ -4,7 +4,7 @@ import ilus from "../../assets/imgs/ilustrater.png";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { SuccessToster , ErrorToster } from "../../components/toster";
+import { SuccessToster, ErrorToster } from "../../components/toster";
 
 function Login() {
   const [data, setData] = useState({
@@ -23,8 +23,16 @@ function Login() {
 
   const handelsubmit = async (e) => {
     e.preventDefault();
-    if (!data.email || !data.password) {    
-      ErrorToster("All Fields Are Necessary", 3000,"top-right", true, false, true, "font-bold transition-all");
+    if (!data.email || !data.password) {
+      ErrorToster(
+        "All Fields Are Necessary",
+        3000,
+        "top-right",
+        true,
+        false,
+        true,
+        "font-bold transition-all"
+      );
       return;
     }
 
@@ -44,10 +52,10 @@ function Login() {
       );
 
       if (response.data.success) {
-        SuccessToster("Logged In Successfuly",3000)
+        SuccessToster("Logged In Successfuly", 3000);
         localStorage.setItem("isLogin", "true");
         localStorage.setItem("userEmail", data.email);
-
+        localStorage.setItem("UserType", response.data.UserType);
         setData({
           email: "",
           password: "",
@@ -55,7 +63,7 @@ function Login() {
         });
 
         setTimeout(() => {
-          window.location.href = "/";
+          document.location.href = "/";
         }, 2000);
       }
     } catch (error) {

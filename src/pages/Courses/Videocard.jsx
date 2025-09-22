@@ -6,7 +6,6 @@ export default function CardDetail() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Get card from state or find it in DataOfCourse by ID
   let card = location.state;
 
   if (!card) {
