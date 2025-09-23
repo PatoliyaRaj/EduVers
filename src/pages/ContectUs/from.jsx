@@ -34,7 +34,7 @@ function From() {
             "Content-Type": "application/json",
           },
         })
-        .post("/Contact/submit", formData);
+        .post("/Contact/submitContact", formData);
       if (response.data.success) {
         toast.success("Message sent successfully!", {
           position: "top-center",
@@ -50,11 +50,15 @@ function From() {
       }
     } catch (error) {
       console.error("Error sending message:", error);
-      toast.error(error.response?.data?.message || "Failed to send message. Please try again later.", {
-        position: "top-center",
-        duration: 2000,
-        className: "bg-red-200",
-      });
+      toast.error(
+        error.response?.data?.message ||
+          "Failed to send message. Please try again later.",
+        {
+          position: "top-center",
+          duration: 2000,
+          className: "bg-red-200",
+        }
+      );
     }
   };
 
@@ -106,7 +110,6 @@ function From() {
                       </div>
                     </div>
 
-                    {/* Email Field */}
                     <div className="relative">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Email Address *

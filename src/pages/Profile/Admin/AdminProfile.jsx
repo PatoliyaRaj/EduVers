@@ -14,7 +14,7 @@ import AdminLayout from "../../../utils/Adminlayoute";
 
 function AdminProfile() {
   const [activeTab, setActiveTab] = useState("overview");
-  const userRoll = localStorage.getItem("UserType") || "Teacher";
+  const userRoll = localStorage.getItem("UserType").toUpperCase() || "TEACHER";
   const email = localStorage.getItem("userEmail");
 
   const {
@@ -38,7 +38,12 @@ function AdminProfile() {
 
   if (isLoading) {
     return (
-      <AdminLayout pageTitle="Profile" showSearch={false} className="p-0" subheader="shadow-none">
+      <AdminLayout
+        pageTitle="Profile"
+        showSearch={false}
+        className="p-0"
+        subheader="shadow-none"
+      >
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#D8A25E] mx-auto"></div>
@@ -68,15 +73,18 @@ function AdminProfile() {
   }
 
   console.log("Fetched User Data:", usersData);
-  
+
   const userData = {
-    name: `${usersData?.firstName || ""} ${usersData?.lastName || ""}`.trim() || "Admin User",
+    name:
+      `${usersData?.firstName || ""} ${usersData?.lastName || ""}`.trim() ||
+      "Admin User",
     role: userRoll,
     email: usersData?.email || email || "admin@example.com",
     age: usersData?.age || "N/A",
     gender: usersData?.gender || "N/A",
     phone: usersData?.phoneNo || "+1 (123) 456-7890",
-    about: "Passionate educator with 5+ years of experience in fostering student growth and engagement.",
+    about:
+      "Passionate educator with 5+ years of experience in fostering student growth and engagement.",
     courses: [
       {
         id: 1,
@@ -137,9 +145,7 @@ function AdminProfile() {
                   <h2 className="text-lg sm:text-xl font-bold text-[#343131]">
                     {userData.name.toUpperCase()}
                   </h2>
-                  <p className="text-sm text-gray-500 mb-4">
-                    {userData.role}
-                  </p>
+                  <p className="text-sm text-gray-500 mb-4">{userData.role}</p>
 
                   <div className="w-full space-y-3 mt-4">
                     <div className="flex items-center text-sm">
@@ -260,43 +266,43 @@ function AdminProfile() {
         {/* Other tabs */}
         {activeTab === "courses" && (
           <div className="p-4 sm:p-6 md:p-8">
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 ">
-            <h2 className="text-xl font-bold text-[#343131] mb-6 flex items-center ">
-              <BookOpen size={24} className="text-[#D8A25E] mr-2" />
-              My Courses
-            </h2>
-            <p className="text-gray-600">
-              Your enrolled courses would appear here.
-            </p>
-          </div>
+            <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 ">
+              <h2 className="text-xl font-bold text-[#343131] mb-6 flex items-center ">
+                <BookOpen size={24} className="text-[#D8A25E] mr-2" />
+                My Courses
+              </h2>
+              <p className="text-gray-600">
+                Your enrolled courses would appear here.
+              </p>
+            </div>
           </div>
         )}
 
         {activeTab === "achievements" && (
           <div className="p-4 sm:p-6 md:p-8">
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-            <h2 className="text-xl font-bold text-[#343131] mb-6 flex items-center">
-              <Award size={24} className="text-[#D8A25E] mr-2" />
-              Achievements
-            </h2>
-            <p className="text-gray-600">
-              Your badges and certificates would appear here.
-            </p>
-          </div>
+            <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+              <h2 className="text-xl font-bold text-[#343131] mb-6 flex items-center">
+                <Award size={24} className="text-[#D8A25E] mr-2" />
+                Achievements
+              </h2>
+              <p className="text-gray-600">
+                Your badges and certificates would appear here.
+              </p>
+            </div>
           </div>
         )}
 
         {activeTab === "settings" && (
           <div className="p-4 sm:p-6 md:p-8">
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-            <h2 className="text-xl font-bold text-[#343131] mb-6 flex items-center">
-              <Settings size={24} className="text-[#D8A25E] mr-2" />
-              Profile Settings
-            </h2>
-            <p className="text-gray-600">
-              Account settings form would appear here.
-            </p>
-          </div>
+            <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+              <h2 className="text-xl font-bold text-[#343131] mb-6 flex items-center">
+                <Settings size={24} className="text-[#D8A25E] mr-2" />
+                Profile Settings
+              </h2>
+              <p className="text-gray-600">
+                Account settings form would appear here.
+              </p>
+            </div>
           </div>
         )}
       </div>

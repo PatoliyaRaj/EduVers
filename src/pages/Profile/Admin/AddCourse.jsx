@@ -1,24 +1,7 @@
-// import React from 'react'
-// import AdminLayout from '../../../utils/Adminlayoute'
-// function AddCourse() {
-//   return (
-//     <React.Fragment>
-//       <AdminLayout pageTitle='AddCourse'>
-//           <div>this is the add course page</div>
-//       </AdminLayout>
-//     </React.Fragment>
-//   )
-// }
-
-// export default AddCourse
-
-
-
-import React, { useState } from 'react';
-import AdminLayout from '../../../utils/Adminlayoute';
+import React, { useState } from "react";
+import AdminLayout from "../../../utils/Adminlayoute";
 import {
   Save,
-  Upload,
   X,
   Star,
   Image,
@@ -27,67 +10,66 @@ import {
   Tag,
   Grid3X3,
   Hash,
-  Eye,
   Plus,
-  Minus
-} from 'lucide-react';
+  Minus,
+} from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import API from "./../../../utils/axiosintence";
 
 function AddCourse() {
   const [courseData, setCourseData] = useState({
-    title: '',
-    image: '',
-    description: '',
-    category: '',
+    title: "",
+    image: "",
+    description: "",
+    category: "",
     rating: 0,
     reviewCount: 0,
-    videoUrl: '',
-    tags: ['Popular']
+    videoUrl: "",
+    tags: [],
   });
 
-  const [imagePreview, setImagePreview] = useState(null);
-  const [newTag, setNewTag] = useState('');
+  const [newTag, setNewTag] = useState("");
 
-  // Handle form input changes
+  const { mutateAsync, isSuccess, isPending, isLoading, error } = useMutation({
+    mutationFn: async (courseData) => {
+      const response = await API.post("/course/create", courseData);
+      return response.data;
+    },
+    onSuccess: (data) => {
+      console.log("Course created successfully:", data);
+    },
+    onError: (error) => {
+      console.error("Error creating course:", error);
+    },
+  });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCourseData(prev => ({
+    setCourseData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  // Handle image upload
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagePreview(e.target.result);
-        setCourseData(prev => ({
-          ...prev,
-          image: e.target.result
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  // Handle tag operations
   const addTag = () => {
-    if (newTag.trim() && courseData.tags.length < 3 && !courseData.tags.includes(newTag.trim())) {
-      setCourseData(prev => ({
+    if (
+      newTag.trim() &&
+      courseData.tags.length < 3 &&
+      !courseData.tags.includes(newTag.trim())
+    ) {
+      setCourseData((prev) => ({
         ...prev,
-        tags: [...prev.tags, newTag.trim()]
+        tags: [...prev.tags, newTag.trim()],
       }));
-      setNewTag('');
+      setNewTag("");
     }
   };
 
   const removeTag = (tagToRemove) => {
     if (courseData.tags.length > 1) {
-      setCourseData(prev => ({
+      setCourseData((prev) => ({
         ...prev,
-        tags: prev.tags.filter(tag => tag !== tagToRemove)
+        tags: prev.tags.filter((tag) => tag !== tagToRemove),
       }));
     }
   };
@@ -95,30 +77,86 @@ function AddCourse() {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Course Data:', courseData);
-    // Add your form submission logic here
+    console.log("Course Data:", courseData);
+    mutateAsync(courseData);
   };
 
   const categories = [
-    'Programming',
-    'Web Development',
-    'Mobile Development',
-    'Data Science',
-    'Machine Learning',
-    'UI/UX Design',
-    'Digital Marketing',
-    'Business',
-    'Photography',
-    'Music'
+    "Programming",
+    "Web Development",
+    "Mobile Development",
+    "Data Science",
+    "Machine Learning",
+    "UI/UX Design",
+    "Digital Marketing",
+    "Business",
+    "Photography",
+    "Music",
   ];
 
+  if (isLoading) {
+    return (
+      <AdminLayout
+        pageTitle="Profile"
+        showSearch={false}
+        className="p-0"
+        subheader="shadow-none"
+      >
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#D8A25E] mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading profile...</p>
+          </div>
+        </div>
+      </AdminLayout>
+    );
+  }
+  if (error) {
+    return (
+      <AdminLayout pageTitle="Profile" showSearch={false}>
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <p className="text-red-600 mb-4">Error: {error.message}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 bg-[#D8A25E] text-white rounded-md hover:opacity-90"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </AdminLayout>
+    );
+  }
+
+  if (isSuccess) {
+    return (
+      <AdminLayout pageTitle="Profile" showSearch={false}>
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <p className="text-green-600 mb-4">Course created successfully!</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 bg-[#D8A25E] text-white rounded-md hover:opacity-90"
+            >
+              Add Another Course
+            </button>
+          </div>
+        </div>
+      </AdminLayout>
+    );
+  }
+
   return (
-    <AdminLayout pageTitle="Add New Course" showSearch={false} givespace={true}>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-        {/* Glass Effect Container */}
+    <AdminLayout
+      pageTitle="Add New Course"
+      showSearch={false}
+      givespace={true}
+      className="py-4"
+    >
+      <div className="">
         <div className="max-w-4xl mx-auto">
           <div className="backdrop-blur-lg bg-white/30 rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
-            {/* Header */}
             <div className="bg-gradient-to-r from-[#343131] to-[#D8A25E] p-8 text-white">
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
@@ -126,17 +164,16 @@ function AddCourse() {
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold">Create New Course</h1>
-                  <p className="text-white/90 mt-1">Fill in the details to add a new course</p>
+                  <p className="text-white/90 mt-1">
+                    Fill in the details to add a new course
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Form Content */}
             <div className="p-8">
               <form onSubmit={handleSubmit} className="space-y-8">
-                {/* Course Title & Category Row */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Course Title */}
                   <div className="space-y-2">
                     <label className="flex items-center text-sm font-semibold text-[#343131] mb-3">
                       <FileText size={18} className="mr-2 text-[#D8A25E]" />
@@ -153,7 +190,6 @@ function AddCourse() {
                     />
                   </div>
 
-                  {/* Category */}
                   <div className="space-y-2">
                     <label className="flex items-center text-sm font-semibold text-[#343131] mb-3">
                       <Grid3X3 size={18} className="mr-2 text-[#D8A25E]" />
@@ -167,64 +203,31 @@ function AddCourse() {
                       required
                     >
                       <option value="">Select a category</option>
-                      {categories.map(cat => (
-                        <option key={cat} value={cat}>{cat}</option>
+                      {categories.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
                       ))}
                     </select>
                   </div>
                 </div>
 
-                {/* Course Image Upload */}
-                <div className="space-y-4">
+                <div className="space-y-2">
                   <label className="flex items-center text-sm font-semibold text-[#343131] mb-3">
                     <Image size={18} className="mr-2 text-[#D8A25E]" />
-                    Course Image
+                    Image URL
                   </label>
-                  
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Upload Area */}
-                    <div className="relative">
-                      <input
-                        type="file"
-                        id="imageUpload"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                      />
-                      <label
-                        htmlFor="imageUpload"
-                        className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-[#D8A25E]/50 rounded-xl cursor-pointer bg-white/30 hover:bg-white/40 transition-all duration-300"
-                      >
-                        <Upload size={32} className="text-[#D8A25E] mb-2" />
-                        <span className="text-sm font-medium text-[#343131]">Click to upload image</span>
-                        <span className="text-xs text-gray-500 mt-1">PNG, JPG, GIF up to 10MB</span>
-                      </label>
-                    </div>
-
-                    {/* Image Preview */}
-                    {imagePreview && (
-                      <div className="relative">
-                        <img
-                          src={imagePreview}
-                          alt="Course preview"
-                          className="w-full h-48 object-cover rounded-xl border border-gray-200"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setImagePreview(null);
-                            setCourseData(prev => ({ ...prev, image: '' }));
-                          }}
-                          className="absolute top-2 right-2 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
-                        >
-                          <X size={16} />
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                  <input
+                    type="url"
+                    name="image"
+                    value={courseData.image}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#D8A25E] focus:border-transparent transition-all duration-300 text-[#343131] placeholder-gray-400"
+                    placeholder="Image URL (https://...)"
+                    required
+                  />
                 </div>
 
-                {/* Description */}
                 <div className="space-y-2">
                   <label className="flex items-center text-sm font-semibold text-[#343131] mb-3">
                     <FileText size={18} className="mr-2 text-[#D8A25E]" />
@@ -241,7 +244,6 @@ function AddCourse() {
                   />
                 </div>
 
-                {/* Video URL */}
                 <div className="space-y-2">
                   <label className="flex items-center text-sm font-semibold text-[#343131] mb-3">
                     <Video size={18} className="mr-2 text-[#D8A25E]" />
@@ -258,9 +260,7 @@ function AddCourse() {
                   />
                 </div>
 
-                {/* Rating & Review Count Row */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Rating */}
                   <div className="space-y-2">
                     <label className="flex items-center text-sm font-semibold text-[#343131] mb-3">
                       <Star size={18} className="mr-2 text-[#D8A25E]" />
@@ -278,7 +278,6 @@ function AddCourse() {
                     />
                   </div>
 
-                  {/* Review Count */}
                   <div className="space-y-2">
                     <label className="flex items-center text-sm font-semibold text-[#343131] mb-3">
                       <Hash size={18} className="mr-2 text-[#D8A25E]" />
@@ -295,14 +294,12 @@ function AddCourse() {
                   </div>
                 </div>
 
-                {/* Tags Section */}
                 <div className="space-y-4">
                   <label className="flex items-center text-sm font-semibold text-[#343131] mb-3">
                     <Tag size={18} className="mr-2 text-[#D8A25E]" />
                     Tags (Max 3)
                   </label>
-                  
-                  {/* Current Tags */}
+
                   <div className="flex flex-wrap gap-2 mb-4">
                     {courseData.tags.map((tag, index) => (
                       <div
@@ -323,14 +320,15 @@ function AddCourse() {
                     ))}
                   </div>
 
-                  {/* Add New Tag */}
                   {courseData.tags.length < 3 && (
                     <div className="flex gap-2">
                       <input
                         type="text"
                         value={newTag}
                         onChange={(e) => setNewTag(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                        onKeyPress={(e) =>
+                          e.key === "Enter" && (e.preventDefault(), addTag())
+                        }
                         className="flex-1 px-4 py-2 rounded-xl border border-gray-200 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#D8A25E] focus:border-transparent transition-all duration-300 text-[#343131] placeholder-gray-400"
                         placeholder="Enter new tag"
                       />
@@ -345,30 +343,21 @@ function AddCourse() {
                   )}
                 </div>
 
-                {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row justify-end gap-4 pt-6 border-t border-gray-200">
-                  <button
-                    type="button"
-                    className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-all duration-300 flex items-center justify-center"
-                  >
-                    <X size={16} className="mr-2" />
-                    Cancel
-                  </button>
-                  
                   <button
                     type="button"
                     className="px-8 py-3 border-2 border-[#D8A25E] text-[#D8A25E] rounded-xl font-medium hover:bg-[#D8A25E]/10 transition-all duration-300 flex items-center justify-center"
                   >
-                    <Eye size={16} className="mr-2" />
-                    Preview
+                    <X size={16} className="mr-2" />
+                    Cancel
                   </button>
-                  
+
                   <button
                     type="submit"
                     className="px-8 py-3 bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white rounded-xl font-medium hover:shadow-lg hover:opacity-90 transition-all duration-300 flex items-center justify-center"
                   >
                     <Save size={16} className="mr-2" />
-                    Save Course
+                    {isPending ? "Saving..." : "Save Course"}
                   </button>
                 </div>
               </form>

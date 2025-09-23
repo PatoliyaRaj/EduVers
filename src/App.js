@@ -10,6 +10,8 @@ import SignUp from './pages/Sign-Up/index.jsx';
 import CardDetail from './pages/Courses/Videocard.jsx';
 import Profile from './pages/Profile/Profile';
 import AddCourse from './pages/Profile/Admin/AddCourse.jsx';
+import ActiveUsers from './pages/Profile/Admin/ActiveUsers.jsx';
+import DeleteCourses from './pages/Profile/Admin/DeleteCourses.jsx';
 function App() {
   return (
     <React.Fragment>
@@ -24,6 +26,8 @@ function App() {
           <Route path="/card/:id" element={<CardDetail />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/AddCourse" element={<AddCourse />} />
+          <Route path="/ActiveUsers" element={<ActiveUsers />} />
+          <Route path="/settings" element={<DeleteCourses />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
