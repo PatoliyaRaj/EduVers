@@ -318,36 +318,6 @@ function CoursesGrids() {
           {filteredCourses && filteredCourses.length > 0 ? (
             filteredCourses.map((course, index) => (
               <div key={index} className="flex-shrink-0 w-34 h-50">
-                {/* <ReusableCard
-                  image={course.image}
-                  title={course.title}
-                  description={course.description}
-                  content={course.content}
-                  rating={course.rating}
-                  reviewCount={course.reviewCount}
-                  price={false}
-                  buttonText={course.buttonText}
-                  tags={course.tags}
-                  onButtonClick={() => {
-                    const cleanCourse = {
-                      id: course._id,
-                      image: course.image,
-                      title: course.title,
-                      content: course.description,
-                      rating: course.rating,
-                      reviewCount: course.reviewCount,
-                      buttonText: course.buttonText,
-                      tags: course.tags,
-                      videoUrl: course.videoUrl,
-                      price: course.price,
-                    };
-                    navigate(`/card/${course._id}`, { state: cleanCourse });
-                  }}
-                  onCardClick={() =>
-                    console.log(`${course.title} - Card clicked!`)
-                  }
-                /> */}
-
                 <ReusableCard
                   image={course.image}
                   title={course.title}
