@@ -71,8 +71,8 @@ function Coursecards() {
                 <ReusableCard
                   image={course.image}
                   title={course.title}
-                  description={course.description}
-                  content={course.content}
+                  // description={course.description}
+                  content={course.description}
                   rating={course.rating}
                   reviewCount={course.reviewCount}
                   price={false}
@@ -103,7 +103,7 @@ function Coursecards() {
                 <ReusableCard
                   image={course.image}
                   title={course.title}
-                  description={course.description}
+                  // description={course.description}
                   content={course.content}
                   rating={course.rating}
                   reviewCount={course.reviewCount}

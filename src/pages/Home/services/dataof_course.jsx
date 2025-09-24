@@ -9,7 +9,7 @@ const courses = [
   {
     image: `${busness}`,
     title: "Entrepreneurship Masterclass",
-    content:
+    description:
       "Learn business planning, fundraising, marketing, and scaling strategies.",
     rating: 4.8,
     reviewCount: 145,
@@ -22,7 +22,7 @@ const courses = [
   {
     image: `${comp}`,
     title: "Full Stack Web Development",
-    content:
+    description:
       "Master HTML, CSS, JavaScript, React, Node.js, and databases with projects.",
     rating: 4.9,
     reviewCount: 212,
@@ -35,7 +35,7 @@ const courses = [
   {
     image: `${fin}`,
     title: "Personal Finance & Investment",
-    content:
+    description:
       "Learn budgeting, saving, investing, and wealth-building strategies.",
     rating: 4.7,
     reviewCount: 88,
@@ -48,7 +48,7 @@ const courses = [
   {
     image: `${eco}`,
     title: "Macroeconomics Explained",
-    content:
+    description:
       "Learn GDP, inflation, unemployment, and fiscal & monetary policy.",
     rating: 4.6,
     reviewCount: 67,
@@ -60,7 +60,7 @@ const courses = [
   {
     image: `${Ui}`,
     title: "UI/UX Design for Beginners",
-    content:
+    description:
       "Learn wireframing, prototyping, usability testing, and Figma skills.",
     rating: 4.8,
     reviewCount: 94,
@@ -73,7 +73,7 @@ const courses = [
   {
     image: `${digm}`,
     title: "Digital Marketing & SEO",
-    content: "Learn SEO, Google Ads, social media marketing, and analytics.",
+    description: "Learn SEO, Google Ads, social media marketing, and analytics.",
     rating: 4.7,
     reviewCount: 123,
     buttonText: "Know More",
@@ -84,3 +84,4 @@ const courses = [
 ];
 
 export default courses;
+

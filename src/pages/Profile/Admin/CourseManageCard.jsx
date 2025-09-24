@@ -8,6 +8,7 @@ const CourseCard = ({
   description = "Course description goes here",
   category = "General",
   videoUrl = "",
+  id = "",
   tags = [],
   onDelete = () => {},
   onEdit = () => {},
@@ -72,7 +73,7 @@ const CourseCard = ({
             {videoUrl && (
               <div className="ml-2 flex-shrink-0">
                 <Link
-                  to={videoUrl}
+                  to={`/card/${id}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-[#D8A25E] rounded-full text-white hover:bg-[#D8A25E]/90 transition-colors flex items-center gap-1"

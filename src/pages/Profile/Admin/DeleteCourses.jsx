@@ -108,11 +108,11 @@ function DeleteCourses() {
                   Course List
                 </h2>
                 <button className="px-4 py-2 bg-[#D8A25E] text-white rounded-md hover:opacity-90">
-                  Add Course
+                  Short By
                 </button>
               </div>
             </section>
-            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 bg-[#F9F9F9]  rounded-lg">
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 bg-[#F9F9F9]  rounded-lg py-6 px-4">
               {courses.data.map((course) => (
                 <CourseCard
                   key={course._id}
@@ -122,6 +122,7 @@ function DeleteCourses() {
                   category={course.category}
                   videoUrl={course.videoUrl}
                   tags={course.tags}
+                  id={course._id}
                   onDelete={() => removeCourse(course._id)}
                 />
               ))}

@@ -74,9 +74,7 @@ function ReusableCard({
           className="group overflow-hidden bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer"
           onClick={handleCardClick}
         >
-          {/* Card Header with Background Image */}
           <CardHeader className="relative h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 flex items-center justify-center text-white p-0 overflow-hidden">
-            {/* Background Image Container */}
             <div className="image-container absolute inset-0">
               <div
                 className="w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110"
@@ -129,7 +127,7 @@ function ReusableCard({
                   className="flex items-center justify-center gap-2 absolute right-0 bottom-0 cursor-pointer text-blue-600 hover:text-blue-800 transition-colors duration-300"
                   onClick={handleButtonClick}
                 >
-                  <span className="font-medium">{buttonText}</span>
+                  <span className="font-medium">{buttonText || "Learn More"}</span>
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
                 </span>
               </div>
