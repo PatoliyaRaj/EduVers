@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import "./glass-effect.css";
 import { Button } from "../../components/Button";
 import axios from "axios";
-import { toast } from "react-toastify";
-
+import { ErrorToster, SuccessToster } from "../../components/toster";
 function From() {
   const [formData, setFormData] = useState({
     fullname: "",
@@ -36,10 +35,7 @@ function From() {
         })
         .post("/Contact/submitContact", formData);
       if (response.data.success) {
-        toast.success("Message sent successfully!", {
-          position: "top-center",
-          duration: 2000,
-        });
+        SuccessToster("Message sent successfully!", 2500);
         setFormData({
           fullname: "",
           email: "",
@@ -50,14 +46,10 @@ function From() {
       }
     } catch (error) {
       console.error("Error sending message:", error);
-      toast.error(
+      ErrorToster(
         error.response?.data?.message ||
           "Failed to send message. Please try again later.",
-        {
-          position: "top-center",
-          duration: 2000,
-          className: "bg-red-200",
-        }
+        2500
       );
     }
   };
@@ -239,11 +231,11 @@ function From() {
                         Our Location
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
-                        123 Education Street
+                        224 Pujan Park,
                         <br />
-                        Learning District
+                        Near VIP Tower,
                         <br />
-                        Knowledge City, KC 12345
+                        Surat, KC 12345
                       </p>
                     </div>
                   </div>
@@ -271,8 +263,8 @@ function From() {
                       <h3 className="font-semibold text-gray-900 mb-1">
                         Call Us
                       </h3>
-                      <p className="text-gray-600">+1 (555) 123-4567</p>
-                      <p className="text-gray-600">+1 (555) 987-6543</p>
+                      <p className="text-gray-600">+91 (123) 361-8767</p>
+                      <p className="text-gray-600">+91 (555) 987-6543</p>
                     </div>
                   </div>
 

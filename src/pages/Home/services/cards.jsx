@@ -44,7 +44,7 @@ function ReusableCard({
   onCardClick,
 }) {
   const handleButtonClick = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     if (onButtonClick) {
       onButtonClick();
     }
@@ -65,15 +65,20 @@ function ReusableCard({
     "bg-indigo-100 text-indigo-700 hover:bg-indigo-200",
   ];
 
+  const limitWords = (text, maxWords = 25) => {
+    const words = text.trim().split(/\s+/);
+    if (words.length <= maxWords) return text;
+    return words.slice(0, maxWords).join(" ") + "...";
+  };
+
   return (
     <React.Fragment>
-      <div
-        className={`w-full min-w-[300px] flex flex-shrink-0 flex-row gap-10 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl 2xl:max-w-2xl justify-between item-center p-3 sm:p-4 md:p-6 ${className}`}
-      >
+      <div className={`w-full p-3 sm:p-4 md:p-6 ${className}`}>
         <Card
-          className="group overflow-hidden bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer"
+          className="group overflow-hidden bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02] cursor-pointer relative flex flex-col h-full"
           onClick={handleCardClick}
         >
+          {/* Image Header */}
           <CardHeader className="relative h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 flex items-center justify-center text-white p-0 overflow-hidden">
             <div className="image-container absolute inset-0">
               <div
@@ -84,9 +89,7 @@ function ReusableCard({
               />
 
               <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-all duration-300" />
-
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
               <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-24 md:h-28 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
             </div>
 
@@ -97,67 +100,78 @@ function ReusableCard({
             </div>
           </CardHeader>
 
-          <CardContent className="content-section p-4 sm:p-5 md:p-6 lg:p-8 bg-gradient-to-b from-white to-gray-50/50 group-hover:from-blue-50/30 group-hover:to-purple-50/30 transition-all duration-300">
-            <div className="content-text mb-4 sm:mb-5 md:mb-6">
-              <p className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg group-hover:text-gray-800 transition-colors duration-300">
-                {content}
-              </p>
+          {/* Card Content - Using flex-grow to push footer to bottom */}
+          <CardContent className="content-section p-4 sm:p-5 md:p-6 lg:p-8 bg-gradient-to-b from-white to-gray-50/50 group-hover:from-blue-50/30 group-hover:to-purple-50/30 transition-all duration-300 flex flex-col flex-grow">
+            {/* Main content */}
+            <div className="flex-grow">
+              <div className="content-text mb-4 sm:mb-5 md:mb-6">
+                <p className="text-gray-700 leading-relaxed text-sm sm:text-base md:text-lg group-hover:text-gray-800 transition-colors duration-300">
+                  {limitWords(content)}
+                </p>
+              </div>
+
+              {showTags && tags && tags.length > 0 && (
+                <div className="features-section mb-4 sm:mb-5 md:mb-6">
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
+                    {tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className={`px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium hover:scale-105 transition-all duration-200 cursor-pointer ${
+                          tagColors[index % tagColors.length]
+                        }`}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {showTags && tags && tags.length > 0 && (
-              <div className="features-section mb-4 sm:mb-5 md:mb-6">
-                <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className={`px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium hover:scale-105 transition-all duration-200 cursor-pointer ${
-                        tagColors[index % tagColors.length]
-                      }`}
-                    >
-                      {tag}
+            {/* Footer Section - Now uses flex and margin instead of absolute positioning */}
+            <div className="mt-auto pt-4">
+              {/* Button Section */}
+              {showButton && (
+                <div className="button-section mb-4 flex justify-end">
+                  <button
+                    className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors duration-300"
+                    onClick={handleButtonClick}
+                  >
+                    <span className="font-medium">
+                      {buttonText || "Learn More"}
                     </span>
-                  ))}
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </button>
                 </div>
-              </div>
-            )}
+              )}
 
-            {showButton && (
-              <div className="button-section mb-4 sm:mb-5 md:mb-6 relative my-2 py-5">
-                <span
-                  className="flex items-center justify-center gap-2 absolute right-0 bottom-0 cursor-pointer text-blue-600 hover:text-blue-800 transition-colors duration-300"
-                  onClick={handleButtonClick}
-                >
-                  <span className="font-medium">{buttonText || "Learn More"}</span>
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </div>
-            )}
-
-            {(showRating || showPrice) && (
-              <div className="stats-section">
-                <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-gray-200 group-hover:border-gray-300 transition-colors duration-300">
-                  {showRating && (
-                    <div className="rating flex items-center gap-1 sm:gap-2">
-                      <div className="stars text-yellow-400 group-hover:text-yellow-500 transition-colors duration-300 text-sm sm:text-base">
-                        {"★".repeat(Math.floor(rating))}
-                        {"☆".repeat(5 - Math.floor(rating))}
+              {/* Stats Section */}
+              {(showRating || showPrice) && (
+                <div className="stats-section">
+                  <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-gray-200 group-hover:border-gray-300 transition-colors duration-300">
+                    {showRating && (
+                      <div className="rating flex items-center gap-1 sm:gap-2">
+                        <div className="stars text-yellow-400 group-hover:text-yellow-500 transition-colors duration-300 text-sm sm:text-base">
+                          {"★".repeat(Math.floor(rating))}
+                          {"☆".repeat(5 - Math.floor(rating))}
+                        </div>
+                        <span className="text-gray-600 text-xs sm:text-sm group-hover:text-gray-700 transition-colors duration-300">
+                          {rating} ({reviewCount} reviews)
+                        </span>
                       </div>
-                      <span className="text-gray-600 text-xs sm:text-sm group-hover:text-gray-700 transition-colors duration-300">
-                        {rating} ({reviewCount} reviews)
-                      </span>
-                    </div>
-                  )}
+                    )}
 
-                  {showPrice && (
-                    <div className="price">
-                      <span className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                        {price}
-                      </span>
-                    </div>
-                  )}
+                    {showPrice && (
+                      <div className="price">
+                        <span className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                          {price}
+                        </span>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -166,127 +180,3 @@ function ReusableCard({
 }
 
 export default ReusableCard;
-
-// ============================================================================
-// USAGE EXAMPLES AND DOCUMENTATION
-// ============================================================================
-
-/* 
-// Example 1: Basic Usage
-import ReusableCard from './components/ReusableCard';
-import computerImg from './assets/imgs/comp.png';
-
-<ReusableCard 
-  image={computerImg}
-  title="Tech Innovation"
-  description="Cutting-edge technology solutions"
-  content="Discover innovative solutions that drive business growth."
-/>
-
-// Example 2: Full Featured Card
-<ReusableCard 
-  image={computerImg}
-  title="Advanced Course"
-  description="Master modern web development"
-  content="Learn React, Node.js, and modern development practices with hands-on projects."
-  rating={4.8}
-  reviewCount={89}
-  price="$199"
-  buttonText="Enroll Now"
-  tags={['React', 'JavaScript', 'Web Dev']}
-  onButtonClick={() => console.log('Button clicked!')}
-  onCardClick={() => console.log('Card clicked!')}
-/>
-
-// Example 3: Minimal Card (No extras)
-<ReusableCard 
-  image={computerImg}
-  title="Simple Card"
-  description="Just the basics"
-  content="A clean, simple card design."
-  showButton={false}
-  showRating={false}
-  showPrice={false}
-  showTags={false}
-/>
-
-// Example 4: Custom Styling
-<ReusableCard 
-  image={computerImg}
-  title="Custom Styled"
-  description="With custom classes"
-  content="This card has custom styling applied."
-  className="my-custom-class"
-  tags={['Custom', 'Styled', 'Unique', 'Special']}
-/>
-
-// Example 5: Event Handling
-<ReusableCard 
-  image={computerImg}
-  title="Interactive Card"
-  description="With click handlers"
-  content="Click the card or button to see different actions."
-  onCardClick={() => {
-    // Handle card click - maybe navigate to detail page
-    window.location.href = '/details/123';
-  }}
-  onButtonClick={() => {
-    // Handle button click - maybe add to cart
-    console.log('Added to cart!');
-  }}
-/>
-
-// Example 6: Dynamic Data from API
-const cardData = {
-  image: '/api/images/product1.jpg',
-  title: 'Product Name',
-  description: 'Product short description',
-  content: 'Detailed product information and benefits.',
-  rating: 4.5,
-  reviewCount: 156,
-  price: '$299',
-  tags: ['Popular', 'New', 'Premium']
-};
-
-<ReusableCard {...cardData} />
-*/
-
-// ============================================================================
-// PROPS DOCUMENTATION
-// ============================================================================
-
-/*
-REQUIRED PROPS:
-- image (string): Image URL or imported image for the card background
-
-OPTIONAL PROPS:
-- title (string): Card title text [default: "Card Title"]
-- description (string): Card description text [default: "Card description goes here"]
-- content (string): Main content text [default: "Discover amazing features and benefits."]
-- rating (number): Star rating (1-5) [default: 4.9]
-- reviewCount (number): Number of reviews [default: 127]
-- price (string): Price display text [default: "$299"]
-- buttonText (string): Button label text [default: "Learn More"]
-- tags (array): Array of tag strings [default: ["Feature 1", "Feature 2", "Feature 3"]]
-
-VISIBILITY CONTROLS:
-- showButton (boolean): Show/hide action button [default: true]
-- showRating (boolean): Show/hide rating section [default: true]
-- showPrice (boolean): Show/hide price [default: true]
-- showTags (boolean): Show/hide tags section [default: true]
-
-STYLING:
-- className (string): Additional CSS classes [default: ""]
-
-EVENT HANDLERS:
-- onButtonClick (function): Called when button is clicked
-- onCardClick (function): Called when card is clicked
-
-RESPONSIVE BREAKPOINTS:
-- Mobile: 300px+ (compact layout)
-- Small: 384px+ (sm: prefix)
-- Medium: 448px+ (md: prefix)
-- Large: 512px+ (lg: prefix)
-- Extra Large: 576px+ (xl: prefix)
-- 2X Large: 672px+ (2xl: prefix)
-*/

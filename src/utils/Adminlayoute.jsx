@@ -60,10 +60,10 @@ const AdminLayout = ({
 
   return (
     <React.Fragment>
-      <div className="flex h-screen bg-gray-100">
+      <div className="flex absolute top-0 left-0 w-full h-full bg-[#F9F9F9]">
         <div
           className={`
-          fixed inset-y-0 left-0 z-30 transition-all duration-300 ease-in-out
+          sticky inset-y-0 left-0 z-30 transition-all duration-300 ease-in-out
           transform bg-white border-r border-gray-200 shadow-lg
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} 
           md:relative md:translate-x-0
@@ -201,10 +201,9 @@ const AdminLayout = ({
           </header>
 
           {/* Content Area for Children */}
-          {givespace && (
-            <main className={`p-4 sm:p-6 md:p-8 ${className}`}></main>
-          )}
-          <main className={`${className}`}>{children}</main>
+          <div className="flex-1">
+            <main className={` ${givespace ? "p-4 sm:p-6 md:p-8" : ""} ${className}`}>{children}</main>
+          </div>
         </div>
       </div>
     </React.Fragment>
@@ -212,3 +211,68 @@ const AdminLayout = ({
 };
 
 export default AdminLayout;
+
+
+
+
+// import React from "react";
+// import {
+//   Search,
+// } from "lucide-react";
+// import Sidebar from "../components/sidbar";
+
+// const AdminLayout = ({
+//   children,
+//   pageTitle = "Dashboard",
+//   showSearch = true,
+//   className = "",
+//   subheader = "",
+//   givespace = false,
+// }) => {
+
+//   return (
+//     <React.Fragment>
+//       <Sidebar />
+//       <div className="w-full h-full bg-[#F9F9F9]">
+//         {/* Main Content Area */}
+//         <div className="w-full overflow-y-auto">
+//           {/* Top Navigation */}
+//           <header className={`sticky top-0 z-10 bg-white shadow-sm ${subheader}`}>
+//             <div className="flex items-center justify-between h-16 px-4 md:px-6">
+//               <div className="flex items-center">
+//                 <h1 className="text-xl font-semibold text-[#343131]">
+//                   {pageTitle}
+//                 </h1>
+//               </div>
+
+//               {showSearch && (
+//                 <div className="flex items-center space-x-3">
+//                   <div className="relative hidden sm:block">
+//                     <Search
+//                       className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+//                       size={18}
+//                     />
+//                     <input
+//                       type="text"
+//                       placeholder="Search..."
+//                       className="w-40 md:w-64 pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#D8A25E] focus:border-transparent"
+//                     />
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+//           </header>
+
+//           {/* Content Area for Children */}
+//           <div className="flex-1">
+//             <main className={`${givespace ? "p-4 sm:p-6 md:p-8" : ""} ${className}`}>
+//               {children}
+//             </main>
+//           </div>
+//         </div>
+//       </div>
+//     </React.Fragment>
+//   );
+// };
+
+// export default AdminLayout;

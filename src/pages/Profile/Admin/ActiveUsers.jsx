@@ -43,6 +43,7 @@ function ActiveUsers() {
   if (error) {
     return (
       <AdminLayout pageTitle="Profile" showSearch={false}>
+        
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <p className="text-red-600 mb-4">Error: {error.message}</p>
@@ -90,7 +91,7 @@ function ActiveUsers() {
             </div>
 
             {/* ***********       User List Section *********** */}
-            <div className=" userlists h-auto w-full  rounded-lg p-4 flex flex-col gap-2">
+            <div className="  h-auto w-full  rounded-lg p-4 flex flex-col gap-2">
               {(Userdata.users).map((user) => (
                 <Userlist
                   key={user._id}

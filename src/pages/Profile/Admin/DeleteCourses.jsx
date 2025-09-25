@@ -5,7 +5,6 @@ import API from "../../../utils/axiosintence";
 import CourseCard from "./CourseManageCard";
 import {
   ErrorToster,
-  InfoToster,
   SuccessToster,
 } from "../../../components/toster";
 
@@ -25,7 +24,7 @@ function DeleteCourses() {
     queryFn: fetchCourses,
   });
 
-  const { mutate: removeCourse, isPending: isDeleting } = useMutation({
+  const { mutate: removeCourse } = useMutation({
     mutationFn: async (courseId) => {
       await API.delete(`/Course/delete`, {
         params: { id: courseId },
@@ -40,9 +39,6 @@ function DeleteCourses() {
     },
   });
 
-  if (isDeleting) {
-    return InfoToster("Course Deleting...", 2000);
-  }
   if (isLoading) {
     return (
       <AdminLayout
