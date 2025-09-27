@@ -2,8 +2,8 @@ import React from "react";
 import BlurText from "../../components/blureText";
 import ScrollFloat from "../../components/ScrollFloat";
 import busness from "../../assets/imgs/bus2.jpg";
-import busness2 from "../../assets/imgs/busness.jpg";
 import { Button } from './../../components/Button';
+import  busness3 from "../../assets/imgs/infosec2.jpg";
 
 function InfoSection() {
   return (
@@ -60,7 +60,7 @@ function InfoSection() {
               className="absolute top-0 right-0 w-2/3 sm:w-3/5 md:w-2/3 lg:w-3/5 xl:w-2/3 h-2/3 sm:h-3/5 md:h-2/3 lg:h-3/5 xl:h-2/3 object-cover rounded-lg shadow-lg z-10 transition-transform duration-300 hover:scale-105 filter grayscale hover:grayscale-0 animate-fade-in2 invisible  md:visible "
             />
             <img
-              src={busness2}
+              src={busness3}
               alt="business learning"
               className="absolute bottom-[-20%]  left-0 w-2/3 sm:w-3/5 md:w-2/3 lg:w-3/5 xl:w-2/3 h-2/3 sm:h-3/5 md:h-2/3 lg:h-3/5 xl:h-2/3 object-cover rounded-lg shadow-lg z-20 transition-transform duration-300 hover:scale-105 filter grayscale hover:grayscale-0 animate-fade-in "
             />

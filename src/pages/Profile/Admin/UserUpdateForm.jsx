@@ -102,6 +102,9 @@ function UserUpdateForm({ userId, onClose }) {
         return;
       }
       updateMutation.mutate(userData);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     },
     [userData, userId, updateMutation]
   );

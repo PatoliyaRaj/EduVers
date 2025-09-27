@@ -189,7 +189,7 @@ function AdminProfile() {
             {showForm && (
               <UserUpdateForm userId={userData.id} onClose={toggleForm} />
             )}
-
+            
             {/* About & Activity */}
             <div className="lg:col-span-2 space-y-4 sm:space-y-6">
               <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
