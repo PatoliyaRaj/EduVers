@@ -1,14 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Book, BookOpen, Calendar, HelpCircle, Home, Settings, 
-  User, Users2, Menu, LogOut, Search, Bell, ChevronRight
-} from 'lucide-react';
-import AvatarDropdown from '../components/Avatar';
-
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Book,
+  BookOpen,
+  Calendar,
+  HelpCircle,
+  Home,
+  Settings,
+  User,
+  Users2,
+  Menu,
+  LogOut,
+  Search,
+} from "lucide-react";
+import AvatarDropdown from "../components/Avatar";
+import API from "./axiosintence";
+import { useMutation } from "@tanstack/react-query";
+import { ErrorToster, SuccessToster } from "../components/toster";
 // Enhanced Dashboard Layout Component
-const DashboardLayout = ({
+const AdminLayout = ({
   children,
   pageTitle = "Dashboard",
   showSearch = true,
@@ -21,6 +32,7 @@ const DashboardLayout = ({
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
   const userRoll = localStorage.getItem("UserType")?.toUpperCase() || null;
+  const email = localStorage.getItem("userEmail");
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,18 +50,53 @@ const DashboardLayout = ({
       ? [
           { id: "profile", icon: User, label: "Profile", link: "/profile" },
           { id: "dashboard", icon: Home, label: "Dashboard", link: "/" },
-          { id: "courses", icon: BookOpen, label: "Courses", link: "/courses" },
-          { id: "addcourse", icon: Book, label: "Add Course", link: "/AddCourse" },
-          { id: "users", icon: Users2, label: "Active Users", link: "/ActiveUsers" },
-          { id: "settings", icon: Settings, label: "Settings", link: "/settings" },
+          {
+            id: "courses",
+            icon: BookOpen,
+            label: "Courses",
+            link: "/managecourses",
+          },
+          {
+            id: "addcourse",
+            icon: Book,
+            label: "Add Course",
+            link: "/AddCourse",
+          },
+          {
+            id: "users",
+            icon: Users2,
+            label: "Active Users",
+            link: "/ActiveUsers",
+          },
+          {
+            id: "settings",
+            icon: Settings,
+            label: "Settings",
+            link: "/settings",
+          },
           { id: "help", icon: HelpCircle, label: "Help", link: "/help" },
         ]
       : [
           { id: "dashboard", icon: Home, label: "Dashboard", link: "/" },
           { id: "courses", icon: BookOpen, label: "Courses", link: "/courses" },
-          { id: "schedule", icon: Calendar, label: "Schedule", link: "/schedule" },
-          { id: "resources", icon: Book, label: "Resources", link: "/resources" },
-          { id: "settings", icon: Settings, label: "Settings", link: "/settings" },
+          {
+            id: "schedule",
+            icon: Calendar,
+            label: "Schedule",
+            link: "/schedule",
+          },
+          {
+            id: "resources",
+            icon: Book,
+            label: "Resources",
+            link: "/resources",
+          },
+          {
+            id: "settings",
+            icon: Settings,
+            label: "Settings",
+            link: "/settings",
+          },
           { id: "help", icon: HelpCircle, label: "Help", link: "/help" },
         ];
 
@@ -59,10 +106,45 @@ const DashboardLayout = ({
     setIsExpanded(!isExpanded);
   };
 
+  const { mutateAsync } = useMutation({
+    mutationKey: ["signOut"],
+    mutationFn: async (email) => {
+      const response = await API.post(
+        "Logout/Userlogout",
+        {
+          email: email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      SuccessToster("SUCCESSFULLY signed out", 2500);
+      localStorage.clear();
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2000);
+    },
+    onError: (error) => {
+      ErrorToster(error.message, 2500);
+    },
+  });
+
   const isActiveLink = (link) => {
     return location.pathname === link;
   };
 
+  const handleSignOut = async () => {
+    try {
+      await mutateAsync(email);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
   const sidebarVariants = {
     expanded: { width: "250px" },
     collapsed: { width: "64px" },
@@ -87,7 +169,7 @@ const DashboardLayout = ({
           onClick={toggleSidebar}
         />
       )}
-      
+
       <AnimatePresence>
         <motion.div
           initial={isExpanded ? "expanded" : "collapsed"}
@@ -100,7 +182,11 @@ const DashboardLayout = ({
           <div className="block border-b border-gray-200">
             <div className="p-4 block">
               <div className=" block flex flex-row gap-4">
-                <div className={`${!isExpanded ? "mx-auto text-center" : ""} block `}>
+                <div
+                  className={`${
+                    !isExpanded ? "mx-auto text-center" : ""
+                  } block `}
+                >
                   <AvatarDropdown
                     placeholder="E"
                     size={isExpanded ? "md" : "sm"}
@@ -112,7 +198,9 @@ const DashboardLayout = ({
                 </div>
                 {isExpanded && (
                   <div className="mt-2 block">
-                    <p className="text-sm font-medium text-[#343131] block">EduVers</p>
+                    <p className="text-sm font-medium text-[#343131] block">
+                      EduVers
+                    </p>
                     <p className="text-xs text-gray-500 block">{userRoll}</p>
                   </div>
                 )}
@@ -137,13 +225,15 @@ const DashboardLayout = ({
                     }`}
                   aria-label={item.label}
                 >
-                  <IconComponent 
-                    size={18} 
-                    className={`${isExpanded ? "mr-3 inline-block" : "mx-auto block"} ${
-                      isActiveLink(item.link) ? "text-[#D8A25E]" : ""
-                    }`} 
+                  <IconComponent
+                    size={18}
+                    className={`${
+                      isExpanded ? "mr-3 inline-block" : "mx-auto block"
+                    } ${isActiveLink(item.link) ? "text-[#D8A25E]" : ""}`}
                   />
-                  {isExpanded && <span className="inline-block">{item.label}</span>}
+                  {isExpanded && (
+                    <span className="inline-block">{item.label}</span>
+                  )}
                 </Link>
               );
             })}
@@ -154,27 +244,21 @@ const DashboardLayout = ({
             <div className="p-4 block">
               <div className={`${!isExpanded ? "text-center" : ""} block`}>
                 <button
-                  onClick={toggleSidebar}
-                  className="p-2 rounded-md text-gray-500 hover:text-[#D8A25E] focus:outline-none hidden md:inline-block"
-                >
-                  <ChevronRight
-                    size={20}
-                    className={`transform transition-transform duration-300 ${
-                      !isExpanded ? "" : "rotate-180"
-                    }`}
-                  />
-                </button>
-                
-                <button
                   className={`w-full block mt-2 rounded-lg
                     ${!isExpanded ? "mx-auto" : ""}
                     text-red-600 hover:bg-red-50 transition-colors p-2`}
                   aria-label="Logout"
+                  onClick={() => handleSignOut()}
                 >
-                  <LogOut size={20} className={`${isExpanded ? "mr-2 inline-block" : "mx-auto block"}`} />
+                  <LogOut
+                    size={20}
+                    className={`${
+                      isExpanded ? "mr-2 inline-block" : "mx-auto block"
+                    }`}
+                  />
                   {isExpanded && <span className="inline-block">Logout</span>}
                 </button>
-                
+
                 {isExpanded && (
                   <div className="mt-4 text-xs text-gray-500 block">
                     &copy; {new Date().getFullYear()} EduVers
@@ -186,22 +270,26 @@ const DashboardLayout = ({
         </motion.div>
       </AnimatePresence>
 
-      <div className={`block ${isExpanded ? "md:ml-[250px]" : "md:ml-[64px]"} transition-all duration-300`}>
+      <div
+        className={`block ${
+          isExpanded ? "md:ml-[250px]" : "md:ml-[64px]"
+        } transition-all duration-300`}
+      >
         {/* Header */}
         <header className="bg-white shadow-sm block sticky top-0 z-20 w-full">
           <div className="h-16 px-4 md:px-6 block">
             <div className="py-4 block w-full">
-              <button 
+              <button
                 className="p-2 mr-2 rounded-md text-gray-500 hover:text-[#D8A25E] hover:bg-gray-100 focus:outline-none inline-block align-middle"
                 onClick={toggleSidebar}
               >
                 <Menu className="w-5 h-5" />
               </button>
-              
+
               <h1 className="text-xl font-semibold text-[#343131] inline-block align-middle">
                 {pageTitle}
               </h1>
-              
+
               <div className="float-right inline-block align-middle">
                 {showSearch && (
                   <div className="inline-block mr-4 relative">
@@ -213,25 +301,21 @@ const DashboardLayout = ({
                     />
                   </div>
                 )}
-                
-                <button className="p-2 text-gray-500 hover:text-gray-700 inline-block align-middle relative">
-                  <Bell className="w-5 h-5" />
-                  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
               </div>
             </div>
           </div>
         </header>
-        
-        {/* Content Area - Scrollable */}
-        <main className={`block w-full ${givespace ? "p-4 sm:p-6 md:p-8" : ""} ${className}`}>
-          <div className="block w-full overflow-auto">
-            {children}
-          </div>
+
+        <main
+          className={`block w-full ${
+            givespace ? "p-4 sm:p-6 md:p-8" : ""
+          } ${className}`}
+        >
+          <div className="block w-full overflow-auto">{children}</div>
         </main>
       </div>
     </div>
   );
 };
 
-export default DashboardLayout;
+export default AdminLayout;

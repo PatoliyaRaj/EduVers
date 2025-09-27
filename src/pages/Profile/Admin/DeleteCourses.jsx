@@ -3,10 +3,7 @@ import AdminLayout from "../../../utils/Adminlayoute";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import API from "../../../utils/axiosintence";
 import CourseCard from "./CourseManageCard";
-import {
-  ErrorToster,
-  SuccessToster,
-} from "../../../components/toster";
+import { ErrorToster, SuccessToster } from "../../../components/toster";
 
 function DeleteCourses() {
   const fetchCourses = async () => {
@@ -79,7 +76,7 @@ function DeleteCourses() {
     <React.Fragment>
       <AdminLayout
         pageTitle="Manage Courses"
-        showSearch={false}
+        showSearch={true}
         className=" mt-0 pt-0"
         subheader="shadow-none"
       >
@@ -100,7 +97,10 @@ function DeleteCourses() {
           <div className="flex flex-col w-full p-4 sm:p-6 md:p-8  ">
             <section>
               <div className="w-full flex  flex-row justify-between items-center ">
-                <h2 className="text-xl font-semibold text-[#343131]">
+                <h2
+                  className="text-2xl font-mono border-b-4  border-t-4 p-2 border-[#D8A25E] border-dashed
+ font-semibold text-[#343131]"
+                >
                   Course List
                 </h2>
                 <button className="px-4 py-2 bg-[#D8A25E] text-white rounded-md hover:opacity-90">

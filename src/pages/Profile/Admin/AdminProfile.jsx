@@ -11,11 +11,17 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import API from "../../../utils/axiosintence";
 import AdminLayout from "../../../utils/Adminlayoute";
+import UserUpdateForm from "./UserUpdateForm";
 
 function AdminProfile() {
   const [activeTab, setActiveTab] = useState("overview");
+  const [showForm, setShowForm] = useState(false);
   const userRoll = localStorage.getItem("UserType").toUpperCase() || "TEACHER";
   const email = localStorage.getItem("userEmail");
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
 
   const {
     data: usersData,
@@ -27,10 +33,7 @@ function AdminProfile() {
       if (!email) {
         throw new Error("No email found in localStorage");
       }
-
-      console.log("Making API call with email:", email);
       const response = await API.get(`/User/getuserdetails/${email}`);
-      console.log("API Response:", response);
       return response.data.user;
     },
     enabled: !!email,
@@ -84,7 +87,9 @@ function AdminProfile() {
     gender: usersData?.gender || "N/A",
     phone: usersData?.phoneNo || "+1 (123) 456-7890",
     about:
+      usersData?.about ||
       "Passionate educator with 5+ years of experience in fostering student growth and engagement.",
+      id: usersData?._id || "",
     courses: [
       {
         id: 1,
@@ -169,13 +174,21 @@ function AdminProfile() {
                   </div>
 
                   <div className="mt-6 w-full">
-                    <button className="w-full bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white py-2 rounded-md font-medium hover:shadow-lg hover:opacity-90 transition-all duration-300">
+                    <button
+                      className="w-full bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white py-2 rounded-md font-medium hover:shadow-lg hover:opacity-90 transition-all duration-300"
+                      onClick={toggleForm}
+                    >
                       Edit Profile
                     </button>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* show form and handle toggle */}
+            {showForm && (
+              <UserUpdateForm userId={userData.id} onClose={toggleForm} />
+            )}
 
             {/* About & Activity */}
             <div className="lg:col-span-2 space-y-4 sm:space-y-6">

@@ -11,11 +11,17 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import API from "../../../utils/axiosintence";
 import AdminLayout from "../../../utils/Adminlayoute";
+import UserUpdateForm from "../Admin/UserUpdateForm";
 
 function UserProfile() {
   const [activeTab, setActiveTab] = useState("overview");
   const userRoll = localStorage.getItem("UserType").toUpperCase() || "Student";
   const email = localStorage.getItem("userEmail");
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
 
   const {
     data: usersData,
@@ -80,6 +86,7 @@ function UserProfile() {
     phone: usersData?.phoneNo || "+1 (123) 456-7890",
     about:
       "Passionate learner dedicated to continuous growth and skill development through online education.",
+      id: usersData?._id || "",
     courses: [
       {
         id: 1,
@@ -162,13 +169,17 @@ function UserProfile() {
                     </div>
 
                     <div className="mt-6 w-full">
-                      <button className="w-full bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white py-2 rounded-md font-medium hover:shadow-lg hover:opacity-90 transition-all duration-300">
+                      <button className="w-full bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white py-2 rounded-md font-medium hover:shadow-lg hover:opacity-90 transition-all duration-300" onClick={toggleForm}>
                         Edit Profile
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
+
+            {showForm && (
+              <UserUpdateForm userId={userData.id} onClose={toggleForm} />
+            )}
 
               {/* About & Activity */}
               <div className="lg:col-span-2 space-y-4 sm:space-y-6">

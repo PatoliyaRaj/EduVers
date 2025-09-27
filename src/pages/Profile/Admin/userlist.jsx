@@ -47,7 +47,7 @@ function Userlist({
               )} `}
             >
               <Shield size={14} className="mr-1.5" />
-              <span className="text-sm">{role.toLowerCase()}</span>
+              <span className="text-sm">{role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</span>
             </div>
 
             {/* Status Badge */}

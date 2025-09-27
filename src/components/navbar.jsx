@@ -156,7 +156,7 @@ export default function Navbar() {
               {isLogin ? (
                 <AvatarDropdown placeholder={`${email.charAt(0)}`} />
               ) : (
-                <Link to={"/Sign-Up"}>
+                <Link to={"/Login"}>
                   <button className="flex items-center space-x-2 px-4 lg:px-5 xl:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold text-white  bg-gradient-to-r from-[#343131] to-[#D8A25E]  rounded-xl  transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-inter">
                     <UserPlus className="w-4 h-4" />
                     <span className="whitespace-nowrap">Join EduVers</span>
@@ -258,7 +258,7 @@ export default function Navbar() {
 
             <div className="space-y-3 pt-6 border-t border-slate-200/60">
               {!isLogin && (
-                <Link to={"/Sign-Up"}>
+                <Link to={"/Login"}>
                   <button className="flex items-center justify-center space-x-2 w-full px-4 py-4 text-sm font-semibold text-white bg-gradient-to-r from-[#343131] to-[#D8A25E]  rounded-xl transition-all duration-300 shadow-lg transform hover:scale-[1.02] font-inter">
                     <UserPlus className="w-4 h-4" />
                     <span>Join EduVers</span>
