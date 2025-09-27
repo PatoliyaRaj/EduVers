@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import AdminLayout from "../../../utils/Adminlayoute";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import API from "../../../utils/axiosintence";
 import CourseCard from "./CourseManageCard";
 import { ErrorToster, SuccessToster } from "../../../components/toster";
+import CourseUpdateForm from "./CourseUpdateForm";
 
 function DeleteCourses() {
+  const [editingCourseId, setEditingCourseId] = useState(null);
+  const queryClient = useQueryClient();
+
+  const handleEditCourse = (courseId) => {
+    setEditingCourseId(courseId);
+  };
+
+  const closeEditForm = () => {
+    setEditingCourseId(null);
+  };
+
   const fetchCourses = async () => {
     const response = await API.get("/Course/all");
     const courses = response.data;
-    console.log("🚀 ~ fetchCourses ~ courses:", courses);
     return courses;
   };
   const {
@@ -29,9 +40,12 @@ function DeleteCourses() {
     },
     onSuccess: () => {
       SuccessToster("Course Deleted Successfully", 2000);
+      queryClient.invalidateQueries(["courses"]);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     },
     onError: (error) => {
-      console.error("Delete failed:", error);
       ErrorToster("Failed to delete the course. Please try again.", 2000);
     },
   });
@@ -110,19 +124,27 @@ function DeleteCourses() {
             </section>
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 bg-[#F9F9F9]  rounded-lg py-6 px-4">
               {courses.data.map((course) => (
-                <CourseCard
-                  key={course._id}
-                  title={course.title}
-                  image={course.image}
-                  description={course.description}
-                  category={course.category}
-                  videoUrl={course.videoUrl}
-                  tags={course.tags}
-                  id={course._id}
-                  onDelete={() => removeCourse(course._id)}
-                />
+                <React.Fragment key={course._id}>
+                  <CourseCard
+                    title={course.title}
+                    image={course.image}
+                    description={course.description}
+                    category={course.category}
+                    videoUrl={course.videoUrl}
+                    tags={course.tags}
+                    id={course._id}
+                    onDelete={() => removeCourse(course._id)}
+                    onEdit={() => handleEditCourse(course._id)}
+                  />
+                </React.Fragment>
               ))}
             </section>
+            {editingCourseId && (
+              <CourseUpdateForm
+                courseId={editingCourseId}
+                onClose={closeEditForm}
+              />
+            )}
           </div>
         </section>
       </AdminLayout>

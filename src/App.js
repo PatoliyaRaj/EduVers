@@ -13,6 +13,7 @@ import AddCourse from './pages/Profile/Admin/AddCourse.jsx';
 import ActiveUsers from './pages/Profile/Admin/ActiveUsers.jsx';
 import DeleteCourses from './pages/Profile/Admin/DeleteCourses.jsx';
 import UserUpdateForm from './pages/Profile/Admin/UserUpdateForm.jsx';
+import Settings from './pages/Profile/Admin/settings';
 function App() {
   return (
     <React.Fragment>
@@ -29,7 +30,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/AddCourse" element={<AddCourse />} />
           <Route path="/ActiveUsers" element={<ActiveUsers />} />
-          <Route path="/settings" element={<DeleteCourses />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="/updateForm" element={<UserUpdateForm />} />
         </Routes>
       </BrowserRouter>
