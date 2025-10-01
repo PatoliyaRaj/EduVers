@@ -79,6 +79,7 @@ const AdminLayout = ({
           { id: "help", icon: HelpCircle, label: "Help", link: "/help" },
         ]
       : [
+          { id: "profile", icon: User, label: "Profile", link: "/profile" },
           { id: "dashboard", icon: Home, label: "Dashboard", link: "/" },
           { id: "courses", icon: BookOpen, label: "Courses", link: "/courses" },
           {
@@ -147,7 +148,7 @@ const AdminLayout = ({
       console.error("Logout failed:", error);
     }
   };
-  
+
   const sidebarVariants = {
     expanded: { width: "250px" },
     collapsed: { width: "64px" },
@@ -198,7 +199,9 @@ const AdminLayout = ({
                 </div>
                 {isExpanded && (
                   <div className="mt-2">
-                    <p className="text-sm font-medium text-[#343131]">EduVers</p>
+                    <p className="text-sm font-medium text-[#343131]">
+                      EduVers
+                    </p>
                     <p className="text-xs text-gray-500">{userRoll}</p>
                   </div>
                 )}
@@ -269,7 +272,7 @@ const AdminLayout = ({
       </AnimatePresence>
 
       {/* Main Content Area with Header and Content */}
-      <div 
+      <div
         className={`flex flex-col flex-grow ${
           isExpanded ? "md:ml-[250px]" : "md:ml-[64px]"
         } transition-all duration-300`}
@@ -306,10 +309,12 @@ const AdminLayout = ({
         </header>
 
         {/* Main Content */}
-        <main className={`flex-grow ${givespace ? "p-4 sm:p-6 md:p-8" : ""} ${className}`}>
-          <div className="w-full overflow-auto">
-            {children}
-          </div>
+        <main
+          className={`flex-grow ${
+            givespace ? "p-4 sm:p-6 md:p-8" : ""
+          } ${className}`}
+        >
+          <div className="w-full overflow-auto">{children}</div>
         </main>
 
         {/* Footer - Now properly positioned at the bottom */}
@@ -322,9 +327,6 @@ const AdminLayout = ({
 };
 
 export default AdminLayout;
-
-
-
 
 // import React, { useState, useEffect } from "react";
 // import { Link, useLocation } from "react-router-dom";
@@ -652,9 +654,3 @@ export default AdminLayout;
 // };
 
 // export default AdminLayout;
-
-
-
-
-
-
