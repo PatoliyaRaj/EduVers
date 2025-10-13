@@ -99,7 +99,7 @@ export default function AvatarDropdown({
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/Logout/Userlogout",
+        `${process.env.REACT_APP_API_URL}/Logout/Userlogout`,
         {
           email: email,
         },
