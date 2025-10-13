@@ -318,9 +318,9 @@ const AdminLayout = ({
         </main>
 
         {/* Footer - Now properly positioned at the bottom */}
-        <div className="mt-auto w-full">
+       {/* <div className="mt-auto w-full">
           <Footer />
-        </div>
+         </div> */}
       </div>
     </div>
   );

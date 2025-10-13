@@ -7,6 +7,7 @@ import SmoothScroll from "./components/SmoothScroll";
 import { Toaster } from "react-hot-toast";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,9 @@ root.render(
       <ToastContainer />
       <Toaster />
       <QueryClientProvider client={queryClient}>
-        <App />
+        {/* <ReactQueryDevtools initialIsOpen={false}> */}
+          <App />
+        {/* </ReactQueryDevtools> */}
       </QueryClientProvider>
     </SmoothScroll>
   </React.StrictMode>
