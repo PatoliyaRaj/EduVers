@@ -1,7 +1,6 @@
 import React from "react";
 import { QuoteIcon } from "lucide-react";
 
-// Reusable Review Card Component
 function ReviewCard({
   quote = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   studentName = "Student Name",
@@ -22,7 +21,6 @@ function ReviewCard({
           <QuoteIcon className="w-8 h-8 sm:w-12 sm:h-12 "  />
         </div>
 
-        {/* Review Text */}
         <div className="mb-8 sm:mb-12">
           <p
             className={`text-base sm:text-lg lg:text-xl leading-relaxed select-none max-w-3xl mx-auto ${textColor}`}
@@ -31,9 +29,7 @@ function ReviewCard({
           </p>
         </div>
 
-        {/* Student Profile */}
         <div className="flex flex-col items-center">
-          {/* Profile Image */}
           <div className="mb-4">
             <img
               src={studentImage}
@@ -42,7 +38,6 @@ function ReviewCard({
             />
           </div>
 
-          {/* Student Info */}
           <div>
             <h4 className={`text-lg sm:text-xl font-bold mb-1 select-none ${nameColor}`}>
               {studentName.toUpperCase()}

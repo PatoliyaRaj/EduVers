@@ -38,7 +38,6 @@ export default function ReusableCarousel({ items, cardsPerPage = 4 }) {
 
   return (
     <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-[5%] py-4 sm:py-6">
-      {/* Card Container */}
       <div
         ref={containerRef}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3 sm:gap-6"
@@ -51,7 +50,6 @@ export default function ReusableCarousel({ items, cardsPerPage = 4 }) {
             <CardHeader className="rounded-t-xl sm:rounded-t-2xl lg:rounded-t-3xl p-3 sm:p-4 lg:p-6">
               <CardTitle>
                 <div className="flex flex-col gap-2 sm:gap-3">
-                  {/* Top row: Icon + Title */}
                   <div className="flex items-center gap-2 sm:gap-3">
                     <div className="p-1.5 sm:p-2 bg-white/20 rounded-none backdrop-blur-sm">
                       <GlassIcons
@@ -67,10 +65,8 @@ export default function ReusableCarousel({ items, cardsPerPage = 4 }) {
                     </h1>
                   </div>
 
-                  {/* Bottom row: Badges + Rating */}
                   <div className="flex items-center justify-between">
                     <div className="flex flex-wrap gap-1 sm:gap-2">
-                      {/* Primary Badge */}
                       {item.badge && (
                         <Badge 
                           className="hover:bg-yellow-400 text-xs sm:text-sm px-2 py-1" 

@@ -14,7 +14,6 @@ export default function SimpleCarousel({
   const containerRef = useRef(null);
   const autoPlayRef = useRef(null);
 
-  // Animate slide change
   useEffect(() => {
     gsap.fromTo(
       containerRef.current,
@@ -23,7 +22,6 @@ export default function SimpleCarousel({
     );
   }, [currentIndex]);
 
-  // Auto play functionality
   useEffect(() => {
     if (autoPlay && !isHovered && elements.length > 1) {
       autoPlayRef.current = setInterval(() => {

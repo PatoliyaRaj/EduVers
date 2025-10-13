@@ -14,6 +14,7 @@ import ActiveUsers from './pages/Profile/Admin/ActiveUsers.jsx';
 import DeleteCourses from './pages/Profile/Admin/DeleteCourses.jsx';
 import UserUpdateForm from './pages/Profile/Admin/UserUpdateForm.jsx';
 import Settings from './pages/Profile/Admin/settings';
+import UserComments from './pages/Profile/Admin/UserComments.jsx';
 function App() {
   return (
     <React.Fragment>
@@ -32,6 +33,7 @@ function App() {
           <Route path="/ActiveUsers" element={<ActiveUsers />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/updateForm" element={<UserUpdateForm />} />
+          <Route path="/Comments" element={<UserComments />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>
