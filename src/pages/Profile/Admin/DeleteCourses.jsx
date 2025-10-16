@@ -41,9 +41,9 @@ function DeleteCourses() {
     onSuccess: () => {
       SuccessToster("Course Deleted Successfully", 2000);
       queryClient.invalidateQueries(["courses"]);
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 2000);
     },
     onError: (error) => {
       ErrorToster("Failed to delete the course. Please try again.", 2000);
