@@ -47,7 +47,7 @@ function InfosectionS() {
             rotationEnd="bottom center"
             wordAnimationEnd="center center"
           >
-            At EduVers, we combine innovation, accessibility, and quality to
+            At EduVerse, we combine innovation, accessibility, and quality to
             deliver an unmatched learning experience. Our platform is designed
             with learners, educators, and professionals in mind, ensuring that
             everyone finds value.
@@ -62,7 +62,7 @@ function InfosectionS() {
             rotationEnd="bottom center"
             wordAnimationEnd="center center"
           >
-            We believe in personalized learning, which is why EduVers provides
+            We believe in personalized learning, which is why EduVerse provides
             flexible learning paths, progress tracking, and engaging content
             formats that adapt to every individual’s pace. To enhance trust and
             credibility, every course is backed with transparent reviews,

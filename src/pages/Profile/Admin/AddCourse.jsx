@@ -154,7 +154,7 @@ function AddCourse() {
       givespace={true}
       className="py-4"
     >
-      <div className="">
+      <section className="">
         <div className="max-w-4xl mx-auto">
           <div className="backdrop-blur-lg bg-white/30 rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
             <div className="bg-gradient-to-r from-[#343131] to-[#D8A25E] p-8 text-white">
@@ -364,7 +364,7 @@ function AddCourse() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </AdminLayout>
   );
 }

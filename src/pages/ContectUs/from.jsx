@@ -249,13 +249,13 @@ function From() {
                       <h3 className="font-semibold text-gray-900 mb-1">
                         Email Us
                       </h3>
-                      <p className="text-gray-600">info@eduvers.com</p>
-                      <p className="text-gray-600">support@eduvers.com</p>
+                      <p className="text-gray-600">info@eduverse.com</p>
+                      <p className="text-gray-600">support@eduverse.com</p>
                     </div>
                   </div>
 
                   {/* Phone */}
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-4">  
                     <div className="bg-purple-100/50 backdrop-blur-sm p-3 rounded-lg">
                       <Phone className="h-6 w-6 text-purple-600" />
                     </div>

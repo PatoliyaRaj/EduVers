@@ -6,7 +6,7 @@ import { SuccessToster, ErrorToster } from "./toster";
 export default function AvatarDropdown({
   placeholder = "U",
   className = "  ",
-  size = "md", // sm, md, lg, xl
+  size = "md",
   bgColor = "bg-transparent hover:bg-gray-800",
   textColor = "text-[#343131] hover:text-yellow-500",
   borderColor = "ring-2 ring-[#D8A25E] hover:ring-yellow-400",
@@ -99,7 +99,9 @@ export default function AvatarDropdown({
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL || "http://localhost:3000"}/Logout/Userlogout`,
+        `${
+          process.env.REACT_APP_API_URL || "http://localhost:3000"
+        }/Logout/Userlogout`,
         {
           email: email,
         },
@@ -115,10 +117,12 @@ export default function AvatarDropdown({
         localStorage.removeItem("isLogin");
         localStorage.removeItem("userEmail");
         localStorage.removeItem("UserType");
-        window.location.href = "/";
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1500);
       }
     } catch (error) {
-      console.error("error",error)
+      console.error("error", error);
       ErrorToster(error.response?.data?.message || "Some thing went wrong");
     }
   };
@@ -133,19 +137,19 @@ export default function AvatarDropdown({
         ref={trigger}
         className={`
           ${customSize || currentSize.avatar} 
-          ${bgColor} 
-          ${textColor} 
-          ${borderColor}
+          ${bgColor} dark:bg-slate-800 dark:hover:bg-slate-700
+          ${textColor} dark:text-slate-200 dark:hover:text-yellow-400
+          ${borderColor} dark:ring-slate-600
           flex items-center justify-center rounded-full font-bold 
-          focus:outline-none focus:ring-4 focus:ring-blue-200/50
+          focus:outline-none focus:ring-4 focus:ring-blue-200/50 dark:focus:ring-blue-900/50
           hover:scale-105 active:scale-95
           transition-all duration-300 ease-out
           ${currentSize.text}
-          shadow-lg hover:shadow-xl
+          shadow-lg dark:shadow-lg hover:shadow-xl dark:hover:shadow-2xl
           backdrop-blur-sm
           relative overflow-hidden
           before:absolute before:inset-0 before:rounded-full
-          before:bg-white/10 before:opacity-0 
+          before:bg-white/10 dark:before:bg-white/5 before:opacity-0 
           hover:before:opacity-100 before:transition-opacity before:duration-300
         `}
       >
@@ -160,8 +164,8 @@ export default function AvatarDropdown({
         onMouseLeave={handleDropdownMouseLeave}
         className={`
           absolute top-full right-0 mt-3 ${currentSize.dropdown} 
-          rounded-xl bg-white/95 backdrop-blur-md shadow-2xl
-          ring-1 ring-black/5 border border-white/20
+          rounded-xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-2xl
+          ring-1 ring-black/5 dark:ring-white/10 border border-white/20 dark:border-slate-700/50
           transform transition-all duration-300 ease-out z-50
           ${
             dropdownOpen
@@ -175,32 +179,32 @@ export default function AvatarDropdown({
         <div className="py-2">
           <Link
             to="/profile"
-            className="flex items-center px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-gray-900 transition-all duration-200 group"
+            className="flex items-center px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-gray-700 dark:text-slate-300 hover:bg-gradient-to-r hover:from-blue-50 dark:hover:from-slate-800 hover:to-purple-50 dark:hover:to-slate-700 hover:text-gray-900 dark:hover:text-slate-100 transition-all duration-200 group"
           >
-            <User className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-gray-500 group-hover:text-[#D8A25E] transition-colors duration-200" />
+            <User className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-gray-500 dark:text-slate-400 group-hover:text-[#D8A25E] dark:group-hover:text-[#D8A25E] transition-colors duration-200" />
             <span className="truncate font-medium">Profile</span>
           </Link>
 
           <a
             href="/settings"
-            className="flex items-center px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-gray-900 transition-all duration-200 group"
+            className="flex items-center px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-gray-700 dark:text-slate-300 hover:bg-gradient-to-r hover:from-blue-50 dark:hover:from-slate-800 hover:to-purple-50 dark:hover:to-slate-700 hover:text-gray-900 dark:hover:text-slate-100 transition-all duration-200 group"
           >
-            <Settings className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-gray-500 group-hover:text-[#D8A25E] transition-colors duration-200" />
+            <Settings className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-gray-500 dark:text-slate-400 group-hover:text-[#D8A25E] dark:group-hover:text-[#D8A25E] transition-colors duration-200" />
             <span className="truncate font-medium">Settings</span>
           </a>
 
-          <div className="border-t border-gray-200/60 my-2 mx-2"></div>
+          <div className="border-t border-gray-200/60 dark:border-slate-700/50 my-2 mx-2"></div>
 
           <button
             onClick={handleSignOut}
-            className="flex items-center w-full px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-red-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 hover:text-red-700 transition-all duration-200 group rounded-lg mx-2"
+            className="flex items-center w-full px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-red-600 dark:text-red-400 hover:bg-gradient-to-r hover:from-red-50 dark:hover:from-red-950/30 hover:to-pink-50 dark:hover:to-pink-950/30 hover:text-red-700 dark:hover:text-red-300 transition-all duration-200 group rounded-lg mx-2"
           >
-            <LogOut className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-red-500 group-hover:text-red-600 transition-colors duration-200" />
+            <LogOut className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-red-500 dark:text-red-400 group-hover:text-red-600 dark:group-hover:text-red-300 transition-colors duration-200" />
             <span className="truncate font-medium">Sign Out</span>
           </button>
         </div>
 
-        <div className="absolute -top-2 right-5 w-4 h-4 bg-white/95 backdrop-blur-md border-l border-t border-white/20 transform rotate-45 shadow-lg"></div>
+        <div className="absolute -top-2 right-5 w-4 h-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-l border-t border-white/20 dark:border-slate-700/50 transform rotate-45 shadow-lg"></div>
       </div>
     </div>
   );

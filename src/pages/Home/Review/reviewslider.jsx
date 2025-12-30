@@ -1,6 +1,6 @@
 import React from 'react'
 import SimpleCarousel from './reusableslider'
-import bgpick from '../../../assets/imgs/BgpickDark2.jpg'
+import bgpick from '../../../assets/imgs/bgpickdark.jpg'
 import { DataOfReview } from './DataofReview';
 import ReviewCard from './reviewCards';
 
@@ -12,7 +12,7 @@ function ReviewSlider() {
 
   return (
     <React.Fragment>
-       <div className="h-auto flex items-center justify-center p-4" style={{
+       <div className="h-auto flex items-center justify-center p-4 " style={{
          backgroundImage: `url(${bgpick})`,
          backgroundSize: 'cover',
          backgroundPosition: 'center',

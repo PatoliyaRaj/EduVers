@@ -29,7 +29,7 @@ function UserComments() {
           {data.contacts.map((comment) => (
             <div
               key={comment._id}
-              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100"
+              className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 relative pb-14"
             >
               <div className="bg-[#343131] text-white px-4 py-2 flex justify-between items-center">
                 <h3 className="font-medium text-sm">Feedback</h3>
@@ -86,9 +86,9 @@ function UserComments() {
                   </p>
                 </div>
               </div>
-
-              <div className="bg-gray-50 px-5 py-3 flex flex-wrap justify-between items-center gap-2">
-                <div className="flex items-center text-xs text-gray-500">
+              {/* footer section  */}
+              <div className="bg-gray-50 px-5 py-3 flex flex-wrap justify-between items-center gap-2 absolute bottom-0 left-0 right-0 border-t border-gray-100">
+                <div className="flex items-center text-xs text-gray-500 ">
                   <Calendar size={14} className="mr-1" />
                   <span>
                     {comment.createdAt

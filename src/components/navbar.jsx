@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import logo from "../assets/imgs/logo.png";
 import AvatarDropdown from "../components/Avatar";
+import DarkModeToggle from "./DarkModeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -73,8 +74,8 @@ export default function Navbar() {
   return (
     <React.Fragment>
       <header
-        className={`bg-white/90 backdrop-blur-lg bg-transparent sticky top-0 z-50 transition-all duration-300 border-b border-slate-200/60 font-inter ${
-          scrolled ? "shadow-xl shadow-slate-900/5 bg-white/95" : "shadow-sm"
+        className={`bg-white dark:bg-slate-950 backdrop-blur-xl sticky top-0 z-50 transition-all duration-300 border-b border-slate-200/50 dark:border-slate-800 font-inter ${
+          scrolled ? "shadow-2xl shadow-slate-900/10 dark:shadow-black/40 bg-white dark:bg-slate-950" : "shadow-md dark:shadow-xl"
         }`}
       >
         <div className="w-full mx-auto px-2 ">
@@ -90,9 +91,9 @@ export default function Navbar() {
                 </div>
                 <div className="ml-2 sm:ml-3 flex flex-col">
                   <span className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-[#343131] to-[#D8A25E] bg-clip-text text-transparent tracking-tight font-inter">
-                    EduVers
+                    EduVerse
                   </span>
-                  <span className="text-xs text-black font-medium hidden sm:block font-inter">
+                  <span className="text-xs text-slate-700 dark:text-slate-400 font-medium hidden sm:block font-inter">
                     Learn & Grow
                   </span>
                 </div>
@@ -101,14 +102,14 @@ export default function Navbar() {
             {/* Desktop: Search and Navigation */}
             <div className="hidden lg:flex items-center space-x-4  xl:space-x-6 flex-1 justify-center max-w-3xl xl:max-w-4xl mx-auto px-2 xl:px-4">
               {/* Enhanced Search Container */}
-              <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200 hover:border-blue-300 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-500/10 transition-all duration-300 shadow-sm hover:shadow-lg w-full max-w-xl xl:max-w-2xl ">
+              <div className="flex items-center bg-white dark:bg-slate-900 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-600 focus-within:border-blue-500 dark:focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-500/10 dark:focus-within:ring-blue-500/30 transition-all duration-300 shadow-sm dark:shadow-lg hover:shadow-md dark:hover:shadow-2xl w-full max-w-xl xl:max-w-2xl ">
                 <div className="pl-4 lg:pl-3 pr-3">
                   <Search className="w-5 h-5 text-[#D8A25E]" />
                 </div>
                 <input
                   type="text"
                   placeholder="Search courses, topics, instructors..."
-                  className="flex-1 bg-transparent px-3 py-3 lg:py-1.5 text-sm lg:text-base text-slate-700 placeholder-slate-500 focus:outline-none min-w-0 font-medium font-inter"
+                  className="flex-1 bg-transparent px-3 py-3 lg:py-1.5 text-sm lg:text-base text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none min-w-0 font-medium font-inter"
                 />
                 <div className="relative mr-2">
                   <select className="appearance-none bg-gradient-to-r from-[#343131] to-[#D8A25E] font-medium text-white px-3 lg:px-4 py-2.5 lg:py-2 pr-8 lg:pr-9 rounded-xl text-sm lg:text-base font-semibold cursor-pointer  focus:outline-none focus:ring-3 focus:ring-blue-500/20 transition-all duration-300 border border-blue-200 font-inter transition-all duration-500">
@@ -133,10 +134,10 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     to={link.path || "/"}
-                    className="flex items-center space-x-2 px-3 lg:px-2 xl:px-5 py-2.5 lg:py-3 text-slate-700  font-medium text-sm lg:text-base transition-all duration-300 relative group rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 font-inter"
+                    className="flex items-center space-x-2 px-3 lg:px-2 xl:px-5 py-2.5 lg:py-3 text-slate-800 dark:text-slate-200 font-medium text-sm lg:text-base transition-all duration-300 relative group rounded-xl hover:bg-gradient-to-r hover:from-blue-50 dark:hover:from-slate-900 hover:to-purple-50 dark:hover:to-slate-800 font-inter"
                   >
-                    <IconComponent className="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 group-hover:text-[#343131] transition-colors duration-300" />
-                    <span className="whitespace-nowrap group-hover:text-[#D8A25E]">{link.name}</span>
+                    <IconComponent className="w-4 h-4 lg:w-5 lg:h-5 text-slate-600 dark:text-slate-400 group-hover:text-[#343131] dark:group-hover:text-[#D8A25E] transition-colors duration-300" />
+                    <span className="whitespace-nowrap group-hover:text-[#D8A25E] dark:group-hover:text-[#D8A25E]">{link.name}</span>
                     <span className="absolute -bottom-1 left-0 right-0 mx-auto w-0 h-0.5 bg-gradient-to-r from-[#343131] to-[#D8A25E] transition-all duration-300 group-hover:w-[90%] rounded-full"></span>
                   </Link>
                 );
@@ -146,20 +147,21 @@ export default function Navbar() {
             <div className="hidden lg:flex xl:hidden items-center">
               <button
                 onClick={() => setLgNavOpen(!lgNavOpen)}
-                className="p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 hover:text-blue-600"
+                className="p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 transition-all duration-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 <Menu className="w-5 h-5" />
               </button>
             </div>
 
             <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 ml-2 xl:ml-4">
+              <DarkModeToggle />
               {isLogin ? (
                 <AvatarDropdown placeholder={`${email.charAt(0)}`} />
               ) : (
                 <Link to={"/Login"}>
                   <button className="flex items-center space-x-2 px-4 lg:px-5 xl:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold text-white  bg-gradient-to-r from-[#343131] to-[#D8A25E]  rounded-xl  transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-inter">
                     <UserPlus className="w-4 h-4" />
-                    <span className="whitespace-nowrap">Join EduVers</span>
+                    <span className="whitespace-nowrap">Join EduVerse</span>
                   </button>
                 </Link>
               )}
@@ -171,7 +173,7 @@ export default function Navbar() {
                   e.stopPropagation();
                   setOpen(!open);
                 }}
-                className="mobile-menu-button p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 hover:text-blue-600"
+                className="mobile-menu-button p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 transition-all duration-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 {open ? (
                   <X className="w-6 h-6" />
@@ -190,7 +192,7 @@ export default function Navbar() {
         <div
           className={`hidden lg:block xl:hidden transition-all duration-300 ease-in-out ${
             lgNavOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
-          } overflow-hidden bg-white/95 backdrop-blur-lg border-t border-slate-200/60 shadow-lg`}
+          } overflow-hidden bg-white dark:bg-slate-950 backdrop-blur-lg border-t border-slate-200/50 dark:border-slate-800 shadow-lg dark:shadow-2xl`}
         >
           <div className="max-w-7xl mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-2">
@@ -200,10 +202,10 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     to={link.path || "/"}
-                    className="flex items-center space-x-3 px-4 py-3 text-slate-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl font-medium transition-all duration-300 group font-inter"
+                    className="flex items-center space-x-3 px-4 py-3 text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gradient-to-r hover:from-blue-50 dark:hover:from-slate-900 hover:to-purple-50 dark:hover:to-slate-800 rounded-xl font-medium transition-all duration-300 group font-inter"
                     onClick={() => setLgNavOpen(false)}
                   >
-                    <IconComponent className="w-5 h-5 text-slate-500 group-hover:text-blue-500 transition-colors duration-300" />
+                    <IconComponent className="w-5 h-5 text-slate-600 dark:text-slate-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300" />
                     <span>{link.name}</span>
                   </Link>
                 );
@@ -215,7 +217,7 @@ export default function Navbar() {
         <div
           className={`mobile-menu lg:hidden transition-all duration-300 ease-in-out ${
             open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-          } overflow-hidden bg-white/95 backdrop-blur-lg border-t border-slate-200/60 shadow-xl`}
+          } overflow-hidden bg-white dark:bg-slate-950 backdrop-blur-lg border-t border-slate-200/50 dark:border-slate-800 shadow-xl dark:shadow-2xl`}
         >
           <div className="px-4 sm:px-6 py-6 space-y-6">
             {/* Mobile Search */}
@@ -225,7 +227,7 @@ export default function Navbar() {
                 <input
                   type="text"
                   placeholder="Search courses, topics..."
-                  className="w-full pl-12 pr-4 py-4 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-3 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/90 backdrop-blur-sm font-inter"
+                  className="w-full pl-12 pr-4 py-4 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:ring-3 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 focus:border-blue-500 dark:focus:border-blue-500 transition-all duration-300 bg-white dark:bg-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 backdrop-blur-sm font-inter"
                 />
               </div>
               <select className="w-full px-4 py-4 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-3 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-gradient-to-r from-[#343131] to-[#D8A25E] font-medium text-white   font-inter">
@@ -239,29 +241,32 @@ export default function Navbar() {
               </select>
             </div>
 
-            <nav className="space-y-2 pt-6 border-t border-slate-200/60">
+            <nav className="space-y-2 pt-6 border-t border-slate-200/50 dark:border-slate-800">
               {navLinks.map((link) => {
                 const IconComponent = link.icon;
                 return (
                   <Link
                     key={link.name}
                     to={link.path || "/"}
-                    className="flex items-center space-x-3 px-4 py-4 text-slate-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl font-medium transition-all duration-300 group font-inter"
+                    className="flex items-center space-x-3 px-4 py-4 text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gradient-to-r hover:from-blue-50 dark:hover:from-slate-900 hover:to-purple-50 dark:hover:to-slate-800 rounded-xl font-medium transition-all duration-300 group font-inter"
                     onClick={() => setOpen(false)}
                   >
-                    <IconComponent className="w-5 h-5 text-slate-500 group-hover:text-blue-500 transition-colors duration-300" />
+                    <IconComponent className="w-5 h-5 text-slate-600 dark:text-slate-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300" />
                     <span>{link.name}</span>
                   </Link>
                 );
               })}
             </nav>
 
-            <div className="space-y-3 pt-6 border-t border-slate-200/60">
+            <div className="space-y-3 pt-6 border-t border-slate-200/50 dark:border-slate-800">
+              <div className="flex items-center justify-center">
+                <DarkModeToggle />
+              </div>
               {!isLogin && (
                 <Link to={"/Login"}>
                   <button className="flex items-center justify-center space-x-2 w-full px-4 py-4 text-sm font-semibold text-white bg-gradient-to-r from-[#343131] to-[#D8A25E]  rounded-xl transition-all duration-300 shadow-lg transform hover:scale-[1.02] font-inter">
                     <UserPlus className="w-4 h-4" />
-                    <span>Join EduVers</span>
+                    <span>Join EduVerse</span>
                   </button>
                 </Link>
               )}

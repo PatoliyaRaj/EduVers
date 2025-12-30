@@ -80,7 +80,7 @@ const benefitsData = [
     id: 3,
     title: "Wide Course Variety",
     description:
-      "Explore a diverse range of courses across various subjects and industries. Whether you're interested in technology, business, arts, or personal development, EduVers offers a wide selection of courses to cater to your interests and career goals. Our platform is designed to help you discover new passions and expand your skill set.",
+      "Explore a diverse range of courses across various subjects and industries. Whether you're interested in technology, business, arts, or personal development, EduVerse offers a wide selection of courses to cater to your interests and career goals. Our platform is designed to help you discover new passions and expand your skill set.",
   },
   {
     id: 4,
@@ -92,13 +92,13 @@ const benefitsData = [
     id: 5,
     title: "Affordable Learning",
     description:
-      "EduVers makes quality education affordable and accessible for everyone. With budget-friendly pricing plans and lifetime access to purchased courses, learners can invest in their future without financial stress. Education should empower, not burden — and EduVers is committed to making that possible.",
+      "EduVerse makes quality education affordable and accessible for everyone. With budget-friendly pricing plans and lifetime access to purchased courses, learners can invest in their future without financial stress. Education should empower, not burden — and EduVerse is committed to making that possible.",
   },
   {
     id: 6,
     title: "24/7 Support",
     description:
-      "EduVers provides round-the-clock support to ensure you have the assistance you need, whenever you need it. Our dedicated support team is available 24/7 to help you with any questions or issues you may encounter on your learning journey. Whether you need technical support, guidance on course selection, or assistance with assignments, we're here to help you succeed.",
+      "EduVerse provides round-the-clock support to ensure you have the assistance you need, whenever you need it. Our dedicated support team is available 24/7 to help you with any questions or issues you may encounter on your learning journey. Whether you need technical support, guidance on course selection, or assistance with assignments, we're here to help you succeed.",
   },
 ];
 

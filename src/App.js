@@ -15,10 +15,16 @@ import DeleteCourses from './pages/Profile/Admin/DeleteCourses.jsx';
 import UserUpdateForm from './pages/Profile/Admin/UserUpdateForm.jsx';
 import Settings from './pages/Profile/Admin/settings';
 import UserComments from './pages/Profile/Admin/UserComments.jsx';
+import Resources from './pages/resources/index.jsx';
+import Schedule from './pages/schedule/index.jsx';
+import Help from './pages/help/index.jsx';
+import { DarkModeProvider } from './context/DarkModeContext.jsx';
+
 function App() {
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <DarkModeProvider>
+        <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
@@ -34,8 +40,12 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/updateForm" element={<UserUpdateForm />} />
           <Route path="/Comments" element={<UserComments />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/help" element={<Help />} />
         </Routes>
-      </BrowserRouter>
+        </BrowserRouter>
+      </DarkModeProvider>
     </React.Fragment>
   );
 }

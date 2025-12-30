@@ -5,7 +5,7 @@ import logo from "../assets/imgs/logo.png";
 const Footer = ({ className }) => {
   return (
     <React.Fragment>  
-    <footer className={`bg-gray-900 text-white ${className}`}>
+    <footer className={`bg-gray-900 dark:bg-slate-950 text-white ${className}`}>
       <div className="max-w-6xl mx-auto px-6 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
@@ -17,20 +17,20 @@ const Footer = ({ className }) => {
                   <img src={logo} alt="EduVers Logo" className="w-12 h-12" />
                 </a>
               </div>
-              <span className="text-xl font-bold tracking-wide">EduVers.</span>
+              <span className="text-xl font-bold tracking-wide">EduVerse.</span>
             </div>
-            <p className="text-gray-400 text-sm leading-6 pr-4">
+            <p className="text-gray-400 dark:text-slate-400 text-sm leading-6 pr-4">
               Top learning experiences that create more talent in the world.
             </p>
             <div className="flex flex-col gap-4 mt-3">
               <div className="flex items-center gap-2">
-                <Mail className="text-gray-400 hover:text-white transition-colors text-sm block" />
-                <span className="text-gray-400 text-sm ">Stay updated </span>
+                <Mail className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block" />
+                <span className="text-gray-400 dark:text-slate-400 text-sm ">Stay updated </span>
               </div>
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="bg-transparent border-b border-gray-600 w-full text-white focus:outline-none focus:border-white md:w-1/2 lg:w-full"
+                className="bg-transparent border-b border-gray-600 dark:border-slate-700 w-full text-white dark:text-slate-200 focus:outline-none focus:border-white dark:focus:border-slate-400 md:w-1/2 lg:w-full placeholder-gray-500 dark:placeholder-slate-500"
               />
             </div>
           </div>
@@ -42,7 +42,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Overview
                 </a>
@@ -50,7 +50,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Features
                 </a>
@@ -58,7 +58,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Solutions
                 </a>
@@ -66,7 +66,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Tutorials
                 </a>
@@ -74,7 +74,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Pricing
                 </a>
@@ -89,7 +89,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   About us
                 </a>
@@ -97,7 +97,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Careers
                 </a>
@@ -105,7 +105,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   <div className="flex items-center">Press</div>
                 </a>
@@ -113,7 +113,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   News
                 </a>
@@ -128,7 +128,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Twitter
                 </a>
@@ -136,7 +136,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   LinkedIn
                 </a>
@@ -144,7 +144,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   GitHub
                 </a>
@@ -152,7 +152,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Dribbble
                 </a>
@@ -167,7 +167,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Terms
                 </a>
@@ -175,7 +175,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Privacy
                 </a>
@@ -183,7 +183,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Cookies
                 </a>
@@ -191,7 +191,7 @@ const Footer = ({ className }) => {
               <li>
                 <a
                   href="/"
-                  className="text-gray-400 hover:text-white transition-colors text-sm block"
+                  className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors text-sm block"
                 >
                   Contact
                 </a>
@@ -201,9 +201,9 @@ const Footer = ({ className }) => {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div className="mt-16 pt-8 border-t border-gray-800 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-6">
           {/* Copyright */}
-          <p className="text-gray-400 text-sm order-2 sm:order-1">
+          <p className="text-gray-400 dark:text-slate-400 text-sm order-2 sm:order-1">
             {` © ${new Date().getFullYear()} Ed-Circle. All rights reserved.`}
           </p>
 
@@ -211,35 +211,35 @@ const Footer = ({ className }) => {
           <div className="flex items-center space-x-5 order-1 sm:order-2">
             <a
               href="/"
-              className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
+              className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors duration-200 p-1"
               aria-label="Twitter"
             >
               <Twitter size={18} />
             </a>
             <a
               href="/"
-              className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
+              className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors duration-200 p-1"
               aria-label="LinkedIn"
             >
               <Linkedin size={18} />
             </a>
             <a
               href="/"
-              className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
+              className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors duration-200 p-1"
               aria-label="Facebook"
             >
               <Facebook size={18} />
             </a>
             <a
               href="/"
-              className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
+              className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors duration-200 p-1"
               aria-label="GitHub"
             >
               <Github size={18} />
             </a>
             <a
               href="/"
-              className="text-gray-400 hover:text-white transition-colors duration-200 p-1"
+              className="text-gray-400 dark:text-slate-400 hover:text-white dark:hover:text-slate-200 transition-colors duration-200 p-1"
               aria-label="Dribbble"
             >
               <Globe size={18} />

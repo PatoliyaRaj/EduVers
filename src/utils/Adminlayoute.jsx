@@ -131,7 +131,7 @@ const AdminLayout = ({
       return response.data;
     },
     onSuccess: () => {
-      SuccessToster("SUCCESSFULLY signed out", 2500);
+      SuccessToster("Successfully signed out", 2500);
       localStorage.clear();
       setTimeout(() => {
         window.location.href = "/";
@@ -166,7 +166,6 @@ const AdminLayout = ({
 
   return (
     <div className="min-h-screen bg-[#F9F9F9] flex flex-col">
-      {/* Mobile overlay */}
       {isMobile && isExpanded && (
         <motion.div
           initial="hidden"
@@ -179,7 +178,6 @@ const AdminLayout = ({
         />
       )}
 
-      {/* Sidebar */}
       <AnimatePresence>
         <motion.div
           initial={isExpanded ? "expanded" : "collapsed"}
@@ -188,7 +186,6 @@ const AdminLayout = ({
           transition={{ duration: 0.3 }}
           className="fixed left-0 top-0 h-screen bg-white shadow-lg z-30 overflow-hidden border-r border-gray-200"
         >
-          {/* Sidebar Header with Logo */}
           <div className="border-b border-gray-200">
             <div className="p-4">
               <div className="flex flex-row gap-4">
@@ -214,7 +211,6 @@ const AdminLayout = ({
             </div>
           </div>
 
-          {/* Navigation Menu */}
           <div className="overflow-y-auto py-4 px-2">
             {navItems.map((item) => {
               const IconComponent = item.icon;
@@ -245,7 +241,6 @@ const AdminLayout = ({
             })}
           </div>
 
-          {/* Sidebar Footer */}
           <div className="absolute bottom-0 left-0 right-0 border-t border-gray-200">
             <div className="p-4">
               <div className={`${!isExpanded ? "text-center" : ""}`}>
@@ -276,13 +271,11 @@ const AdminLayout = ({
         </motion.div>
       </AnimatePresence>
 
-      {/* Main Content Area with Header and Content */}
       <div
         className={`flex flex-col flex-grow ${
           isExpanded ? "md:ml-[250px]" : "md:ml-[64px]"
         } transition-all duration-300`}
       >
-        {/* Header */}
         <header className="bg-white shadow-sm sticky top-0 z-20 w-full">
           <div className="h-16 px-4 md:px-6">
             <div className="py-4 w-full">
@@ -313,7 +306,6 @@ const AdminLayout = ({
           </div>
         </header>
 
-        {/* Main Content */}
         <main
           className={`flex-grow ${
             givespace ? "p-4 sm:p-6 md:p-8" : ""

@@ -11,7 +11,7 @@ function FeaturesSec() {
           className="text-2xl w-full sm:p-2 md:text-4xl md:w-[60%]  text-gray-600  mt-4 font-semibold "
           style={{ lineHeight: "1.5" }}
         >
-          By Joining EduVers Platform, One Can Avail a Lot Of Benefits.
+          By Joining EduVerse Platform, One Can Avail a Lot Of Benefits.
         </p>
         <p className="text-md m-2  md:w-[50%] lg:w-[45%] mt-6 sm:text-sm md:text-base lg:text-lg text-gray-500">
           Install our top-rated dropshipping app to your e-commerce site and get

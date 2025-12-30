@@ -9,7 +9,7 @@ function ReviewCard({
   className = "",
   quoteColor = "text-gray-700",
   textColor = "text-white",
-  nameColor = "text-yellow-400",
+  nameColor = "text-white/60 hover:text-white",
   roleColor = "text-[#BCA88D]",
 }) {
   return (

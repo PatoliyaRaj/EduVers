@@ -18,7 +18,7 @@ function InfoSection() {
               scrollStart="top 85%"
               scrollEnd="bottom 25%"
             >
-              “Empower Your Future with EduVers”
+              “Empower Your Future with EduVerse”
             </ScrollFloat>
           </div>
           {/* Subtitle */}
@@ -36,7 +36,7 @@ function InfoSection() {
           {/* Description with BlurText */}
           <div className="mt-2">
             <BlurText
-              text="Welcome to EduVers, your all-in-one platform for online learning and professional growth. We bring together expert educators, industry professionals, and passionate mentors to create courses that are practical, engaging, and impactful."
+              text="Welcome to EduVerse, your all-in-one platform for online learning and professional growth. We bring together expert educators, industry professionals, and passionate mentors to create courses that are practical, engaging, and impactful."
               className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed text-center lg:text-left "
               delay={100}
               animateBy="words"
@@ -46,7 +46,7 @@ function InfoSection() {
           </div>
           <div className="mt-2">
             <BlurText
-              text="Whether you’re a student preparing for exams, a professional upgrading your skills, or someone exploring new passions, EduVers makes learning accessible to everyone. With high-quality video lectures, interactive content, assignments, and certifications, our goal is to help you learn faster, smarter, and with confidence."
+              text="Whether you’re a student preparing for exams, a professional upgrading your skills, or someone exploring new passions, EduVerse makes learning accessible to everyone. With high-quality video lectures, interactive content, assignments, and certifications, our goal is to help you learn faster, smarter, and with confidence."
               className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed text-center lg:text-left "
               delay={100}
               animateBy="words"
