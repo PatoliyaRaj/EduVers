@@ -100,7 +100,7 @@ export default function AvatarDropdown({
     try {
       const response = await axios.post(
         `${
-          process.env.REACT_APP_API_URL || "http://localhost:3000"
+          process.env.VITE_APP_API_URL || "http://localhost:5000"
         }/Logout/Userlogout`,
         {
           email: email,

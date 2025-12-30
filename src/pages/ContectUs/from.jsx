@@ -28,7 +28,7 @@ function From() {
       const response = await axios
         .create({
           method: "post",
-          baseURL: process.env.REACT_APP_API_URL || "http://localhost:3000",
+          baseURL: process.env.VITE_APP_API_URL || "http://localhost:5000",
           headers: {
             "Content-Type": "application/json",
           },
