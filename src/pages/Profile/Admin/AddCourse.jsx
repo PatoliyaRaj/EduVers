@@ -13,10 +13,12 @@ import {
   Plus,
   Minus,
 } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
-import API from "./../../../utils/axiosintence";
+import { useCreateCourseMutation } from "../../../redux";
+import { getBreadcrumbs } from "../../../utils/breadcrumbs";
 
 function AddCourse() {
+  const breadcrumbItems = getBreadcrumbs("ADD_COURSE");
+
   const [courseData, setCourseData] = useState({
     title: "",
     image: "",
@@ -30,18 +32,9 @@ function AddCourse() {
 
   const [newTag, setNewTag] = useState("");
 
-  const { mutateAsync, isSuccess, isPending, isLoading, error } = useMutation({
-    mutationFn: async (courseData) => {
-      const response = await API.post("/course/create", courseData);
-      return response.data;
-    },
-    onSuccess: (data) => {
-      console.log("Course created successfully:", data);
-    },
-    onError: (error) => {
-      console.error("Error creating course:", error);
-    },
-  });
+  // RTK Query mutation
+  const [createCourse, { isSuccess, isLoading: isPending, error }] =
+    useCreateCourseMutation();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -74,11 +67,15 @@ function AddCourse() {
     }
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Course Data:", courseData);
-    mutateAsync(courseData);
+    try {
+      await createCourse(courseData).unwrap();
+      console.log("Course created successfully");
+    } catch (err) {
+      console.error("Error creating course:", err);
+    }
   };
 
   const categories = [
@@ -94,13 +91,12 @@ function AddCourse() {
     "Music",
   ];
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <AdminLayout
-        pageTitle="Profile"
         showSearch={false}
         className="p-0"
-        subheader="shadow-none"
+        breadcrumbItems={breadcrumbItems}
       >
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
@@ -113,7 +109,11 @@ function AddCourse() {
   }
   if (error) {
     return (
-      <AdminLayout pageTitle="Profile" showSearch={false}>
+      <AdminLayout
+        
+        showSearch={false}
+        breadcrumbItems={breadcrumbItems}
+      >
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <p className="text-red-600 mb-4">Error: {error.message}</p>
@@ -131,7 +131,10 @@ function AddCourse() {
 
   if (isSuccess) {
     return (
-      <AdminLayout pageTitle="Profile" showSearch={false}>
+      <AdminLayout
+        showSearch={false}
+        breadcrumbItems={breadcrumbItems}
+      >
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <p className="text-green-600 mb-4">Course created successfully!</p>
@@ -149,10 +152,11 @@ function AddCourse() {
 
   return (
     <AdminLayout
-      pageTitle="Add New Course"
+      
       showSearch={false}
       givespace={true}
       className="py-4"
+      breadcrumbItems={breadcrumbItems}
     >
       <section className="">
         <div className="max-w-4xl mx-auto">

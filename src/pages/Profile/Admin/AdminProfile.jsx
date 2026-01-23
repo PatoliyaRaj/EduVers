@@ -8,44 +8,45 @@ import {
   BookOpen,
   Settings,
 } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import API from "../../../utils/axiosintence";
+import { useGetUserDetailsQuery } from "../../../redux";
 import AdminLayout from "../../../utils/Adminlayoute";
 import UserUpdateForm from "./UserUpdateForm";
+import { getAuth } from "../../../utils/users";
+import SuperAdminLayout from "../../../utils/SuperAdminLayout";
+import { getBreadcrumbs } from "../../../utils/breadcrumbs";
 
 function AdminProfile() {
   const [activeTab, setActiveTab] = useState("overview");
   const [showForm, setShowForm] = useState(false);
-  const userRoll = localStorage.getItem("UserType").toUpperCase() || "TEACHER";
-  const email = localStorage.getItem("userEmail");
+  
+  
+  const user =getAuth().user;
+  const userRoll = user?.userType?.toUpperCase() || "TEACHER";
+  const email = user?.email;
+
+  const breadcrumbItems = getBreadcrumbs("PROFILE");
 
   const toggleForm = () => {
     setShowForm(!showForm);
   };
 
+  // RTK Query hook
   const {
-    data: usersData,
+    data: response,
     isLoading,
     error,
-  } = useQuery({
-    queryKey: ["userData", email],
-    queryFn: async () => {
-      if (!email) {
-        throw new Error("No email found in localStorage");
-      }
-      const response = await API.get(`/User/getuserdetails/${email}`);
-      return response.data.user;
-    },
-    enabled: !!email,
+  } = useGetUserDetailsQuery(email, {
+    skip: !email,
   });
+
+  const usersData = response?.user;
 
   if (isLoading) {
     return (
       <AdminLayout
-        pageTitle="Profile"
         showSearch={false}
         className="p-0"
-        subheader="shadow-none"
+        breadcrumbItems={breadcrumbItems}
       >
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
@@ -59,10 +60,13 @@ function AdminProfile() {
 
   if (error) {
     return (
-      <AdminLayout pageTitle="Profile" showSearch={false}>
+      <AdminLayout  showSearch={false}>
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
-            <p className="text-red-600 mb-4">Error: {error.message}</p>
+            <p className="text-red-600 mb-4">
+              Error:{" "}
+              {error?.data?.message || error?.error || "Failed to load profile"}
+            </p>
             <button
               onClick={() => window.location.reload()}
               className="px-4 py-2 bg-[#D8A25E] text-white rounded-md hover:opacity-90"
@@ -75,7 +79,6 @@ function AdminProfile() {
     );
   }
 
-  console.log("Fetched User Data:", usersData);
 
   const userData = {
     name:
@@ -89,7 +92,7 @@ function AdminProfile() {
     about:
       usersData?.about ||
       "Passionate educator with 5+ years of experience in fostering student growth and engagement.",
-      id: usersData?._id || "",
+    id: usersData?.id || "",
     courses: [
       {
         id: 1,
@@ -114,7 +117,12 @@ function AdminProfile() {
 
   return (
     // p-4 sm:p-6 md:p-8
-    <AdminLayout pageTitle="Profile" showSearch={true} className="p-0">
+    // <SuperAdminLayout
+    <AdminLayout
+      showSearch={true}
+      className="p-0"
+      breadcrumbItems={breadcrumbItems}
+    >
       {/* Profile Tabs */}
       <div className="mb-6">
         <div className="flex overflow-x-auto  bg-white rounded-t-lg px-4">

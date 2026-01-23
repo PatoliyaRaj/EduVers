@@ -1,34 +1,22 @@
 import React from "react";
 import AdminLayout from "../../../utils/Adminlayoute";
 import Userlist from "./userlist";
-import { useQuery } from "@tanstack/react-query";
-import API from "../../../utils/axiosintence";
+import { useGetAllUsersQuery } from "../../../redux";
 import { User2 } from "lucide-react";
+import { getBreadcrumbs } from "../../../utils/breadcrumbs";
 
 function ActiveUsers() {
-  const fetchusers = async () => {
-    const response = await API.get("/User/getallusers");
-    const Userdata = response.data;
-    console.log("🚀 ~ fetchusers ~ Userdata:", Userdata);
-    return Userdata;
-  };
+  const breadcrumbItems = getBreadcrumbs("ACTIVE_USERS");
 
-  const {
-    data: Userdata,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: fetchusers,
-  });
+  // RTK Query hook
+  const { data: Userdata, isLoading, error } = useGetAllUsersQuery();
 
   if (isLoading) {
     return (
       <AdminLayout
-        pageTitle="Profile"
         showSearch={false}
         className="p-0"
-        subheader="shadow-none"
+        breadcrumbItems={breadcrumbItems}
       >
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
@@ -42,8 +30,10 @@ function ActiveUsers() {
 
   if (error) {
     return (
-      <AdminLayout pageTitle="Profile" showSearch={false}>
-        
+      <AdminLayout
+        showSearch={false}
+        breadcrumbItems={breadcrumbItems}
+      >
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <p className="text-red-600 mb-4">Error: {error.message}</p>
@@ -61,7 +51,10 @@ function ActiveUsers() {
 
   if (!Userdata || Userdata.length === 0) {
     return (
-      <AdminLayout pageTitle="Profile" showSearch={false}>
+      <AdminLayout
+        showSearch={false}
+        breadcrumbItems={breadcrumbItems}
+      >
         <div className="flex items-center justify-center h-96">
           <div className="text-center flex flex-col">
             <User2 size={48} className="text-gray-400 mb-4 mx-auto" />
@@ -76,7 +69,11 @@ function ActiveUsers() {
 
   return (
     <React.Fragment>
-      <AdminLayout showSearch={false} className="p-4 sm:p-6 md:p-8" pageTitle="Active Users" >
+      <AdminLayout
+        showSearch={false}
+        className="p-4 sm:p-6 md:p-8"
+        breadcrumbItems={breadcrumbItems}
+      >
         <section>
           <div className="flex flex-col w-full bg-[#D8A25E]/10 ">
              <div className="mb-6 flex flex-col sm:flex-row sm:justify-between   sm:items-center gap-4 p-6">
@@ -92,15 +89,17 @@ function ActiveUsers() {
 
             {/* ***********       User List Section *********** */}
             <div className="  h-auto w-full  rounded-lg p-4 flex flex-col gap-2">
-              {(Userdata.users).map((user) => (
+              {Userdata.users.map((user) => (
                 <Userlist
-                  key={user._id}
+                  key={user.id}
                   name={`${user.firstName} ${user.lastName}`}
                   email={user.email}
                   role={user.userType}
                   status={user.isLogin ? "Online" : "Offline"}
                   statusColor={user.isLoading ? "bg-green-200" : "bg-white"}
-                  onDelete={(email) => {console.log("Delete user with email:", email);}}
+                  onDelete={(email) => {
+                    console.log("Delete user with email:", email);
+                  }}
                 />
               ))}
             </div>

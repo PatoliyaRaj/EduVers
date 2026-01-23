@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../../components/Button";
 import ilus2 from "../../assets/imgs/ilustrator2.png";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import API from "../../utils/axiosintence";
 import { toast } from "react-toastify";
 function SignUp() {
   const [Data, setData] = useState({
@@ -18,6 +18,7 @@ function SignUp() {
     agreeTerms: false,
   });
 
+  const [Loading, setLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setData((prev) => ({
@@ -28,16 +29,9 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
-      const response = await axios
-        .create({
-          baseURL: process.env.VITE_APP_API_URL || "http://localhost:5000",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .post("/User/signup", {
+      const response = await API.post("/User/signup", {
           userType: Data.userType,
           firstName: Data.firstName,
           lastName: Data.lastName,
@@ -67,12 +61,13 @@ function SignUp() {
           confirmPassword: "",
           agreeTerms: false,
         });
-
+        setLoading(false);
         setTimeout(() => {
           window.location.href = "/Login";
         }, 2000);
       }
     } catch (error) {
+      setLoading(false);
       toast.error(
         error.response?.data?.message || "Sign Up Failed. Please try again",
         {
@@ -336,11 +331,30 @@ function SignUp() {
 
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 
-                    text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 
-                    transform hover:scale-[1.02] shadow-lg hover:shadow-xl font-sans"
+                    disabled={Loading}
+                    aria-busy={Loading}
+                    className={`w-full bg-gradient-to-r from-blue-600 to-indigo-600 
+                        hover:from-blue-700 hover:to-indigo-700 text-white py-3 px-6 
+                        rounded-lg font-medium transition-all duration-200 shadow-lg 
+                        hover:shadow-xl font-sans flex items-center justify-center gap-2
+                        ${
+                          Loading
+                            ? "opacity-80 cursor-not-allowed"
+                            : "hover:scale-[1.02]"
+                        }`}
                   >
-                    Sign Up
+                    {Loading ? (
+                      <>
+                        <span className="text-sm">Signing up</span>
+                        <span
+                          className="w-4 h-4 border-2 border-white border-t-transparent 
+                            rounded-full animate-spin"
+                          aria-hidden="true"
+                        />
+                      </>
+                    ) : (
+                      "Sign In"
+                    )}
                   </Button>
 
                   <div className="text-center pt-4 border-t border-gray-100">

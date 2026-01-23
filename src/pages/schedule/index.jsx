@@ -4,10 +4,8 @@ import AdminLayout from '../../utils/Adminlayoute'
 function Schedule() {
   return (
     <AdminLayout
-      pageTitle="Schedule"
       showSearch={false}
       className="p-0"
-      subheader="shadow-none"
     >
       <div className="flex justify-center items-center h-[70vh]">
         <h1 className="text-3xl font-bold text-gray-700">

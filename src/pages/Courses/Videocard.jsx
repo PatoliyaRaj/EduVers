@@ -1,7 +1,6 @@
 import React from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import API from "../../utils/axiosintence";
+import { useGetAllCoursesQuery } from "../../redux";
 
 export default function CardDetail() {
   const { id } = useParams();
@@ -15,13 +14,13 @@ const formatVideoUrl = (url) => {
     // Extract video ID from YouTube URL
     let videoId = "";
     
-    if (url.includes('youtube.com/watch')) {
+      if (url.includes("youtube.com/watch")) {
       // Regular YouTube URL
       const urlObj = new URL(url);
-      videoId = urlObj.searchParams.get('v');
-    } else if (url.includes('youtu.be/')) {
+        videoId = urlObj.searchParams.get("v");
+      } else if (url.includes("youtu.be/")) {
       // Shortened YouTube URL
-      videoId = url.split('youtu.be/')[1].split('?')[0];
+        videoId = url.split("youtu.be/")[1].split("?")[0];
     }
     
     if (videoId) {
@@ -34,22 +33,13 @@ const formatVideoUrl = (url) => {
     return url;
   }
 };
-  const {
-    data: courses,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["courses"],
-    queryFn: async () => {
-      const response = await API.get("/Course/all");
-      return response.data;
-    },
-  });
+  // RTK Query hook
+  const { data: courses, isLoading, error } = useGetAllCoursesQuery();
 
   let card = location.state;
   
   if (!card && courses?.data) {
-    card = courses.data.find((course) => course._id === id);
+    card = courses.data.find((course) => course.id === id);
   }
 
   if (isLoading) {
@@ -72,7 +62,7 @@ const formatVideoUrl = (url) => {
           </h2>
           <p className="text-gray-700 mb-6">{error.message}</p>
           <button
-            onClick={() => navigate("/courses")}
+            onClick={() => window.close()}
             className="bg-[#343131] text-white px-4 py-2 rounded-lg hover:bg-opacity-90"
           >
             Go Back to Courses
@@ -93,7 +83,7 @@ const formatVideoUrl = (url) => {
             The course you're looking for doesn't exist or has been removed.
           </p>
           <button
-            onClick={() => navigate("/courses")}
+            onClick={() => window.close()}
             className="bg-[#343131] text-white px-4 py-2 rounded-lg hover:bg-opacity-90"
           >
             Go Back to Courses
@@ -112,7 +102,7 @@ const formatVideoUrl = (url) => {
         {/* Header */}
         <div className="mb-6">
           <button
-            onClick={() => navigate("/courses")}
+            onClick={() => window.close()}
             className="flex items-center gap-2 text-[#D8A25E] hover:text-[#D8A25E]/80 transition-colors duration-200 mb-4"
           >
             <svg
@@ -178,7 +168,9 @@ const formatVideoUrl = (url) => {
         ) : (
           <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-6 aspect-video flex items-center justify-center">
             <div className="text-center">
-              <p className="text-gray-500">No video available for this course</p>
+              <p className="text-gray-500">
+                No video available for this course
+              </p>
             </div>
           </div>
         )}

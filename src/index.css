@@ -18,11 +18,52 @@ code {
 
 
 .scrollbar-hide {
-  -ms-overflow-style: none; /* IE/Edge */
-  scrollbar-width: none;    /* Firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none;    
 }
 .scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;    
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; 
+}
+
+/* Soft focus gradient background */
+.soft-focus-bg {
+  background: linear-gradient(
+    135deg,
+    #c9a89a 0%,
+    #d4b5a7 15%,
+    #e8d5c9 30%,
+    #f5ebe4 45%,
+    #faf6f2 55%,
+    #f0e4db 70%,
+    #d9c4b8 85%,
+    #c4a394 100%
+  );
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px) brightness(0.9);
+  transform: scale(1.1);
+}
+
+.dark .soft-focus-bg {
+  background: linear-gradient(
+    135deg,
+    #4a3f3a 0%,
+    #5c4f48 15%,
+    #6e5f56 30%,
+    #7a6b61 45%,
+    #6e5f56 55%,
+    #5c4f48 70%,
+    #4a3f3a 85%,
+    #3d3330 100%
+  );
 }
 
 

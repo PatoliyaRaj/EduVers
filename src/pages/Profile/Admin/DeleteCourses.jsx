@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import AdminLayout from "../../../utils/Adminlayoute";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import API from "../../../utils/axiosintence";
+import { useGetAllCoursesQuery, useDeleteCourseMutation } from "../../../redux";
 import CourseCard from "./CourseManageCard";
 import { ErrorToster, SuccessToster } from "../../../components/toster";
 import CourseUpdateForm from "./CourseUpdateForm";
+import { getBreadcrumbs } from "../../../utils/breadcrumbs";
 
 function DeleteCourses() {
+  const breadcrumbItems = getBreadcrumbs("MANAGE_COURSES_ADMIN");
+
   const [editingCourseId, setEditingCourseId] = useState(null);
-  const queryClient = useQueryClient();
 
   const handleEditCourse = (courseId) => {
     setEditingCourseId(courseId);
@@ -18,50 +19,34 @@ function DeleteCourses() {
     setEditingCourseId(null);
   };
 
-  const fetchCourses = async () => {
-    const response = await API.get("/Course/all");
-    const courses = response.data;
-    return courses;
-  };
-  const {
-    data: courses,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["courses"],
-    queryFn: fetchCourses,
-  });
+  // RTK Query hooks
+  const { data: coursesResponse, isLoading, error } = useGetAllCoursesQuery();
 
-  const { mutate: removeCourse } = useMutation({
-    mutationFn: async (courseId) => {
-      await API.delete(`/Course/delete`, {
-        params: { id: courseId },
-      });
-    },
-    onSuccess: () => {
+  const courses = coursesResponse;
+
+  const [deleteCourse, { isLoading: isDeleting }] = useDeleteCourseMutation();
+
+  const removeCourse = async (courseId) => {
+    try {
+      await deleteCourse(courseId).unwrap();
       SuccessToster("Course Deleted Successfully", 2000);
-      queryClient.invalidateQueries(["courses"]);
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 2000);
-    },
-    onError: (error) => {
+    } catch (error) {
       ErrorToster("Failed to delete the course. Please try again.", 2000);
-    },
-  });
+    }
+  };
 
   if (isLoading) {
     return (
       <AdminLayout
-        pageTitle="Profile"
+        
         showSearch={false}
         className="p-0"
-        subheader="shadow-none"
+        breadcrumbItems={breadcrumbItems}
       >
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#D8A25E] mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading profile...</p>
+            <p className="mt-4 text-gray-600">Loading Courses...</p>
           </div>
         </div>
       </AdminLayout>
@@ -70,7 +55,11 @@ function DeleteCourses() {
 
   if (error) {
     return (
-      <AdminLayout pageTitle="Profile" showSearch={false}>
+      <AdminLayout
+        
+        showSearch={false}
+        breadcrumbItems={breadcrumbItems}
+      >
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <p className="text-red-600 mb-4">Error: {error.message}</p>
@@ -86,13 +75,35 @@ function DeleteCourses() {
     );
   }
 
+  if (isDeleting) {
+    return (
+      <AdminLayout
+        
+        showSearch={false}
+        className="p-0"
+        breadcrumbItems={breadcrumbItems}
+      >
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 ">
+          <div className="bg-white backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#D8A25E] mx-auto"></div>
+              <p className="mt-4 text-gray-800 font-medium">
+                Deleting Courses...
+              </p>
+            </div>
+          </div>
+        </div>
+      </AdminLayout>
+    );
+  }
+
   return (
     <React.Fragment>
       <AdminLayout
-        pageTitle="Manage Courses"
+        
         showSearch={true}
         className=" mt-0 pt-0"
-        subheader="shadow-none"
+        breadcrumbItems={breadcrumbItems}
       >
         <section className="flex flex-col">
           <div className="flex flex-col w-full bg-[#D8A25E]/10 ">
@@ -124,7 +135,7 @@ function DeleteCourses() {
             </section>
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 bg-[#F9F9F9]  rounded-lg py-6 px-4">
               {courses.data.map((course) => (
-                <React.Fragment key={course._id}>
+                <React.Fragment key={course.id}>
                   <CourseCard
                     title={course.title}
                     image={course.image}
@@ -132,9 +143,9 @@ function DeleteCourses() {
                     category={course.category}
                     videoUrl={course.videoUrl}
                     tags={course.tags}
-                    id={course._id}
-                    onDelete={() => removeCourse(course._id)}
-                    onEdit={() => handleEditCourse(course._id)}
+                    id={course.id}
+                    onDelete={() => removeCourse(course.id)}
+                    onEdit={() => handleEditCourse(course.id)}
                   />
                 </React.Fragment>
               ))}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import {
   Search,
@@ -14,16 +14,19 @@ import {
 import logo from "../assets/imgs/logo.png";
 import AvatarDropdown from "../components/Avatar";
 import DarkModeToggle from "./DarkModeToggle";
+import { getAuth } from "../utils/users";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [lgNavOpen, setLgNavOpen] = useState(false);
-  const isLogin = JSON.parse(localStorage.getItem("isLogin"));
-  const email = localStorage.getItem("userEmail") || "User";
   
+  // Use getAuth utility instead of Redux selectors
+  const user = getAuth().user;
+  const isAuthenticated = Boolean(user);
 
-  const navLinks = [
+  // Memoize navLinks to prevent recreation on every render
+  const navLinks = useMemo(() => [
     {
       name: "Home",
       icon: Home,
@@ -44,7 +47,25 @@ export default function Navbar() {
       icon: Mail,
       path: "/contact",
     },
-  ];
+  ], []);
+
+  // Memoized callbacks to prevent unnecessary re-renders
+  const toggleMobileMenu = useCallback((e) => {
+    e.stopPropagation();
+    setOpen(prev => !prev);
+  }, []);
+
+  const toggleLgNav = useCallback(() => {
+    setLgNavOpen(prev => !prev);
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  const closeLgNav = useCallback(() => {
+    setLgNavOpen(false);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,10 +79,12 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Don't close if clicking inside mobile-menu, mobile-menu-button, or dark-mode-toggle
       if (
         open &&
         !event.target.closest(".mobile-menu") &&
-        !event.target.closest(".mobile-menu-button")
+        !event.target.closest(".mobile-menu-button") &&
+        !event.target.closest(".dark-mode-toggle")
       ) {
         setOpen(false);
       }
@@ -112,7 +135,7 @@ export default function Navbar() {
                   className="flex-1 bg-transparent px-3 py-3 lg:py-1.5 text-sm lg:text-base text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none min-w-0 font-medium font-inter"
                 />
                 <div className="relative mr-2">
-                  <select className="appearance-none bg-gradient-to-r from-[#343131] to-[#D8A25E] font-medium text-white px-3 lg:px-4 py-2.5 lg:py-2 pr-8 lg:pr-9 rounded-xl text-sm lg:text-base font-semibold cursor-pointer  focus:outline-none focus:ring-3 focus:ring-blue-500/20 transition-all duration-300 border border-blue-200 font-inter transition-all duration-500">
+                  <select className="appearance-none bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white px-3 lg:px-4 py-2.5 lg:py-2 pr-8 lg:pr-9 rounded-xl text-sm lg:text-base font-semibold cursor-pointer focus:outline-none focus:ring-3 focus:ring-blue-500/20 transition-all duration-300 border border-blue-200 font-inter">
                     <optgroup label="Categories" className="font-bold text-black">
                     <option>All Categories</option>
                     <option>Programming</option>
@@ -146,7 +169,7 @@ export default function Navbar() {
 
             <div className="hidden lg:flex xl:hidden items-center">
               <button
-                onClick={() => setLgNavOpen(!lgNavOpen)}
+                onClick={toggleLgNav}
                 className="p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 transition-all duration-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 <Menu className="w-5 h-5" />
@@ -155,8 +178,8 @@ export default function Navbar() {
 
             <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 ml-2 xl:ml-4">
               <DarkModeToggle />
-              {isLogin ? (
-                <AvatarDropdown placeholder={`${email.charAt(0)}`} />
+              {isAuthenticated && user ? (
+                <AvatarDropdown placeholder={user.email?.charAt(0) || user.name?.charAt(0) || "U"} />
               ) : (
                 <Link to={"/Login"}>
                   <button className="flex items-center space-x-2 px-4 lg:px-5 xl:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold text-white  bg-gradient-to-r from-[#343131] to-[#D8A25E]  rounded-xl  transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-inter">
@@ -169,10 +192,7 @@ export default function Navbar() {
 
             <div className="lg:hidden flex flex-row space-x-2 items-center">
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setOpen(!open);
-                }}
+                onClick={toggleMobileMenu}
                 className="mobile-menu-button p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 transition-all duration-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 {open ? (
@@ -182,8 +202,8 @@ export default function Navbar() {
                 )}
               </button>
 
-              {isLogin && (
-                <AvatarDropdown placeholder={`${email.charAt(0)}`} size="sm" />
+              {isAuthenticated && user && (
+                <AvatarDropdown placeholder={user.email?.charAt(0) || user.name?.charAt(0) || "U"} size="sm" />
               )}
             </div>
           </div>
@@ -203,7 +223,7 @@ export default function Navbar() {
                     key={link.name}
                     to={link.path || "/"}
                     className="flex items-center space-x-3 px-4 py-3 text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gradient-to-r hover:from-blue-50 dark:hover:from-slate-900 hover:to-purple-50 dark:hover:to-slate-800 rounded-xl font-medium transition-all duration-300 group font-inter"
-                    onClick={() => setLgNavOpen(false)}
+                    onClick={closeLgNav}
                   >
                     <IconComponent className="w-5 h-5 text-slate-600 dark:text-slate-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300" />
                     <span>{link.name}</span>
@@ -249,7 +269,7 @@ export default function Navbar() {
                     key={link.name}
                     to={link.path || "/"}
                     className="flex items-center space-x-3 px-4 py-4 text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gradient-to-r hover:from-blue-50 dark:hover:from-slate-900 hover:to-purple-50 dark:hover:to-slate-800 rounded-xl font-medium transition-all duration-300 group font-inter"
-                    onClick={() => setOpen(false)}
+                    onClick={closeMobileMenu}
                   >
                     <IconComponent className="w-5 h-5 text-slate-600 dark:text-slate-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-300" />
                     <span>{link.name}</span>
@@ -262,7 +282,7 @@ export default function Navbar() {
               <div className="flex items-center justify-center">
                 <DarkModeToggle />
               </div>
-              {!isLogin && (
+              {!isAuthenticated && (
                 <Link to={"/Login"}>
                   <button className="flex items-center justify-center space-x-2 w-full px-4 py-4 text-sm font-semibold text-white bg-gradient-to-r from-[#343131] to-[#D8A25E]  rounded-xl transition-all duration-300 shadow-lg transform hover:scale-[1.02] font-inter">
                     <UserPlus className="w-4 h-4" />

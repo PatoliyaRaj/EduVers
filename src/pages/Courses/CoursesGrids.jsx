@@ -4,8 +4,7 @@ import { Button } from "./../../components/Button";
 import ShinyText from "../../components/shyniText";
 import ReusableCard from "../Home/services/cards";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import API from "../../utils/axiosintence";
+import { useGetAllCoursesQuery } from "../../redux";
 import { ErrorToster, InfoToster } from "../../components/toster";
 
 function CoursesGrids() {
@@ -13,12 +12,6 @@ function CoursesGrids() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-
-  const fetchCourses = async () => {
-    const response = await API.get("/Course/all");
-    const courses = response.data;
-    return courses;
-  };
 
   const categories = [
     "All",
@@ -32,14 +25,12 @@ function CoursesGrids() {
     "Music",
   ];
 
+  // RTK Query hook
   const {
     data: courses,
     isLoading,
     error,
-  } = useQuery({
-    queryKey: ["courses"],
-    queryFn: fetchCourses,
-  });
+  } = useGetAllCoursesQuery();
 
   const showToggle = () => setOpen((prev) => !prev);
 
@@ -174,7 +165,7 @@ function CoursesGrids() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
                 {filteredCourses.map((course) => (
                   <ReusableCard
-                    key={course._id}
+                    key={course.id}
                     image={
                       course.image ||
                       "https://placehold.co/600x400?text=Course+Image"
@@ -188,7 +179,7 @@ function CoursesGrids() {
                     tags={course.tags || []}
                     onButtonClick={() => {
                       const cleanCourse = {
-                        id: course._id,
+                        id: course.id,
                         image: course.image,
                         title: course.title,
                         content: course.description,
@@ -197,7 +188,7 @@ function CoursesGrids() {
                         tags: course.tags,
                         videoUrl: course.videoUrl,
                       };
-                      navigate(`/card/${course._id}`, { state: cleanCourse });
+                      navigate(`/card/${course.id}`, { state: cleanCourse });
                     }}
                     onCardClick={() =>
                       console.log(`${course.title} - Card clicked!`)

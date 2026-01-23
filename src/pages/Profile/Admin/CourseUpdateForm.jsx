@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   X,
   Save,
@@ -12,9 +11,8 @@ import {
   Plus,
   Minus,
 } from "lucide-react";
-import API from "../../../utils/axiosintence";
+import { useGetCourseByIdQuery, useUpdateCourseMutation } from "../../../redux/Apis/courseApi";
 import { SuccessToster, ErrorToster } from "../../../components/toster";
-
 function CourseUpdateForm({ courseId, onClose }) {
   const [newTag, setNewTag] = useState("");
 
@@ -25,65 +23,28 @@ function CourseUpdateForm({ courseId, onClose }) {
     category: "",
     videoUrl: "",
     tags: [],
-    _id: courseId || "",
+    id: courseId || "",
   });
 
-  const fetchCourseData = async () => {
-    try {
-      const response = await API.get(`Course/get/${courseId}`);
 
-      console.log("🚀 ~ fetchCourseData ~ response.data.data:", response.data.data);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching course data:", error);
-      throw error;
+  const { data: courseDataFromAPI, isLoading } = useGetCourseByIdQuery(
+    courseId,
+    {
+      skip: !courseId,
     }
-  };
+  );
+  
+  console.log("🚀 ~ CourseUpdateForm ~ courseDataFromAPI:", courseDataFromAPI)
 
-  const { data: courseDataFromAPI, isLoading } = useQuery({
-    queryKey: ["getCourse", courseId],
-    queryFn: fetchCourseData,
-    enabled: !!courseId,
-    retry: 1,
-    staleTime: 30000,
-    onError: (error) => {
-      console.error("Query error:", error);
-      ErrorToster("Failed to load course data", 2500);
-    },
-  });
-
-  const updateMutation = useMutation({
-    mutationFn: async (updatedData) => {
-      if (!courseId) {
-        throw new Error("Course ID is required for update");
-      }
-      try {
-        const response = await API.patch(
-          `/Course/update/${courseId}`,
-          updatedData
-        );
-        return response.data;
-      } catch (error) {
-        console.error("Update error:", error.message);
-        throw error;
-      }
-    },
-    onSuccess: () => {
-      SuccessToster("Course updated successfully", 2500);
-      setTimeout(() => {
-        if (onClose) onClose();
-      }, 0);
-    },
-    onError: (error) => {
-      ErrorToster(error.message || "Failed to update course", 2500);
-    },
-  });
+  const [updateCourse, { isLoading: isUpdating }] = useUpdateCourseMutation();
+  console.log("🚀 ~ CourseUpdateForm ~ updateCourse:", updateCourse)
 
   useEffect(() => {
     if (courseDataFromAPI) {
       console.log("Setting course data from API:", courseDataFromAPI);
 
       const course = courseDataFromAPI.data || courseDataFromAPI;
+      console.log("🚀 ~ CourseUpdateForm ~ course:", course)
 
       setCourseData({
         title: course.title || "",
@@ -92,7 +53,7 @@ function CourseUpdateForm({ courseId, onClose }) {
         category: course.category || "",
         videoUrl: course.videoUrl || "",
         tags: course.tags || [],
-        _id: course._id || courseId || "",
+        id: course.id || courseId || "",
       });
     }
   }, [courseDataFromAPI, courseId]);
@@ -134,19 +95,24 @@ function CourseUpdateForm({ courseId, onClose }) {
   };
 
   const handleSubmit = React.useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
-      if (!courseData._id && !courseId) {
+      if (!courseData.id && !courseId) {
         ErrorToster("Cannot update course: Missing ID", 2500);
         return;
       }
-      updateMutation.mutate(courseData);
-
+      try {
+        await updateCourse({ id: courseId, ...courseData }).unwrap();
+        SuccessToster("Course updated successfully", 2500);
       setTimeout(() => {
+          if (onClose) onClose();
         window.location.reload();
       }, 2000);
+      } catch (err) {
+        ErrorToster(err?.data?.message || "Failed to update course", 2500);
+      }
     },
-    [courseData, courseId, updateMutation]
+    [courseData, courseId, updateCourse, onClose]
   );
 
   if (!courseId) {
@@ -375,10 +341,10 @@ function CourseUpdateForm({ courseId, onClose }) {
             </button>
             <button
               type="submit"
-              disabled={updateMutation.isLoading}
+              disabled={isUpdating}
               className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white hover:opacity-90 transition-all flex items-center justify-center gap-2"
             >
-              {updateMutation.isLoading ? (
+              {isUpdating ? (
                 <>
                   <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   <span>Updating...</span>

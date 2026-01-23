@@ -8,43 +8,44 @@ import {
   BookOpen,
   Settings,
 } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import API from "../../../utils/axiosintence";
+import { useGetUserDetailsQuery } from "../../../redux";
 import AdminLayout from "../../../utils/Adminlayoute";
 import UserUpdateForm from "../Admin/UserUpdateForm";
+import { getAuth } from "../../../utils/users";
+import { getBreadcrumbs } from "../../../utils/breadcrumbs";
 
 function UserProfile() {
   const [activeTab, setActiveTab] = useState("overview");
-  const userRoll = localStorage.getItem("UserType").toUpperCase() || "Student";
-  const email = localStorage.getItem("userEmail");
   const [showForm, setShowForm] = useState(false);
+
+  // Use getAuth utility
+  const user = getAuth().user;
+  const userRoll = user?.userType?.toUpperCase() || "STUDENT";
+  const email = user?.email;
+
+  const breadcrumbItems = getBreadcrumbs("PROFILE");
 
   const toggleForm = () => {
     setShowForm(!showForm);
   };
 
+  // RTK Query hook
   const {
-    data: usersData,
+    data: response,
     isLoading,
     error,
-  } = useQuery({
-    queryKey: ["userData", email],
-    queryFn: async () => {
-      if (!email) {
-        throw new Error("No email found in localStorage");
-      }
-
-      console.log("Making API call with email:", email);
-      const response = await API.get(`/User/getuserdetails/${email}`);
-      console.log("API Response:", response);
-      return response.data.user;
-    },
-    enabled: !!email,
+  } = useGetUserDetailsQuery(email, {
+    skip: !email,
   });
+
+  const usersData = response?.user;
 
   if (isLoading) {
     return (
-      <AdminLayout pageTitle="Profile" showSearch={false}>
+      <AdminLayout
+        showSearch={false}
+        breadcrumbItems={breadcrumbItems}
+      >
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#D8A25E] mx-auto"></div>
@@ -57,10 +58,13 @@ function UserProfile() {
 
   if (error) {
     return (
-      <AdminLayout pageTitle="Profile" showSearch={false}>
+      <AdminLayout  showSearch={false}>
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
-            <p className="text-red-600 mb-4">Error: {error.message}</p>
+            <p className="text-red-600 mb-4">
+              Error:{" "}
+              {error?.data?.message || error?.error || "Failed to load profile"}
+            </p>
             <button
               onClick={() => window.location.reload()}
               className="px-4 py-2 bg-[#D8A25E] text-white rounded-md hover:opacity-90"
@@ -73,7 +77,6 @@ function UserProfile() {
     );
   }
 
-  console.log("Fetched User Data:", usersData);
 
   const userData = {
     name:
@@ -86,7 +89,7 @@ function UserProfile() {
     phone: usersData?.phoneNo || "+1 (123) 456-7890",
     about:
       "Passionate learner dedicated to continuous growth and skill development through online education.",
-      id: usersData?._id || "",
+    id: usersData?.id || "",
     courses: [
       {
         id: 1,
@@ -110,7 +113,10 @@ function UserProfile() {
   };
 
   return (
-    <AdminLayout pageTitle="Profile" showSearch={true} subheader="shadow-none">
+    <AdminLayout
+      showSearch={true}
+      breadcrumbItems={breadcrumbItems}
+    >
       <React.Fragment>
         <div className="mb-6">
           <div className="flex overflow-x-auto  bg-white rounded-t-lg px-4  ">
@@ -169,7 +175,10 @@ function UserProfile() {
                     </div>
 
                     <div className="mt-6 w-full">
-                      <button className="w-full bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white py-2 rounded-md font-medium hover:shadow-lg hover:opacity-90 transition-all duration-300" onClick={toggleForm}>
+                      <button
+                        className="w-full bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white py-2 rounded-md font-medium hover:shadow-lg hover:opacity-90 transition-all duration-300"
+                        onClick={toggleForm}
+                      >
                         Edit Profile
                       </button>
                     </div>
@@ -181,7 +190,7 @@ function UserProfile() {
               <UserUpdateForm userId={userData.id} onClose={toggleForm} />
             )}
 
-              {/* About & Activity */}
+             
               <div className="lg:col-span-2 space-y-4 sm:space-y-6">
                 <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
                   <h3 className="text-base sm:text-lg font-semibold text-[#343131] mb-4 flex items-center">
@@ -228,7 +237,7 @@ function UserProfile() {
                   </div>
                 </div>
 
-                {/* Achievement Highlights */}
+               
                 <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
                   <h3 className="text-base sm:text-lg font-semibold text-[#343131] mb-4 flex items-center">
                     <Award size={18} className="text-[#D8A25E] mr-2" />
@@ -267,7 +276,7 @@ function UserProfile() {
             </div>
           )}
 
-          {/* Other tabs */}
+       
           {activeTab === "courses" && (
             <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
               <h2 className="text-xl font-bold text-[#343131] mb-6 flex items-center">
@@ -305,6 +314,7 @@ function UserProfile() {
           )}
         </div>
       </React.Fragment>
+      <div>this is the div here for profile </div>
     </AdminLayout>
   );
 }

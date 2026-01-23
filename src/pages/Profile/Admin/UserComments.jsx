@@ -1,34 +1,64 @@
 import React from "react";
 import AdminLayout from "../../../utils/Adminlayoute";
-import API from "../../../utils/axiosintence";
-import { useQuery } from "@tanstack/react-query";
+import { useGetAllContactsQuery } from "../../../redux";
 import { Mail, Phone, Calendar, MessageCircle, Flag } from "lucide-react";
+import { getBreadcrumbs } from "../../../utils/breadcrumbs";
+
 function UserComments() {
-  const GetComments = async () => {
-    const response = await API.get("/Contact/getComments");
-    console.log("🚀 ~ GetComments ~ response:", response);
-    return response.data;
-  };
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["comments"],
-    queryFn: GetComments,
-  });
+  const breadcrumbItems = getBreadcrumbs("USER_COMMENTS");
+
+  // RTK Query hook
+  const { data, isLoading, error } = useGetAllContactsQuery();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <AdminLayout
+              showSearch={false}
+        className="p-0"
+        breadcrumbItems={breadcrumbItems}
+      >
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#D8A25E] mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading ...</p>
+          </div>
+        </div>
+      </AdminLayout>
+    );  
   }
 
   if (error) {
-    return <div>Error fetching comments</div>;
+    return (
+      <AdminLayout
+      
+        showSearch={false}
+        breadcrumbItems={breadcrumbItems}
+      >
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <p className="text-red-600 mb-4">Error: {error.message}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 bg-[#D8A25E] text-white rounded-md hover:opacity-90"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </AdminLayout>
+    );
   }
 
   return (
     <React.Fragment>
-      <AdminLayout pageTitle="User Comments" givespace={true}>
+      <AdminLayout
+              givespace={true}
+        breadcrumbItems={breadcrumbItems}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 gap-6">
           {data.contacts.map((comment) => (
             <div
-              key={comment._id}
+              key={comment.id}
               className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 relative pb-14"
             >
               <div className="bg-[#343131] text-white px-4 py-2 flex justify-between items-center">

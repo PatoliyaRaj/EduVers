@@ -1,13 +1,15 @@
 import React from "react";
 import AdminProfile from "./Admin/AdminProfile";
 import UserProfile from "./User/UserProfile";
-
+import { getAuth } from "../../utils/users";
 function Profile() {
-  const userRoll = localStorage.getItem("UserType") || "Student";
+  const user = getAuth().user;
+  const userRole = user?.userType?.toLowerCase() || "student"; ;
+  
   return (
     <React.Fragment>
-      {userRoll.toLowerCase() === "teacher" && <AdminProfile />}
-      {userRoll.toLowerCase() === "student" && <UserProfile />}
+      {userRole === "teacher" && <AdminProfile />}
+      {userRole === "student" && <UserProfile />}
     </React.Fragment>
   );
 }

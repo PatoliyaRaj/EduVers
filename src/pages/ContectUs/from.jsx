@@ -2,8 +2,8 @@ import { MapPin, Mail, Phone, Send, User, MessageSquare } from "lucide-react";
 import React, { useState } from "react";
 import "./glass-effect.css";
 import { Button } from "../../components/Button";
-import axios from "axios";
 import { ErrorToster, SuccessToster } from "../../components/toster";
+import API from "../../utils/axiosintence";
 function From() {
   const [formData, setFormData] = useState({
     fullname: "",
@@ -12,7 +12,7 @@ function From() {
     subject: "",
     message: "",
   });
-
+  const [Loading, setLoading] = useState(false);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -23,18 +23,11 @@ function From() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
-      const response = await axios
-        .create({
-          method: "post",
-          baseURL: process.env.VITE_APP_API_URL || "http://localhost:5000",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .post("/Contact/submitContact", formData);
+      const response = await API.post("/Contact/submitContact", formData);
       if (response.data.success) {
+        setLoading(false);
         SuccessToster("Message sent successfully!", 2500);
         setFormData({
           fullname: "",
@@ -45,6 +38,7 @@ function From() {
         });
       }
     } catch (error) {
+      setLoading(false);
       console.error("Error sending message:", error);
       ErrorToster(
         error.response?.data?.message ||
@@ -197,16 +191,25 @@ function From() {
                   <div className="pt-4">
                     <Button
                       type="submit"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 
+                      disabled={Loading}
+                      aria-busy={Loading}
+                      className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 
                       text-black
                               bg-gradient-to-br from-blue-300 to-pink-200 hover:bg-gradient-to-br from-blue-100 to-purple-100 hover:text-white 
                                font-medium rounded-lg shadow-lg hover:shadow-xl 
-                               transform hover:scale-105 transition-all duration-200 
+                                      transform  transition-all duration-700 ease-in-out
                                focus:ring-2 focus:ring-blue-500 focus:ring-offset-2   
-                               "
+                                      ${
+                                        Loading
+                                          ? "cursor-not-allowed opacity-70"
+                                          : ""
+                                      }`}
                     >
-                      <Send className="h-5 w-5" />
-                      Send Message
+                      {Loading ? (
+                        <span className="text-sm ">Sending...</span>
+                      ) : (
+                        <span>Send Message</span>
+                      )}
                     </Button>
                   </div>
                 </form>

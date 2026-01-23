@@ -1,10 +1,8 @@
-
 import React, { useState, useEffect } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { X, Save, UserIcon, Phone, Mail, Calendar, Info } from "lucide-react";
-import API from "../../../utils/axiosintence";
+import { useGetUserDetailsQuery, useUpdateUserMutation } from "../../../redux/Apis/authApi";
 import { SuccessToster, ErrorToster } from "../../../components/toster";
-
+import { getAuth } from "../../../utils/users";
 function UserUpdateForm({ userId, onClose }) {
   const [userData, setUserData] = useState({
     firstName: "",
@@ -14,58 +12,17 @@ function UserUpdateForm({ userId, onClose }) {
     phoneNo: "",
     about: "",
     email: "",
-    _id: userId || "",
+    id: userId || "",
   });
-  const email = localStorage.getItem("userEmail");
+  const user = getAuth().user;
+  const email = user?.email;
 
-  const fetchUserData = async () => {
-    try {
-      const response = await API.get(`/User/getuserdetails/${email}`);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      throw error;
-    }
-  };
-
-  const { data: userDataFromAPI, isLoading } = useQuery({
-    queryKey: ["getUser", email],
-    queryFn: fetchUserData,
-    enabled: !!email,
-    retry: 1,
-    staleTime: 30000,
-    onError: (error) => {
-      console.error("Query error:", error);
-      ErrorToster("Failed to load user data", 2500);
-    },
+  // RTK Query hooks
+  const { data: userDataFromAPI, isLoading } = useGetUserDetailsQuery(email, {
+    skip: !email,
   });
 
-  const updateMutation = useMutation({
-    mutationFn: async (updatedData) => {
-      if (!userId) {
-        throw new Error("User ID is required for update");
-      }
-      try {
-        const response = await API.patch(
-          `/User/updateuser/${userId}`,
-          updatedData
-        );
-        return response.data;
-      } catch (error) {
-        console.error("Update error:", error.message);
-        throw error;
-      }
-    },
-    onSuccess: () => {
-      SuccessToster("Profile updated successfully", 2500);
-      setTimeout(() => {
-        if (onClose) onClose();
-      }, 0);
-    },
-    onError: (error) => {
-      ErrorToster(error.message || "Failed to update profile", 2500);
-    },
-  });
+  const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
   useEffect(() => {
     if (userDataFromAPI) {
@@ -79,9 +36,11 @@ function UserUpdateForm({ userId, onClose }) {
         age: user.age || "",
         gender: user.gender || "",
         phoneNo: user.phoneNo || "",
-        about: user.about || "Passionate educator with 5+ years of experience in fostering student growth and engagement.",
+        about:
+          user.about ||
+          "Passionate educator with 5+ years of experience in fostering student growth and engagement.",
         email: user.email || "",
-        _id: user._id || userId || "",
+        id: user.id || userId || "",
       });
     }
   }, [userDataFromAPI, userId]);
@@ -95,18 +54,24 @@ function UserUpdateForm({ userId, onClose }) {
   }, []);
 
   const handleSubmit = React.useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
-      if (!userData._id && !userId) {
+      if (!userData.id && !userId) {
         ErrorToster("Cannot update user: Missing ID", 2500);
         return;
       }
-      updateMutation.mutate(userData);
+      try {
+        await updateUser({ email: userData.email, ...userData }).unwrap();
+        SuccessToster("Profile updated successfully", 2500);
       setTimeout(() => {
+          if (onClose) onClose();
         window.location.reload();
       }, 2000);
+      } catch (error) {
+        ErrorToster(error?.data?.message || "Failed to update profile", 2500);
+      }
     },
-    [userData, userId, updateMutation]
+    [userData, userId, updateUser, onClose]
   );
 
   if (!userId) {
@@ -317,10 +282,10 @@ function UserUpdateForm({ userId, onClose }) {
             </button>
             <button
               type="submit"
-              disabled={updateMutation.isLoading}
+              disabled={isUpdating}
               className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white hover:opacity-90 transition-all flex items-center justify-center gap-2"
             >
-              {updateMutation.isLoading ? (
+              {isUpdating ? (
                 <>
                   <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   <span>Updating...</span>

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { User, Settings, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { SuccessToster, ErrorToster } from "./toster";
+import API from "../utils/axiosintence";
 export default function AvatarDropdown({
   placeholder = "U",
   className = "  ",
@@ -98,10 +98,8 @@ export default function AvatarDropdown({
   const handleSignOut = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${
-          process.env.VITE_APP_API_URL || "http://localhost:5000"
-        }/Logout/Userlogout`,
+      const response = await API.post(
+        `/Logout/Userlogout`,
         {
           email: email,
         },
@@ -178,11 +176,11 @@ export default function AvatarDropdown({
       >
         <div className="py-2">
           <Link
-            to="/profile"
+            to="/dashboard"
             className="flex items-center px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-gray-700 dark:text-slate-300 hover:bg-gradient-to-r hover:from-blue-50 dark:hover:from-slate-800 hover:to-purple-50 dark:hover:to-slate-700 hover:text-gray-900 dark:hover:text-slate-100 transition-all duration-200 group"
           >
             <User className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-gray-500 dark:text-slate-400 group-hover:text-[#D8A25E] dark:group-hover:text-[#D8A25E] transition-colors duration-200" />
-            <span className="truncate font-medium">Profile</span>
+            <span className="truncate font-medium">Go to Dashboard</span>
           </Link>
 
           <a

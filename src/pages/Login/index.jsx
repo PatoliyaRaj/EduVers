@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { Button } from "../../components/Button";
 import ilus from "../../assets/imgs/ilustrater.png";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useLoginMutation, setCredentials } from "../../redux";
 import { SuccessToster, ErrorToster } from "../../components/toster";
 
 function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // RTK Query mutation hook
+  const [login, { isLoading }] = useLoginMutation();
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -23,6 +30,7 @@ function Login() {
 
   const handelsubmit = async (e) => {
     e.preventDefault();
+
     if (!data.email || !data.password) {
       ErrorToster(
         "All Fields Are Necessary",
@@ -37,25 +45,24 @@ function Login() {
     }
 
     try {
-      const response = await axios.post(
-        `${process.env.VITE_APP_API_URL || "http://localhost:5000"}/Login/userlogin`,
-        {
+      // Use RTK Query mutation
+      const response = await login({
           email: data.email,
           password: data.password,
-          Rememberme: data.Rememberme,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      }).unwrap();
 
-      if (response.data.success) {
-        SuccessToster("Logged In Successfuly", 3000);
-        localStorage.setItem("isLogin", "true");
-        localStorage.setItem("userEmail", data.email);
-        localStorage.setItem("UserType", response.data.UserType);
+      if (response.success) {
+        // Dispatch credentials to Redux store
+        dispatch(
+          setCredentials({
+            user: response.data.user,
+            accessToken: response.data.accessToken,
+            refreshToken: response.data.refreshToken,
+          })
+        );
+
+        SuccessToster("Logged In Successfully", 3000);
+
         setData({
           email: "",
           password: "",
@@ -63,18 +70,15 @@ function Login() {
         });
 
         setTimeout(() => {
-          document.location.href = "/";
+          navigate("/");
         }, 2000);
       }
     } catch (error) {
-      console.error("Login error:", error.response?.data || error.message);
-      toast.error(
-        error.response?.data?.message || "Login Failed. Please try again",
-        {
+      console.error("Login error:", error);
+      toast.error(error?.data?.message || "Login Failed. Please try again", {
           position: "top-center",
           duration: 4000,
-        }
-      );
+      });
     }
   };
 
@@ -162,11 +166,26 @@ function Login() {
 
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 
-                                                 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 
-                                                 transform hover:scale-[1.02] shadow-lg hover:shadow-xl font-sans"
+                    disabled={isLoading}
+                    aria-busy={isLoading}
+                    className={`w-full bg-gradient-to-r from-blue-600 to-indigo-600 
+    hover:from-blue-700 hover:to-indigo-700 text-white py-3 px-6 
+    rounded-lg font-medium transition-all duration-200 shadow-lg 
+    hover:shadow-xl font-sans flex items-center justify-center gap-2
+    ${isLoading ? "opacity-80 cursor-not-allowed" : "hover:scale-[1.02]"}`}
                   >
-                    Sign In
+                    {isLoading ? (
+                      <>
+                        <span className="text-sm">Logging in</span>
+                        <span
+                          className="w-4 h-4 border-2 border-white border-t-transparent 
+        rounded-full animate-spin"
+                          aria-hidden="true"
+                        />
+                      </>
+                    ) : (
+                      "Login in"
+                    )}
                   </Button>
 
                   <div className="text-center pt-4 border-t border-gray-100">

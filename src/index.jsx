@@ -6,23 +6,19 @@ import reportWebVitals from "./reportWebVitals";
 import SmoothScroll from "./components/SmoothScroll";
 import { Toaster } from "react-hot-toast";
 import { ToastContainer } from "react-toastify";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-const queryClient = new QueryClient();
+import { Provider } from "react-redux";
+import { store } from "./redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <SmoothScroll>
       <ToastContainer />
       <Toaster />
-      <QueryClientProvider client={queryClient}>
-        {/* <ReactQueryDevtools initialIsOpen={false}> */}
           <App />
-        {/* </ReactQueryDevtools> */}
-      </QueryClientProvider>
     </SmoothScroll>
+    </Provider>
   </React.StrictMode>
 );
 

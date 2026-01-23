@@ -19,6 +19,9 @@ import Resources from './pages/resources/index.jsx';
 import Schedule from './pages/schedule/index.jsx';
 import Help from './pages/help/index.jsx';
 import { DarkModeProvider } from './context/DarkModeContext.jsx';
+import Dashboard from './pages/Dashboard/student/index';
+import ExploreCourses from './pages/Dashboard/student/exploreCourses/index.jsx';
+import Userprofile from './pages/Dashboard/student/userprofile/index.jsx';
 
 function App() {
   return (
@@ -34,7 +37,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/card/:id" element={<CardDetail />} />
-          <Route path="/profile" element={<Profile />} />
+         
+          <Route path="/profile" element={<Userprofile />} />
           <Route path="/AddCourse" element={<AddCourse />} />
           <Route path="/ActiveUsers" element={<ActiveUsers />} />
           <Route path="/settings" element={<Settings />} />
@@ -43,6 +47,8 @@ function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/help" element={<Help />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Explorecourses" element={<ExploreCourses />} />
         </Routes>
         </BrowserRouter>
       </DarkModeProvider>
