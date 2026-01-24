@@ -6,7 +6,7 @@ function AcademicCredentials() {
 
   if (isLoading) {
     return (
-      <section className="bg-white dark:bg-slate-900 rounded-2xl refined-border p-10">
+      <section className="bg-white dark:bg-sidebar-dark rounded-2xl refined-border p-10  border border-slate-200 dark:border-slate-700">
         <div className="flex items-center justify-center h-48">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-studprimary"></div>
         </div>
@@ -16,7 +16,7 @@ function AcademicCredentials() {
 
   if (error) {
     return (
-      <section className="bg-white dark:bg-slate-900 rounded-2xl refined-border p-10">
+      <section className="bg-white dark:bg-sidebar-dark rounded-2xl refined-border p-10  border border-slate-200 dark:border-slate-700">
         <div className="text-center text-red-500">
           Failed to load credentials. Please try again.
         </div>
@@ -25,7 +25,7 @@ function AcademicCredentials() {
   }
 
   return (
-    <section className="bg-white dark:bg-slate-900 rounded-2xl refined-border p-10">
+    <section className="bg-white dark:bg-sidebar-dark rounded-2xl refined-border p-10  border border-slate-200 dark:border-slate-700">
       <div className="flex items-center justify-between mb-10">
         <div className="flex items-center gap-4">
           <div className="w-1.5 h-8 bg-studprimary rounded-full"></div>

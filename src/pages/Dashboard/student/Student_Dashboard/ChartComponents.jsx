@@ -72,7 +72,7 @@ export const PerformanceLineChart = ({ data, title }) => {
 // Reusable Bar Chart Component
 export const LearningProgressBarChart = ({ data, title }) => {
   return (
-    <div className="soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl">
+    <div className="soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl w-full">
       <div className="mb-6">
         <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">{title}</h4>
         <p className="text-xs text-slate-500 mt-2">Weekly learning activities</p>
@@ -102,8 +102,9 @@ export const LearningProgressBarChart = ({ data, title }) => {
 
 // Reusable Radar Chart Component for Skills
 export const SkillsRadarChart = ({ data, title }) => {
+  
   return (
-    <div className="soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl">
+    <div className="soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl w-full">
       <div className="mb-6">
         <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">{title}</h4>
         <p className="text-xs text-slate-500 mt-2">Skill proficiency levels</p>

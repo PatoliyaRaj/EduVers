@@ -42,7 +42,6 @@ const AdminLayout = ({
   const dispatch = useDispatch();
   const { isDark } = useDarkMode();
 
-  // Get auth from utility (includes user, isAuthenticated, accessToken)
   const { user, isAuthenticated, accessToken } = getAuth();
   console.log("🚀 ~ AdminLayout ~ user:", user);
   const userRole = user?.userType?.toUpperCase();
@@ -319,7 +318,7 @@ const AdminLayout = ({
   );
 
   return (
-    <div className="min-h-screen bg-[#f9fafb] dark:bg-[#111827] transition-colors duration-300">
+    <div className="min-h-screen bg-[#f9fafb] dark:bg-background-dark transition-colors duration-300">
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div
@@ -330,7 +329,7 @@ const AdminLayout = ({
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-xl transition-transform duration-300 ease-in-out lg:hidden
+        className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-white dark:bg-sidebar-dark border-r border-slate-200 dark:border-slate-800 shadow-xl transition-transform duration-300 ease-in-out lg:hidden
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         {/* Close Button */}
@@ -345,7 +344,7 @@ const AdminLayout = ({
 
       {/* Desktop Sidebar */}
       <aside
-        className={`hidden lg:fixed lg:left-0 lg:top-0 lg:h-full lg:z-50 lg:flex lg:flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800
+        className={`hidden lg:fixed lg:left-0 lg:top-0 lg:h-full lg:z-50 lg:flex lg:flex-col bg-white dark:bg-sidebar-dark border-r border-slate-200 dark:border-slate-800
           transition-all duration-300 ease-in-out
           ${isCollapsed ? "lg:w-20" : "lg:w-64"}`}
       >
@@ -368,10 +367,10 @@ const AdminLayout = ({
       <main
         className={` min-h-screen transition-all duration-300 ${
           isCollapsed ? "lg:ml-20" : "lg:ml-64"
-        }`}
+        } dark:bg-background-dark`}
       >
         {/* Top Header */}
-        <header className="sticky top-0 z-40 bg-[#f9fafb]/80 dark:bg-[#111827]/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <header className="sticky top-0 z-40 bg-[#f9fafb]/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-center justify-between px-6 py-4">
             {/* Left Section - Search */}
             <div className="flex items-center gap-4 flex-1 max-w-xl">

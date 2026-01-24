@@ -3,6 +3,7 @@
     opacity: 0;
     transform: translateY(14px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -12,6 +13,26 @@
 .animate-fade-in {
   animation: fade-in 2.3s ease-in-out forwards;
 }
+
 .animate-fade-in2 {
   animation: fade-in 1.5s ease-in-out backwards;
+}
+
+.badge-3d {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  perspective: 1000px
+}
+
+.badge-3d:hover {
+  transform: translatey(-8px) rotatey(10deg);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+  vertical-align: middle
+}
+
+.radar-grid {
+  clip-path: polygon(50% 0%, 100% 38%, 81% 100%, 19% 100%, 0% 38%)
 }
