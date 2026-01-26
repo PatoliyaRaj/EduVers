@@ -37,13 +37,13 @@ function ProficiencyMetrics() {
   ];
 
   return (
-    <section className="bg-white dark:bg-slate-900 rounded-2xl refined-border p-8 md:p-10">
+    <section className="bg-white dark:bg-slate-900 rounded-2xl  p-8 md:p-10 border border-white dark:border-slate-700 shadow-md ">
       <div className="flex items-center justify-between mb-10 md:mb-12">
         <div className="flex items-center gap-3 md:gap-4">
-          <div className="w-1.5 h-8 bg-primary rounded-full"></div>
+          <div className="w-1.5 h-8 bg-studprimary rounded-full"></div>
           <h3 className="text-xl md:text-2xl font-bold tracking-tight dark:text-white">Proficiency Metrics</h3>
         </div>
-        <button className="bg-primary/5 text-primary text-[11px] font-bold px-4 py-2 rounded-lg hover:bg-primary/10 transition-colors uppercase tracking-widest border border-primary/10">
+        <button className="bg-primary/5 text-primary text-[11px] font-bold px-4 py-2 rounded-lg hover:bg-studprimary/10 transition-colors uppercase tracking-widest border border-studprimary/10 dark:border-slate-700 dark:text-white">
           Recalibrate Stats
         </button>
       </div>

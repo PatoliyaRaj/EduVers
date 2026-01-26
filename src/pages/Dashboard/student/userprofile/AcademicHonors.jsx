@@ -50,7 +50,7 @@ function AcademicHonors() {
 
   const HonorBadge = ({ label, icon: Icon, color, bg, border }) => (
     <div
-      className={`badge-3d aspect-square ${bg} rounded-2xl flex flex-col items-center justify-center ${color} ${border} cursor-pointer p-3 group animate-fade-in  dark:border-slate-700`}
+      className={` group badge-3d aspect-square ${bg} rounded-2xl flex flex-col items-center justify-center ${color} ${border} cursor-pointer p-3 group animate-fade-in  dark:border-slate-700`}
     >
       <Icon className="mb-1 drop-shadow-md" size={28} />
       <span className="text-[9px] font-extrabold uppercase tracking-widest text-center opacity-70 group-hover:opacity-100">{label}</span>

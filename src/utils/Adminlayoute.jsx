@@ -106,7 +106,7 @@ const AdminLayout = ({
         {
           id: "help",
           icon: HelpCircle,
-          label: "Help",
+          label: "Help Center",
           link: "/help",
           breadcrumb: "Help & Support",
         },
@@ -173,7 +173,7 @@ const AdminLayout = ({
       {
         id: "help",
         icon: HelpCircle,
-        label: "Help",
+        label: "Help Center",
         link: "/help",
         breadcrumb: "Help & Support",
       },

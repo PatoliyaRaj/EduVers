@@ -2,7 +2,7 @@
 const config = {
   darkMode: "class",
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  theme: { 
+  theme: {
     extend: {
       colors: {
         "superadminprimary": "#B48B4D",
@@ -26,11 +26,21 @@ const config = {
       animation: {
         bounce: "bounce 2s infinite",
         "bounce-sm": "bounce 1.5s infinite",
+        "accordion-down": "accordion-down 0.3s ease-in-out",
+        "accordion-up": "accordion-up 0.3s ease-in-out",
       },
       keyframes: {
         bounce: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-15px)" },
+        },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
     },
