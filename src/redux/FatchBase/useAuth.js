@@ -25,27 +25,17 @@ export const useAuth = () => {
     } catch (error) {
       console.error("Logout API error:", error);
     } finally {
-      // Always clear local state regardless of API result
       dispatch(logoutAction());
       navigate("/login");
     }
   };
 
-  /**
-   * Check if user has a specific role
-   */
   const hasRole = (role) => {
     return user?.userType?.toUpperCase() === role.toUpperCase();
   };
 
-  /**
-   * Check if user is a teacher
-   */
   const isTeacher = () => hasRole("TEACHER");
 
-  /**
-   * Check if user is a student
-   */
   const isStudent = () => hasRole("STUDENT");
 
   return {

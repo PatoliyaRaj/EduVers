@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   LineChart,
   Line,
@@ -15,27 +15,35 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from 'recharts';
+} from "recharts";
 
 // Reusable Line Chart Component
-export const PerformanceLineChart = ({ data, title }) => {
+export const PerformanceLineChart = ({ data, title, className }) => {
   return (
-    <div className="soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl">
+    <div className={`soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl ${className}`}>
       <div className="mb-6">
-        <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">{title}</h4>
-        <p className="text-xs text-slate-500 mt-2">Performance metrics over time</p>
+        <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">
+          {title}
+        </h4>
+        <p className="text-xs text-slate-500 mt-2">
+          Performance metrics over time
+        </p>
       </div>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-700" />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="#e2e8f0"
+            className="dark:stroke-slate-700"
+          />
           <XAxis dataKey="month" stroke="#94a3b8" className="text-xs" />
           <YAxis stroke="#94a3b8" className="text-xs" />
           <Tooltip
             contentStyle={{
-              backgroundColor: '#1e293b',
-              border: 'none',
-              borderRadius: '8px',
-              color: '#fff',
+              backgroundColor: "#1e293b",
+              border: "none",
+              borderRadius: "8px",
+              color: "#fff",
             }}
           />
           <Legend />
@@ -44,7 +52,7 @@ export const PerformanceLineChart = ({ data, title }) => {
             dataKey="accuracy"
             stroke="#B48B4D"
             strokeWidth={3}
-            dot={{ fill: '#B48B4D', r: 4 }}
+            dot={{ fill: "#B48B4D", r: 4 }}
             activeDot={{ r: 6 }}
           />
           <Line
@@ -52,7 +60,7 @@ export const PerformanceLineChart = ({ data, title }) => {
             dataKey="completionRate"
             stroke="#3b82f6"
             strokeWidth={2}
-            dot={{ fill: '#3b82f6', r: 4 }}
+            dot={{ fill: "#3b82f6", r: 4 }}
             activeDot={{ r: 6 }}
           />
           <Line
@@ -60,7 +68,7 @@ export const PerformanceLineChart = ({ data, title }) => {
             dataKey="engagement"
             stroke="#10b981"
             strokeWidth={2}
-            dot={{ fill: '#10b981', r: 4 }}
+            dot={{ fill: "#10b981", r: 4 }}
             activeDot={{ r: 6 }}
           />
         </LineChart>
@@ -69,30 +77,45 @@ export const PerformanceLineChart = ({ data, title }) => {
   );
 };
 
-// Reusable Bar Chart Component
-export const LearningProgressBarChart = ({ data, title }) => {
+export const LearningProgressBarChart = ({ data, title, className }) => {
   return (
-    <div className="soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl w-full">
+    <div className={`soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl w-full ${className}`}>
       <div className="mb-6">
-        <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">{title}</h4>
-        <p className="text-xs text-slate-500 mt-2">Weekly learning activities</p>
+        <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">
+          {title}
+        </h4>
+        <p className="text-xs text-slate-500 mt-2">
+          Weekly learning activities
+        </p>
       </div>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-700" />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="#e2e8f0"
+            className="dark:stroke-slate-700"
+          />
           <XAxis dataKey="week" stroke="#94a3b8" className="text-xs" />
           <YAxis stroke="#94a3b8" className="text-xs" />
           <Tooltip
             contentStyle={{
-              backgroundColor: '#1e293b',
-              border: 'none',
-              borderRadius: '8px',
-              color: '#fff',
+              backgroundColor: "#1e293b",
+              border: "none",
+              borderRadius: "8px",
+              color: "#fff",
             }}
           />
           <Legend />
-          <Bar dataKey="coursesCompleted" fill="#B48B4D" radius={[8, 8, 0, 0]} />
-          <Bar dataKey="assignmentsSubmitted" fill="#3b82f6" radius={[8, 8, 0, 0]} />
+          <Bar
+            dataKey="coursesCompleted"
+            fill="#B48B4D"
+            radius={[8, 8, 0, 0]}
+          />
+          <Bar
+            dataKey="assignmentsSubmitted"
+            fill="#3b82f6"
+            radius={[8, 8, 0, 0]}
+          />
           <Bar dataKey="quizzesPassed" fill="#10b981" radius={[8, 8, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
@@ -101,12 +124,15 @@ export const LearningProgressBarChart = ({ data, title }) => {
 };
 
 // Reusable Radar Chart Component for Skills
-export const SkillsRadarChart = ({ data, title }) => {
-  
+export const SkillsRadarChart = ({ data, title, className }) => {
   return (
-    <div className="soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl w-full">
+    <div
+      className={`soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl w-full ${className}`}
+    >
       <div className="mb-6">
-        <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">{title}</h4>
+        <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">
+          {title}
+        </h4>
         <p className="text-xs text-slate-500 mt-2">Skill proficiency levels</p>
       </div>
       <ResponsiveContainer width="100%" height={350}>
@@ -123,10 +149,10 @@ export const SkillsRadarChart = ({ data, title }) => {
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: '#1e293b',
-              border: 'none',
-              borderRadius: '8px',
-              color: '#fff',
+              backgroundColor: "#1e293b",
+              border: "none",
+              borderRadius: "8px",
+              color: "#fff",
             }}
           />
           <Legend />
@@ -137,24 +163,36 @@ export const SkillsRadarChart = ({ data, title }) => {
 };
 
 // Reusable Horizontal Bar Chart for Time Distribution
-export const TimeDistributionChart = ({ data, title }) => {
+export const TimeDistributionChart = ({ data, title, className }) => {
   return (
-    <div className="soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl">
+    <div className={`soft-card p-8 md:p-10 bg-white dark:bg-sidebar-dark rounded-2xl ${className}`}>
       <div className="mb-6">
-        <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">{title}</h4>
+        <h4 className="text-lg font-extrabold text-slate-900 dark:text-white">
+          {title}
+        </h4>
         <p className="text-xs text-slate-500 mt-2">Hours spent by activity</p>
       </div>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data} layout="vertical">
-          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-700" />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="#e2e8f0"
+            className="dark:stroke-slate-700"
+          />
           <XAxis type="number" stroke="#94a3b8" className="text-xs" />
-          <YAxis dataKey="category" type="category" stroke="#94a3b8" className="text-xs" width={100} />
+          <YAxis
+            dataKey="category"
+            type="category"
+            stroke="#94a3b8"
+            className="text-xs"
+            width={100}
+          />
           <Tooltip
             contentStyle={{
-              backgroundColor: '#1e293b',
-              border: 'none',
-              borderRadius: '8px',
-              color: '#fff',
+              backgroundColor: "#1e293b",
+              border: "none",
+              borderRadius: "8px",
+              color: "#fff",
             }}
           />
           <Legend />

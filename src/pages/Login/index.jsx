@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../../components/Button";
 import ilus from "../../assets/imgs/ilustrater.png";
-import toast from "react-hot-toast";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useLoginMutation, setCredentials } from "../../redux";
@@ -11,7 +11,6 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // RTK Query mutation hook
   const [login, { isLoading }] = useLoginMutation();
 
   const [data, setData] = useState({
@@ -39,26 +38,24 @@ function Login() {
         true,
         false,
         true,
-        "font-bold transition-all"
+        "font-bold transition-all",
       );
       return;
     }
 
     try {
-      // Use RTK Query mutation
       const response = await login({
-          email: data.email,
-          password: data.password,
+        email: data.email,
+        password: data.password,
       }).unwrap();
 
       if (response.success) {
-        // Dispatch credentials to Redux store
         dispatch(
           setCredentials({
             user: response.data.user,
             accessToken: response.data.accessToken,
             refreshToken: response.data.refreshToken,
-          })
+          }),
         );
 
         SuccessToster("Logged In Successfully", 3000);
@@ -75,10 +72,11 @@ function Login() {
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error(error?.data?.message || "Login Failed. Please try again", {
-          position: "top-center",
-          duration: 4000,
-      });
+      ErrorToster(
+        error?.data?.message || "Login Failed. Please try again",
+        4000,
+        "top-center",
+      );
     }
   };
 

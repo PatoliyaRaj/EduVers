@@ -20,12 +20,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [lgNavOpen, setLgNavOpen] = useState(false);
-  
-  // Use getAuth utility instead of Redux selectors
+
   const user = getAuth().user;
   const isAuthenticated = Boolean(user);
 
-  // Memoize navLinks to prevent recreation on every render
   const navLinks = useMemo(() => [
     {
       name: "Home",
@@ -97,9 +95,8 @@ export default function Navbar() {
   return (
     <React.Fragment>
       <header
-        className={`bg-white dark:bg-slate-950 backdrop-blur-xl sticky top-0 z-50 transition-all duration-300 border-b border-slate-200/50 dark:border-slate-800 font-inter ${
-          scrolled ? "shadow-2xl shadow-slate-900/10 dark:shadow-black/40 bg-white dark:bg-slate-950" : "shadow-md dark:shadow-xl"
-        }`}
+        className={`bg-white dark:bg-slate-950 backdrop-blur-xl sticky top-0 z-50 transition-all duration-300 border-b border-slate-200/50 dark:border-slate-800 font-inter ${scrolled ? "shadow-2xl shadow-slate-900/10 dark:shadow-black/40 bg-white dark:bg-slate-950" : "shadow-md dark:shadow-xl"
+          }`}
       >
         <div className="w-full mx-auto px-2 ">
           <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 lg:h-20 xl:h-22 ">
@@ -137,12 +134,12 @@ export default function Navbar() {
                 <div className="relative mr-2">
                   <select className="appearance-none bg-gradient-to-r from-[#343131] to-[#D8A25E] text-white px-3 lg:px-4 py-2.5 lg:py-2 pr-8 lg:pr-9 rounded-xl text-sm lg:text-base font-semibold cursor-pointer focus:outline-none focus:ring-3 focus:ring-blue-500/20 transition-all duration-300 border border-blue-200 font-inter">
                     <optgroup label="Categories" className="font-bold text-black">
-                    <option>All Categories</option>
-                    <option>Programming</option>
-                    <option>Design</option>
-                    <option>Business</option>
-                    <option>Marketing</option>
-                    <option>Data Science</option> 
+                      <option>All Categories</option>
+                      <option>Programming</option>
+                      <option>Design</option>
+                      <option>Business</option>
+                      <option>Marketing</option>
+                      <option>Data Science</option>
                     </optgroup>
                   </select>
                   <ChevronDown className="absolute right-2 lg:right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white pointer-events-none transition-all duration-300" />
@@ -210,9 +207,8 @@ export default function Navbar() {
         </div>
 
         <div
-          className={`hidden lg:block xl:hidden transition-all duration-300 ease-in-out ${
-            lgNavOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
-          } overflow-hidden bg-white dark:bg-slate-950 backdrop-blur-lg border-t border-slate-200/50 dark:border-slate-800 shadow-lg dark:shadow-2xl`}
+          className={`hidden lg:block xl:hidden transition-all duration-300 ease-in-out ${lgNavOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+            } overflow-hidden bg-white dark:bg-slate-950 backdrop-blur-lg border-t border-slate-200/50 dark:border-slate-800 shadow-lg dark:shadow-2xl`}
         >
           <div className="max-w-7xl mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-2">
@@ -235,9 +231,8 @@ export default function Navbar() {
         </div>
 
         <div
-          className={`mobile-menu lg:hidden transition-all duration-300 ease-in-out ${
-            open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-          } overflow-hidden bg-white dark:bg-slate-950 backdrop-blur-lg border-t border-slate-200/50 dark:border-slate-800 shadow-xl dark:shadow-2xl`}
+          className={`mobile-menu lg:hidden transition-all duration-300 ease-in-out ${open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+            } overflow-hidden bg-white dark:bg-slate-950 backdrop-blur-lg border-t border-slate-200/50 dark:border-slate-800 shadow-xl dark:shadow-2xl`}
         >
           <div className="px-4 sm:px-6 py-6 space-y-6">
             {/* Mobile Search */}

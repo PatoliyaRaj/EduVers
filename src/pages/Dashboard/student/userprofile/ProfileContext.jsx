@@ -1,15 +1,22 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useGetUserDetailsQuery, useUpdateUserMutation } from '../../../../redux';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import {
+  useGetUserDetailsQuery,
+  useUpdateUserMutation,
+} from "../../../../redux";
 import { SuccessToster, ErrorToster } from "../../../../components/toster";
-import { getAuth } from '../../../../utils/users';
+import { getAuth } from "../../../../utils/users";
+import { ProfileContext } from "./ProfileContext.js";
 
-const ProfileContext = createContext(null);
-
-export function ProfileProvider({ children }) {
+export const ProfileProvider = ({ children }) => {
   const { user } = getAuth();
   const email = user?.email;
 
-  const { data: response, isLoading, error, refetch } = useGetUserDetailsQuery(email, {
+  const {
+    data: response,
+    isLoading,
+    error,
+    refetch,
+  } = useGetUserDetailsQuery(email, {
     skip: !email,
   });
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
@@ -17,30 +24,30 @@ export function ProfileProvider({ children }) {
   const userData = response?.user;
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNo: '',
-    campus: 'San Francisco Main',
-    about: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNo: "",
+    campus: "San Francisco Main",
+    about: "",
   });
 
   useEffect(() => {
     if (userData) {
       setFormData({
-        firstName: userData.firstName || '',
-        lastName: userData.lastName || '',
-        email: userData.email || '',
-        phoneNo: userData.phoneNo || '',
-        campus: userData.campus || 'San Francisco Main',
-        about: userData.about || '',
+        firstName: userData.firstName || "",
+        lastName: userData.lastName || "",
+        email: userData.email || "",
+        phoneNo: userData.phoneNo || "",
+        campus: userData.campus || "San Francisco Main",
+        about: userData.about || "",
       });
     }
   }, [userData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -58,9 +65,9 @@ export function ProfileProvider({ children }) {
       }).unwrap();
 
       SuccessToster("Profile updated successfully!", 3000);
-      refetch(); 
+      refetch();
     } catch (err) {
-      ErrorToster(err?.data?.message || 'Failed to update profile', 3000);
+      ErrorToster(err?.data?.message || "Failed to update profile", 3000);
     }
   };
 
@@ -77,16 +84,6 @@ export function ProfileProvider({ children }) {
   };
 
   return (
-    <ProfileContext.Provider value={value}>
-      {children}
-    </ProfileContext.Provider>
+    <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>
   );
-}
-
-export function useProfile() {
-  const context = useContext(ProfileContext);
-  if (!context) {
-    throw new Error('useProfile must be used within a ProfileProvider');
-  }
-  return context;
-}
+};

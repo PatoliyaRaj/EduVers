@@ -1,8 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { User, Settings, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import { SuccessToster, ErrorToster } from "./toster";
-import API from "../utils/axiosintence";
+import { useLogoutMutation } from "../redux";
+import { logout } from "../redux/slice/authSlice";
+import { getAuth } from "../utils/users";
 export default function AvatarDropdown({
   placeholder = "U",
   className = "  ",
@@ -17,7 +20,9 @@ export default function AvatarDropdown({
   const [hoverTimeout, setHoverTimeout] = useState(null);
   const trigger = useRef(null);
   const dropdown = useRef(null);
-  const email = localStorage.getItem("userEmail") || "User";
+  const { user, isAuthenticated, accessToken } = getAuth();
+  const email = user?.email;
+  const dispatch = useDispatch();
 
   const sizeConfig = {
     sm: {
@@ -95,35 +100,21 @@ export default function AvatarDropdown({
     return () => document.removeEventListener("click", clickHandler);
   }, [dropdownOpen]);
 
-  const handleSignOut = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await API.post(
-        `/Logout/Userlogout`,
-        {
-          email: email,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  const [logoutMutation, { isLoading: isPending }] = useLogoutMutation();
 
-      SuccessToster(response.data.message || "Logged Out Successfully");
-      if (response.data.success) {
-        localStorage.removeItem("isLogin");
-        localStorage.removeItem("userEmail");
-        localStorage.removeItem("UserType");
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 1500);
-      }
+  const handleSignOut = useCallback(async () => {
+    try {
+      await logoutMutation({ email }).unwrap();
+      SuccessToster("Successfully signed out", 2500);
+      dispatch(logout());
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2000);
     } catch (error) {
-      console.error("error", error);
-      ErrorToster(error.response?.data?.message || "Some thing went wrong");
+      ErrorToster(error?.data?.message || "Logout failed", 2500);
+      console.error("Logout failed:", error);
     }
-  };
+  }, [email, logoutMutation, dispatch]);
 
   return (
     <div
@@ -195,10 +186,13 @@ export default function AvatarDropdown({
 
           <button
             onClick={handleSignOut}
-            className="flex items-center w-full px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-red-600 dark:text-red-400 hover:bg-gradient-to-r hover:from-red-50 dark:hover:from-red-950/30 hover:to-pink-50 dark:hover:to-pink-950/30 hover:text-red-700 dark:hover:text-red-300 transition-all duration-200 group rounded-lg mx-2"
+            disabled={isPending}
+            className="flex items-center w-full px-4 py-3 sm:px-5 sm:py-3 text-sm sm:text-base text-red-600 dark:text-red-400 hover:bg-gradient-to-r hover:from-red-50 dark:hover:from-red-950/30 hover:to-pink-50 dark:hover:to-pink-950/30 hover:text-red-700 dark:hover:text-red-300 transition-all duration-200 group rounded-lg mx-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <LogOut className="w-4 h-4 sm:w-5 sm:h-5 mr-3 sm:mr-4 text-red-500 dark:text-red-400 group-hover:text-red-600 dark:group-hover:text-red-300 transition-colors duration-200" />
-            <span className="truncate font-medium">Sign Out</span>
+            <span className="truncate font-medium">
+              {isPending ? "Signing Out..." : "Sign Out"}
+            </span>
           </button>
         </div>
 

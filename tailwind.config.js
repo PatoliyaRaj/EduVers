@@ -5,14 +5,27 @@ const config = {
   theme: {
     extend: {
       colors: {
-        "superadminprimary": "#B48B4D",
-        "studprimary": "#b48c4c",
+        superadminprimary: "#B48B4D",
+        studprimary: "#b48c4c",
         "background-light": "#F9FAFB",
         "background-dark": "#111827",
         "sidebar-dark": "#1F2937",
         "lavender-light": "#f3f0ff",
         "lavender-dark": "#1e1b4b",
         "card-border": "rgba(180, 140, 76, 0.15)",
+        // Premium Dark Theme Colors
+        "premium-gold": "#B08D57",
+        "deep-charcoal": "#0F0F12",
+        "navy-charcoal": "#1A1B23",
+        "gold-glow": "rgba(176, 141, 87, 0.15)",
+      },
+      fontFamily: {
+        display: ["Plus Jakarta Sans", "sans-serif"],
+        sans: ["Plus Jakarta Sans", "sans-serif"],
+      },
+      boxShadow: {
+        gold: "0 0 20px rgba(176, 141, 87, 0.15)",
+        "inner-glass": "inset 0 1px 1px 0 rgba(255, 255, 255, 0.05)",
       },
       borderRadius: {
         DEFAULT: "0.75rem",

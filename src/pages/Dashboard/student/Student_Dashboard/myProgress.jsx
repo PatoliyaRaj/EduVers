@@ -8,7 +8,7 @@ function MyProgress() {
 
   const visibleCourses = useMemo(
     () => progressData.slice(0, visibleCount),
-    [visibleCount]
+    [visibleCount],
   );
 
   const canShowMore = visibleCount < progressData.length;
@@ -26,8 +26,8 @@ function MyProgress() {
     <section>
       <div className="flex items-center justify-between mb-6">
         <div className="flex flex-row justify-center items-center ">
-          <h3 className="text-xl font-extrabold flex items-center gap-2 dark:text-white">
-            <span className="w-2 h-8 bg-studprimary rounded-full"></span>
+          <h3 className="text-xl font-extrabold flex items-center gap-2 text-slate-900 dark:text-white">
+            <span className="w-1.5 h-8 bg-studprimary dark:bg-premium-gold rounded-full shadow-[0_0_10px_#B08D57]"></span>
             My Learning Progress
           </h3>
         </div>
@@ -36,7 +36,7 @@ function MyProgress() {
             <button
               type="button"
               onClick={handleShowLess}
-              className="text-sm font-bold text-slate-500 hover:underline dark:text-slate-300 "
+              className="text-xs font-bold text-slate-500 hover:text-studprimary dark:hover:text-premium-gold uppercase tracking-widest transition-all"
             >
               Show Less
             </button>
@@ -45,7 +45,7 @@ function MyProgress() {
             <button
               type="button"
               onClick={handleViewAll}
-              className="text-sm font-bold text-studprimary hover:underline"
+              className="text-xs font-bold text-studprimary dark:text-premium-gold uppercase tracking-widest hover:brightness-110 transition-all"
             >
               View All
             </button>

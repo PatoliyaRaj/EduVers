@@ -53,7 +53,6 @@ const authSlice = createSlice({
         state.refreshToken = refreshToken;
       }
 
-      // Persist everything in ONE localStorage key
       persistAuth(state.user, state.accessToken, state.refreshToken);
     },
 
@@ -68,7 +67,6 @@ const authSlice = createSlice({
       state.refreshToken = null;
       state.isAuthenticated = false;
       
-      // Clear single localStorage key
       localStorage.removeItem("authUser");
     },
 

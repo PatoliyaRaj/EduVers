@@ -1,23 +1,18 @@
 // Breadcrumb configurations and paths
 
 export const breadcrumbPaths = {
-  DASHBOARD: [
-    { label: "Dashboard", to: "/dashboard" },
-  ],
-  
+  DASHBOARD: [{ label: "Dashboard", to: "/dashboard" }],
+
   MANAGE_COURSES: [
     { label: "Dashboard", to: "/dashboard" },
     { label: "Manage Courses" },
   ],
-   EXPLORE_COURSES: [
+  EXPLORE_COURSES: [
     { label: "Dashboard", to: "/dashboard" },
     { label: "Explore Courses" },
   ],
 
-  PROFILE: [
-    { label: "Dashboard", to: "/dashboard" },
-    { label: "Profile" },
-  ],
+  PROFILE: [{ label: "Dashboard", to: "/dashboard" }, { label: "Profile" }],
 
   USER_PROFILE: [
     { label: "Dashboard", to: "/dashboard" },
@@ -29,49 +24,31 @@ export const breadcrumbPaths = {
     { label: "Admin Profile" },
   ],
 
-  COURSES: [
-    { label: "Dashboard", to: "/dashboard" },
-    { label: "Courses" },
-  ],
+  COURSES: [{ label: "Dashboard", to: "/dashboard" }, { label: "Courses" }],
 
   COURSE_DETAILS: (courseTitle = "Course Details") => [
     { label: "Dashboard", to: "/dashboard" },
     { label: "Courses", to: "/courses" },
     { label: courseTitle },
   ],
-
-  ABOUT: [
-    { label: "Home", to: "/" },
-    { label: "About" },
-  ],
-
-  CONTACT_US: [
-    { label: "Home", to: "/" },
-    { label: "Contact Us" },
-  ],
-
-  HELP: [
+  MY_LEARNING: [
     { label: "Dashboard", to: "/dashboard" },
-    { label: "Help" },
+    { label: "My Learning", to: "/mylearning" },
   ],
 
-  RESOURCES: [
-    { label: "Dashboard", to: "/dashboard" },
-    { label: "Resources" },
-  ],
+  ABOUT: [{ label: "Home", to: "/" }, { label: "About" }],
 
-  SCHEDULE: [
-    { label: "Dashboard", to: "/dashboard" },
-    { label: "Schedule" },
-  ],
+  CONTACT_US: [{ label: "Home", to: "/" }, { label: "Contact Us" }],
 
-  LOGIN: [
-    { label: "Login" },
-  ],
+  HELP: [{ label: "Dashboard", to: "/dashboard" }, { label: "Help" }],
 
-  SIGNUP: [
-    { label: "Sign Up" },
-  ],
+  RESOURCES: [{ label: "Dashboard", to: "/dashboard" }, { label: "Resources" }],
+
+  SCHEDULE: [{ label: "Dashboard", to: "/dashboard" }, { label: "Schedule" }],
+
+  LOGIN: [{ label: "Login" }],
+
+  SIGNUP: [{ label: "Sign Up" }],
 
   EDIT_COURSE: (courseTitle = "Edit Course") => [
     { label: "Dashboard", to: "/dashboard" },
@@ -106,19 +83,16 @@ export const breadcrumbPaths = {
     { label: "Add Course" },
   ],
 
-  SETTINGS: [
-    { label: "Dashboard", to: "/dashboard" },
-    { label: "Settings" },
-  ],
+  SETTINGS: [{ label: "Dashboard", to: "/dashboard" }, { label: "Settings" }],
 };
 
 export const getBreadcrumbs = (key, ...params) => {
   const breadcrumb = breadcrumbPaths[key];
-  
+
   if (typeof breadcrumb === "function") {
     return breadcrumb(...params);
   }
-  
+
   return breadcrumb || [];
 };
 

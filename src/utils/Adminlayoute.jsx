@@ -14,7 +14,7 @@ import {
   MessageCircle,
   X,
   ChevronLeft,
-  PanelTopDashedIcon,
+  BookOpenText,
   LayoutDashboard,
   Compass,
 } from "lucide-react";
@@ -43,15 +43,12 @@ const AdminLayout = ({
   const { isDark } = useDarkMode();
 
   const { user, isAuthenticated, accessToken } = getAuth();
-  console.log("🚀 ~ AdminLayout ~ user:", user);
   const userRole = user?.userType?.toUpperCase();
   const email = user?.email;
 
-  // Dynamic nav items based on user role
   const navItems = useMemo(() => {
     if (customNavItems) return customNavItems;
 
-    // Teacher/Admin Navigation
     if (userRole === "TEACHER") {
       return [
         {
@@ -122,39 +119,18 @@ const AdminLayout = ({
         breadcrumb: "Dashboard",
       },
       {
-       id: "Explore Courses",
-       icon: Compass,
-       label: "Explore Courses",
-       link: "/Explorecourses",
-       breadcrumb: "Explore Courses",
-     },
-      {
-        id: "profile",
-        icon: User,
-        label: "Profile",
-        link: "/profile",
-        breadcrumb: "My Profile",
+        id: "Explore Courses",
+        icon: Compass,
+        label: "Explore Courses",
+        link: "/Explorecourses",
+        breadcrumb: "Explore Courses",
       },
       {
         id: "courses",
-        icon: BookOpen,
-        label: "My Courses",
-        link: "/courses",
-        breadcrumb: "My Courses",
-      },
-      {
-        id: "schedule",
-        icon: Calendar,
-        label: "Schedule",
-        link: "/schedule",
-        breadcrumb: "My Schedule",
-      },
-      {
-        id: "resources",
-        icon: Book,
-        label: "Resources",
-        link: "/resources",
-        breadcrumb: "Learning Resources",
+        icon: BookOpenText,
+        label: "My Learning",
+        link: "/Mylearning",
+        breadcrumb: "My Learning",
       },
       {
         id: "chat",
@@ -162,6 +138,27 @@ const AdminLayout = ({
         label: "Chat",
         link: "/chat",
         breadcrumb: "Messages",
+      },
+      {
+        id: "profile",
+        icon: User,
+        label: "Profile",
+        link: "/profile",
+        breadcrumb: "My Profile",
+      },
+      // {
+      //   id: "schedule",
+      //   icon: Calendar,
+      //   label: "Schedule",
+      //   link: "/schedule",
+      //   breadcrumb: "My Schedule",
+      // },
+      {
+        id: "resources",
+        icon: Book,
+        label: "Resources",
+        link: "/resources",
+        breadcrumb: "Learning Resources",
       },
       {
         id: "settings",
@@ -194,7 +191,7 @@ const AdminLayout = ({
 
   const isActiveLink = useCallback(
     (link) => location.pathname === link,
-    [location.pathname]
+    [location.pathname],
   );
 
   const [logoutMutation, { isLoading: isPending }] = useLogoutMutation();
@@ -202,18 +199,17 @@ const AdminLayout = ({
   const handleSignOut = useCallback(async () => {
     try {
       await logoutMutation({ email }).unwrap();
-    SuccessToster("Successfully signed out", 2500);
+      SuccessToster("Successfully signed out", 2500);
       dispatch(logout());
-    setTimeout(() => {
-      window.location.href = "/";
-    }, 2000);
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2000);
     } catch (error) {
       ErrorToster(error?.data?.message || "Logout failed", 2500);
       console.error("Logout failed:", error);
     }
   }, [email, logoutMutation, dispatch]);
 
-  // Navigation Item Component
   const NavItem = useCallback(
     ({ item, collapsed = false }) => {
       const IconComponent = item.icon;
@@ -227,8 +223,8 @@ const AdminLayout = ({
           ${collapsed ? "justify-center px-2" : ""}
           ${
             isActive
-              ? "bg-[#b48c4c]/10 text-[#b48c4c] dark:bg-[#b48c4c]/20 dark:text-[#b48c4c]"
-              : "text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+              ? "bg-[#b48c4c]/10 text-[#b48c4c] dark:bg-premium-gold/10 dark:text-premium-gold dark:border-r-2 dark:border-premium-gold dark:shadow-[0_0_15px_rgba(176,141,87,0.1)]"
+              : "text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5"
           }`}
           title={collapsed ? item.label : undefined}
         >
@@ -236,22 +232,20 @@ const AdminLayout = ({
             className={`shrink-0 h-5 w-5 transition-all duration-200
             ${
               isActive
-                ? "text-[#b48c4c]"
-                : "text-slate-400 group-hover:text-[#b48c4c]"
+                ? "text-[#b48c4c] dark:text-premium-gold"
+                : "text-slate-400 group-hover:text-[#b48c4c] dark:group-hover:text-premium-gold"
             }`}
           />
           {!collapsed && <span className="truncate">{item.label}</span>}
         </Link>
       );
     },
-    [isActiveLink, closeMobileSidebar]
+    [isActiveLink, closeMobileSidebar],
   );
 
-  // Sidebar Content Component
   const SidebarContent = useCallback(
     ({ collapsed = false }) => (
       <div className="flex h-full flex-col">
-        {/* Logo & Branding */}
         <div className="p-6">
           <div
             className={`flex items-center ${
@@ -272,8 +266,8 @@ const AdminLayout = ({
                 <h1 className="font-bold text-xl tracking-tight leading-none text-slate-900 dark:text-white">
                   EduVerse
                 </h1>
-                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mt-1">
-                  {userRole === "TEACHER" ? "Teach & Grow" : "Learn & Grow"}
+                <p className="text-[10px] text-slate-500 dark:text-premium-gold font-bold uppercase tracking-widest mt-1">
+                  {userRole === "TEACHER" ? "Teach & Grow" : "Premium Edition"}
                 </p>
               </div>
             )}
@@ -282,13 +276,11 @@ const AdminLayout = ({
 
         <div className="w-[85%] h-[1px] bg-[#e4e2e2bf] mx-auto"></div>
 
-        {/* Navigation */}
         <nav className="flex-1 px-4 space-y-1 mt-4 overflow-y-auto">
           {navItems.map((item) => (
             <NavItem key={item.id} item={item} collapsed={collapsed} />
           ))}
 
-          {/* Account Section Label */}
           {!collapsed && (
             <div className="pt-8 pb-2 px-4 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
               Account
@@ -296,8 +288,6 @@ const AdminLayout = ({
           )}
         </nav>
 
-
-        {/* Logout Button */}
         <div className="border-t border-slate-200 dark:border-slate-800 p-4">
           <button
             onClick={handleSignOut}
@@ -314,11 +304,11 @@ const AdminLayout = ({
         </div>
       </div>
     ),
-    [navItems, NavItem, handleSignOut, isPending, user, userRole]
+    [navItems, NavItem, handleSignOut, isPending, user, userRole],
   );
 
   return (
-    <div className="min-h-screen bg-[#f9fafb] dark:bg-background-dark transition-colors duration-300">
+    <div className="min-h-screen bg-[#f9fafb] dark:bg-deep-charcoal transition-colors duration-300">
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div
@@ -329,7 +319,7 @@ const AdminLayout = ({
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-white dark:bg-sidebar-dark border-r border-slate-200 dark:border-slate-800 shadow-xl transition-transform duration-300 ease-in-out lg:hidden
+        className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-white dark:bg-navy-charcoal border-r border-slate-200 dark:border-white/5 shadow-xl transition-transform duration-300 ease-in-out lg:hidden
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         {/* Close Button */}
@@ -344,7 +334,7 @@ const AdminLayout = ({
 
       {/* Desktop Sidebar */}
       <aside
-        className={`hidden lg:fixed lg:left-0 lg:top-0 lg:h-full lg:z-50 lg:flex lg:flex-col bg-white dark:bg-sidebar-dark border-r border-slate-200 dark:border-slate-800
+        className={`hidden lg:fixed lg:left-0 lg:top-0 lg:h-full lg:z-50 lg:flex lg:flex-col bg-white dark:bg-navy-charcoal border-r border-slate-200 dark:border-white/5
           transition-all duration-300 ease-in-out
           ${isCollapsed ? "lg:w-20" : "lg:w-64"}`}
       >
@@ -363,18 +353,15 @@ const AdminLayout = ({
         <SidebarContent collapsed={isCollapsed} />
       </aside>
 
-      {/* Main Content Area */}
       <main
         className={` min-h-screen transition-all duration-300 ${
           isCollapsed ? "lg:ml-20" : "lg:ml-64"
-        } dark:bg-background-dark`}
+        } dark:bg-deep-charcoal`}
       >
         {/* Top Header */}
-        <header className="sticky top-0 z-40 bg-[#f9fafb]/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <header className="sticky top-0 z-40 bg-[#f9fafb]/80 dark:bg-navy-charcoal/80 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 shadow-none dark:shadow-gold transition-all duration-300">
           <div className="flex items-center justify-between px-6 py-4">
-            {/* Left Section - Search */}
             <div className="flex items-center gap-4 flex-1 max-w-xl">
-              {/* Mobile Menu Button */}
               <button
                 onClick={toggleMobileSidebar}
                 className="lg:hidden p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all"
@@ -467,7 +454,9 @@ const AdminLayout = ({
         </header>
 
         {/* Main Content */}
-        <div className={`p-6 space-y-8 ${className}`}>{children}</div>
+        <div className={`p-6 space-y-8 ${className} dark:bg-deep-charcoal`}>
+          {children}
+        </div>
       </main>
     </div>
   );

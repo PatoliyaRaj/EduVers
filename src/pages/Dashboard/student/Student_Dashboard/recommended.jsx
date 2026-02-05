@@ -18,7 +18,7 @@ function RecommendedSection() {
         duration: 0.8,
         stagger: 0.1,
         ease: "power2.out",
-      }
+      },
     );
   }, []);
 
@@ -43,25 +43,25 @@ function RecommendedSection() {
     <section>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-extrabold flex items-center gap-2 dark:text-white">
-            <span className="w-2 h-8 bg-studprimary rounded-full"></span>
+          <h3 className="text-xl font-extrabold flex items-center gap-2 text-slate-900 dark:text-white">
+            <span className="w-1.5 h-8 bg-studprimary dark:bg-premium-gold rounded-full shadow-[0_0_10px_#B08D57]"></span>
             Recommended for You
           </h3>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => scroll("left")}
-            className="p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-400 hover:bg-slate-50 dark:hover:bg-sidebar-dark transition-all hover:border-studprimary dark:text-white "
+            className="p-2 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 transition-all hover:border-studprimary dark:hover:border-premium-gold dark:text-white"
             aria-label="Scroll left"
           >
-            <ChevronLeft className="w-5 h-5 hover:text-[#b48c4c]" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={() => scroll("right")}
-            className="p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-400 hover:bg-slate-50 dark:hover:bg-sidebar-dark transition-all hover:border-studprimary dark:text-white"
+            className="p-2 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 transition-all hover:border-studprimary dark:hover:border-premium-gold dark:text-white"
             aria-label="Scroll right"
           >
-            <ChevronRight className="w-5 h-5 hover:text-[#b48c4c] transition-all " />
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -72,7 +72,16 @@ function RecommendedSection() {
       >
         {recommendedCoursesData.map((course, index) => (
           <div key={course.id} ref={(el) => (cardRefs.current[index] = el)}>
-            <RecommendedCourseCard course={course} showRating={false} showReviews={false} showButton={false} buttonText="View Details" onButtonClick={() => console.log("View Details clicked for course:", course.id)} />
+            <RecommendedCourseCard
+              course={course}
+              showRating={false}
+              showReviews={false}
+              showButton={false}
+              buttonText="View Details"
+              onButtonClick={() =>
+                console.log("View Details clicked for course:", course.id)
+              }
+            />
           </div>
         ))}
       </div>
