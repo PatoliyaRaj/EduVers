@@ -18,9 +18,8 @@ import { getBreadcrumbs } from "../../../utils/breadcrumbs";
 function AdminProfile() {
   const [activeTab, setActiveTab] = useState("overview");
   const [showForm, setShowForm] = useState(false);
-  
-  
-  const user =getAuth().user;
+
+  const user = getAuth().user;
   const userRoll = user?.userType?.toUpperCase() || "TEACHER";
   const email = user?.email;
 
@@ -60,7 +59,7 @@ function AdminProfile() {
 
   if (error) {
     return (
-      <AdminLayout  showSearch={false}>
+      <AdminLayout showSearch={false}>
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <p className="text-red-600 mb-4">
@@ -78,7 +77,6 @@ function AdminProfile() {
       </AdminLayout>
     );
   }
-
 
   const userData = {
     name:
@@ -197,7 +195,7 @@ function AdminProfile() {
             {showForm && (
               <UserUpdateForm userId={userData.id} onClose={toggleForm} />
             )}
-            
+
             {/* About & Activity */}
             <div className="lg:col-span-2 space-y-4 sm:space-y-6">
               <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">

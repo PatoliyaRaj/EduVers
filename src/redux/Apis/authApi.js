@@ -4,7 +4,7 @@ export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
-        url: "/Login/userlogin",
+        url: "/Auth/Login",
         method: "POST",
         body: credentials,
       }),
@@ -14,7 +14,7 @@ export const authApi = apiSlice.injectEndpoints({
 
     logout: builder.mutation({
       query: (data) => ({
-        url: "/Logout/Userlogout",
+        url: "/Auth/Logout",
         method: "POST",
         body: data,
       }),
@@ -23,26 +23,26 @@ export const authApi = apiSlice.injectEndpoints({
 
     refreshToken: builder.mutation({
       query: () => ({
-        url: "/Login/refresh-token",
+        url: "/Auth/refresh-token",
         method: "POST",
       }),
     }),
 
     getCurrentUser: builder.query({
-      query: () => "/Login/me",
+      query: () => "/Auth/me",
       providesTags: ["User"],
     }),
 
     signup: builder.mutation({
       query: (userData) => ({
-        url: "/User/create",
+        url: "/User/Signup",
         method: "POST",
         body: userData,
       }),
     }),
 
     getAllUsers: builder.query({
-      query: () => "/User/getallusers",
+      query: () => "/User/AllUsers",
       providesTags: (result) =>
         result?.users
           ? [
@@ -53,13 +53,13 @@ export const authApi = apiSlice.injectEndpoints({
     }),
 
     getUserDetails: builder.query({
-      query: (email) => `/User/getuserdetails/${email}`,
+      query: (email) => `/User/Details/${email}`,
       providesTags: (result, error, email) => [{ type: "User", id: email }],
     }),
 
     updateUser: builder.mutation({
       query: ({ email, id, ...userData }) => ({
-        url: `/User/updateuser/${id}`,
+        url: `/User/Update/${id}`,
         method: "PATCH",
         body: userData,
       }),

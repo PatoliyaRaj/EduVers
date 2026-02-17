@@ -42,10 +42,7 @@ function UserProfile() {
 
   if (isLoading) {
     return (
-      <AdminLayout
-        showSearch={false}
-        breadcrumbItems={breadcrumbItems}
-      >
+      <AdminLayout showSearch={false} breadcrumbItems={breadcrumbItems}>
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#D8A25E] mx-auto"></div>
@@ -58,7 +55,7 @@ function UserProfile() {
 
   if (error) {
     return (
-      <AdminLayout  showSearch={false}>
+      <AdminLayout showSearch={false}>
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <p className="text-red-600 mb-4">
@@ -76,7 +73,6 @@ function UserProfile() {
       </AdminLayout>
     );
   }
-
 
   const userData = {
     name:
@@ -113,10 +109,7 @@ function UserProfile() {
   };
 
   return (
-    <AdminLayout
-      showSearch={true}
-      breadcrumbItems={breadcrumbItems}
-    >
+    <AdminLayout showSearch={true} breadcrumbItems={breadcrumbItems}>
       <React.Fragment>
         <div className="mb-6">
           <div className="flex overflow-x-auto  bg-white rounded-t-lg px-4  ">
@@ -186,11 +179,10 @@ function UserProfile() {
                 </div>
               </div>
 
-            {showForm && (
-              <UserUpdateForm userId={userData.id} onClose={toggleForm} />
-            )}
+              {showForm && (
+                <UserUpdateForm userId={userData.id} onClose={toggleForm} />
+              )}
 
-             
               <div className="lg:col-span-2 space-y-4 sm:space-y-6">
                 <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
                   <h3 className="text-base sm:text-lg font-semibold text-[#343131] mb-4 flex items-center">
@@ -237,7 +229,6 @@ function UserProfile() {
                   </div>
                 </div>
 
-               
                 <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300">
                   <h3 className="text-base sm:text-lg font-semibold text-[#343131] mb-4 flex items-center">
                     <Award size={18} className="text-[#D8A25E] mr-2" />
@@ -276,7 +267,6 @@ function UserProfile() {
             </div>
           )}
 
-       
           {activeTab === "courses" && (
             <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
               <h2 className="text-xl font-bold text-[#343131] mb-6 flex items-center">

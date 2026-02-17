@@ -32,17 +32,17 @@ function SignUp() {
     setLoading(true);
     try {
       const response = await API.post("/User/signup", {
-          userType: Data.userType,
-          firstName: Data.firstName,
-          lastName: Data.lastName,
-          age: parseInt(Data.age),
-          gender: Data.gender,
-          phoneNo: Data.phoneNo,
-          email: Data.email,
-          password: Data.password,
-          confirmPassword: Data.confirmPassword,
-          agreeTerms: Data.agreeTerms,
-        });
+        userType: Data.userType,
+        firstName: Data.firstName,
+        lastName: Data.lastName,
+        age: parseInt(Data.age),
+        gender: Data.gender,
+        phoneNo: Data.phoneNo,
+        email: Data.email,
+        password: Data.password,
+        confirmPassword: Data.confirmPassword,
+        agreeTerms: Data.agreeTerms,
+      });
 
       if (response.data.success) {
         toast.success("Account Created Successfully", {
@@ -73,7 +73,7 @@ function SignUp() {
         {
           position: "top-center",
           duration: 4000,
-        }
+        },
       );
       console.error("Sign Up error:", error.response?.Data || error.message);
     }

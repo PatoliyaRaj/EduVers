@@ -4,8 +4,8 @@ import UserProfile from "./User/UserProfile";
 import { getAuth } from "../../utils/users";
 function Profile() {
   const user = getAuth().user;
-  const userRole = user?.userType?.toLowerCase() || "student"; ;
-  
+  const userRole = user?.userType?.toLowerCase() || "student";
+
   return (
     <React.Fragment>
       {userRole === "teacher" && <AdminProfile />}

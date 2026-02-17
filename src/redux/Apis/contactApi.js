@@ -4,7 +4,7 @@ export const contactApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     submitContact: builder.mutation({
       query: (contactData) => ({
-        url: "/Contact/send",
+        url: "/Contact/Create",
         method: "POST",
         body: contactData,
       }),
@@ -12,7 +12,7 @@ export const contactApi = apiSlice.injectEndpoints({
     }),
 
     getAllContacts: builder.query({
-      query: () => "/Contact/getComments",
+      query: () => "/Contact/Comments",
       providesTags: (result) =>
         result?.contacts
           ? [

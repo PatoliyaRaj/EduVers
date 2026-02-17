@@ -8,7 +8,6 @@ import Index from "./pages/Courses/index";
 import Login from "./pages/Login/index.jsx";
 import SignUp from "./pages/Sign-Up/index.jsx";
 import CardDetail from "./pages/Courses/Videocard.jsx";
-import Profile from "./pages/Profile/Profile";
 import AddCourse from "./pages/Profile/Admin/AddCourse.jsx";
 import ActiveUsers from "./pages/Profile/Admin/ActiveUsers.jsx";
 import DeleteCourses from "./pages/Profile/Admin/DeleteCourses.jsx";
@@ -23,6 +22,7 @@ import Dashboard from "./pages/Dashboard/student/index";
 import ExploreCourses from "./pages/Dashboard/student/exploreCourses/index.jsx";
 import Userprofile from "./pages/Dashboard/student/userprofile/index.jsx";
 import MyLearning from "./pages/Dashboard/student/Mylearning/index.jsx";
+import ChatInterface from "./pages/Chat/index.jsx";
 
 function App() {
   return (
@@ -38,7 +38,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/card/:id" element={<CardDetail />} />
-
             <Route path="/profile" element={<Userprofile />} />
             <Route path="/AddCourse" element={<AddCourse />} />
             <Route path="/ActiveUsers" element={<ActiveUsers />} />
@@ -51,6 +50,7 @@ function App() {
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/Explorecourses" element={<ExploreCourses />} />
             <Route path="/Mylearning" element={<MyLearning />} />
+            <Route path="/Chat" element={<ChatInterface />} />
           </Routes>
         </BrowserRouter>
       </DarkModeProvider>

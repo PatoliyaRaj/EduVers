@@ -3,7 +3,7 @@ import { apiSlice } from "./apiSlice";
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllCourses: builder.query({
-      query: () => "/Course/all",
+      query: () => "/Course/All",
       providesTags: (result) =>
         result?.data
           ? [
@@ -14,13 +14,13 @@ export const courseApi = apiSlice.injectEndpoints({
     }),
 
     getCourseById: builder.query({
-      query: (id) => `/Course/get/${id}`,
+      query: (id) => `/Course/${id}`,
       providesTags: (result, error, id) => [{ type: "Course", id }],
     }),
 
     createCourse: builder.mutation({
       query: (courseData) => ({
-        url: "/Course/create",
+        url: "/Course/Create",
         method: "POST",
         body: courseData,
       }),
@@ -29,7 +29,7 @@ export const courseApi = apiSlice.injectEndpoints({
 
     updateCourse: builder.mutation({
       query: ({ id, ...courseData }) => ({
-        url: `/Course/update/${id}`,
+        url: `/Course/Update/${id}`,
         method: "PATCH",
         body: courseData,
       }),

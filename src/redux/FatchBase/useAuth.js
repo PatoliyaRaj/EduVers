@@ -12,11 +12,11 @@ import { getAuth } from "../../utils/users";
 export const useAuth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const user = getAuth().user;
   const isAuthenticated = getAuth().isAuthenticated;
   const accessToken = getAuth().accessToken;
-  
+
   const [logoutMutation, { isLoading: isLoggingOut }] = useLogoutMutation();
 
   const logout = async () => {

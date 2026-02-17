@@ -30,10 +30,7 @@ function ActiveUsers() {
 
   if (error) {
     return (
-      <AdminLayout
-        showSearch={false}
-        breadcrumbItems={breadcrumbItems}
-      >
+      <AdminLayout showSearch={false} breadcrumbItems={breadcrumbItems}>
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <p className="text-red-600 mb-4">Error: {error.message}</p>
@@ -51,10 +48,7 @@ function ActiveUsers() {
 
   if (!Userdata || Userdata.length === 0) {
     return (
-      <AdminLayout
-        showSearch={false}
-        breadcrumbItems={breadcrumbItems}
-      >
+      <AdminLayout showSearch={false} breadcrumbItems={breadcrumbItems}>
         <div className="flex items-center justify-center h-96">
           <div className="text-center flex flex-col">
             <User2 size={48} className="text-gray-400 mb-4 mx-auto" />
@@ -76,8 +70,8 @@ function ActiveUsers() {
       >
         <section>
           <div className="flex flex-col w-full bg-[#D8A25E]/10 ">
-             <div className="mb-6 flex flex-col sm:flex-row sm:justify-between   sm:items-center gap-4 p-6">
-               <div>
+            <div className="mb-6 flex flex-col sm:flex-row sm:justify-between   sm:items-center gap-4 p-6">
+              <div>
                 <h1 className="text-2xl sm:text-3xl font-bold text-[#343131]">
                   Manage Users
                 </h1>

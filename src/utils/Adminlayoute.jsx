@@ -24,7 +24,7 @@ import { useLogoutMutation } from "../redux";
 import { ErrorToster, SuccessToster } from "../components/toster";
 import SmartBreadcrumb from "../components/Breadcrumb";
 import { logout } from "../redux/slice/authSlice";
-import { getAuth } from "./users";
+import { getAuth, useAuth } from "./users";
 import { useDarkMode } from "../context/DarkModeContext";
 import logo from "../assets/imgs/logo.png";
 
@@ -42,8 +42,10 @@ const AdminLayout = ({
   const dispatch = useDispatch();
   const { isDark } = useDarkMode();
 
-  const { user, isAuthenticated, accessToken } = getAuth();
+  const { user, isAuthenticated, accessToken } = useAuth();
   const userRole = user?.userType?.toUpperCase();
+  console.log(userRole, "this is user role");
+  console.log(user, "this is in the profile page ");
   const email = user?.email;
 
   const navItems = useMemo(() => {

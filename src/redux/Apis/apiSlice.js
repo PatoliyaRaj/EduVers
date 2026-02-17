@@ -4,14 +4,14 @@ const baseUrl = import.meta.env.VITE_APP_API_URL || "http://localhost:5000";
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
-  credentials: "include", 
-    prepareHeaders: (headers, { getState }) => {
+  credentials: "include",
+  prepareHeaders: (headers, { getState }) => {
     const token = getState().auth?.accessToken;
-    
+
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
-    
+
     headers.set("Content-Type", "application/json");
     return headers;
   },
@@ -23,19 +23,19 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   if (result?.error?.status === 401) {
     console.log("Token expired, attempting refresh...");
-    
+
     const refreshResult = await baseQuery(
       {
-        url: "/Login/refresh-token",
+        url: "/Auth/refresh-token",
         method: "POST",
       },
       api,
-      extraOptions
+      extraOptions,
     );
 
     if (refreshResult?.data?.success) {
       const newToken = refreshResult.data.data.accessToken;
-      
+
       api.dispatch({
         type: "auth/setCredentials",
         payload: { accessToken: newToken },
@@ -54,7 +54,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["User", "Course", "Contact"],
-  endpoints: (builder) => ({}), 
+  endpoints: (builder) => ({}),
 });
 
 export default apiSlice;

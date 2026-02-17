@@ -128,7 +128,7 @@ const SuperAdminLayout = ({
 
   const isActiveLink = useCallback(
     (link) => location.pathname === link,
-    [location.pathname]
+    [location.pathname],
   );
 
   const [logoutMutation, { isLoading: isPending }] = useLogoutMutation();
@@ -177,7 +177,7 @@ const SuperAdminLayout = ({
         </Link>
       );
     },
-    [isActiveLink, closeMobileSidebar]
+    [isActiveLink, closeMobileSidebar],
   );
 
   const SidebarContent = useCallback(
@@ -195,8 +195,12 @@ const SuperAdminLayout = ({
             </div>
             {!collapsed && (
               <div>
-                <h1 className="font-bold text-xl tracking-tight leading-none text-slate-900 dark:text-white">EduVerse</h1>
-                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mt-1">Super Admin</p>
+                <h1 className="font-bold text-xl tracking-tight leading-none text-slate-900 dark:text-white">
+                  EduVerse
+                </h1>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mt-1">
+                  Super Admin
+                </p>
               </div>
             )}
           </div>
@@ -207,7 +211,7 @@ const SuperAdminLayout = ({
           {navItems.map((item) => (
             <NavItem key={item.id} item={item} collapsed={collapsed} />
           ))}
-          
+
           {/* System Section Label */}
           {!collapsed && (
             <div className="pt-8 pb-2 px-4 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
@@ -233,7 +237,7 @@ const SuperAdminLayout = ({
         </div>
       </div>
     ),
-    [navItems, NavItem, handleSignOut, isPending]
+    [navItems, NavItem, handleSignOut, isPending],
   );
 
   return (
@@ -298,7 +302,7 @@ const SuperAdminLayout = ({
               >
                 <Menu className="h-6 w-6" />
               </button>
-              
+
               {/* Search Input */}
               {showSearch && (
                 <div className="relative w-full">
@@ -316,10 +320,10 @@ const SuperAdminLayout = ({
             <div className="flex items-center gap-3 md:gap-6">
               {/* Dark Mode Toggle */}
               <DarkModeToggle />
-              
+
               {/* Divider */}
               <div className="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-1 hidden md:block"></div>
-              
+
               {/* Notification Button */}
               <button className="relative p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:shadow-sm transition-all">
                 <svg
@@ -342,7 +346,7 @@ const SuperAdminLayout = ({
               <div className="flex items-center gap-3">
                 <div className="hidden md:block text-right">
                   <p className="text-sm font-bold leading-none text-slate-900 dark:text-white">
-                    {user?.name || user?.email?.split('@')[0] || 'Super Admin'}
+                    {user?.name || user?.email?.split("@")[0] || "Super Admin"}
                   </p>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">
                     Super Admin
