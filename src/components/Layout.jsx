@@ -1,15 +1,15 @@
-import React from 'react'
-import Navbar from './navbar'
-import Footer from './footer'
+import React from "react";
+import Navbar from "../pages/HomeNew/components/Navbar";
+import Footer from "../pages/HomeNew/components/Footer";
 
 function Layout({ children }) {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Navbar />
-      <main>{children}</main>
+      <main className="flex-1">{children}</main>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

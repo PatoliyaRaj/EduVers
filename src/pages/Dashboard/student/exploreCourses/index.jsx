@@ -18,10 +18,10 @@ function ExploreCourses() {
   });
 
   // Count active filters for badge
-  const activeFilterCount = 
-    filters.categories.length + 
-    filters.levels.length + 
-    filters.priceRanges.length + 
+  const activeFilterCount =
+    filters.categories.length +
+    filters.levels.length +
+    filters.priceRanges.length +
     (filters.minRating > 0 ? 1 : 0);
 
   const filteredCourses = useMemo(() => {

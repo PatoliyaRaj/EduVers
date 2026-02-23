@@ -8,7 +8,7 @@ const config = {
         superadminprimary: "#B48B4D",
         studprimary: "#b48c4c",
         "background-light": "#F9FAFB",
-        "background-dark": "#111827",
+        "background-dark": "#1a1d2b",
         "sidebar-dark": "#1F2937",
         "lavender-light": "#f3f0ff",
         "lavender-dark": "#1e1b4b",
@@ -18,10 +18,14 @@ const config = {
         "deep-charcoal": "#0F0F12",
         "navy-charcoal": "#1A1B23",
         "gold-glow": "rgba(176, 141, 87, 0.15)",
+        // HomeNew accent colors
+        primary: "#ecb613",
+        "accent-gold": "#ecb613",
       },
       fontFamily: {
         display: ["Plus Jakarta Sans", "sans-serif"],
         sans: ["Plus Jakarta Sans", "sans-serif"],
+        lexend: ["Lexend", "sans-serif"],
       },
       boxShadow: {
         gold: "0 0 20px rgba(176, 141, 87, 0.15)",
@@ -59,6 +63,12 @@ const config = {
     },
   },
   plugins: [],
+  safelist: [
+    "dark:bg-navy-charcoal",
+    "dark:bg-navy-charcoal/80",
+    "dark:bg-navy-charcoal/95",
+    "dark:bg-background-dark",
+  ],
 };
 
 export default config;
